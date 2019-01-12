@@ -21,6 +21,12 @@ public class BaloonScript : MonoBehaviour
         Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.left, Quaternion.identity);
         Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);
 
+
+        Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
+        int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
+
+        Instantiate((GameObject)explosionsObjects[randomExplosionIndex], gameObject.transform.position + Vector3.up, Quaternion.identity);
+
         Destroy(gameObject);
     }
 

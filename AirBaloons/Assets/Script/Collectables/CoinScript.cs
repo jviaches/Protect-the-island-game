@@ -9,6 +9,7 @@ public class CoinScript : MonoBehaviour {
         PlayerScript player = GameObject.Find("Player").GetComponent<PlayerScript>();
 
         player.Coins += 1;
+        
         Destroy(gameObject);
     }
 }
