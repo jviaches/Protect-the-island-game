@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-
     private const float speed = 20f;
     private bool allowedToBeCollected;
     private bool isCointAlreadyCounted;
