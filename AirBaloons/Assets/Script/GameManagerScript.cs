@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour {
+    private PlayerScript player;
 
     void Start () {
+        player = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Player")).GetComponent<PlayerScript>(); // TODO: load from file
         InvokeRepeating("generateBaloons", 0f, 2.5f);
 	}
 	
