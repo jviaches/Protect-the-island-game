@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
-    public int Coins;
+    private int coins;
+    public int Coins { get { return coins; } }
 
 	// Use this for initialization
 	void Start () {
@@ -16,4 +18,10 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void CoinsUpdate(int coinsAmount)
+    {
+        coins += coinsAmount;
+        GameObject.Find("bar_coins_text").GetComponent<Text>().text = Coins.ToString();
+    }
 }
