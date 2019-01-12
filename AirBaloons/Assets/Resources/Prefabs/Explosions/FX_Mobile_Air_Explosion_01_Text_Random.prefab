@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4937076524101946}
   - component: {fileID: 198434551465706386}
   - component: {fileID: 199569946362889748}
+  - component: {fileID: 114083596530274084}
   m_Layer: 0
   m_Name: FX_Mobile_Air_Explosion_01_Text_Random
   m_TagString: Untagged
@@ -196,6 +197,17 @@ Transform:
   m_Father: {fileID: 4937076524101946}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114083596530274084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1407653531546058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1615d62937d3a4f41af605124d27ab29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198113552285671830
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 4239942486795736}
   - component: {fileID: 198057116412990534}
   - component: {fileID: 199091528687040324}
+  - component: {fileID: 114779167036088456}
   m_Layer: 0
   m_Name: FX_Mobile_Air_Explosion_03_Text_Kapow
   m_TagString: Untagged
@@ -196,6 +197,17 @@ Transform:
   m_Father: {fileID: 4239942486795736}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114779167036088456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1960588074567580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1615d62937d3a4f41af605124d27ab29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198057116412990534
 ParticleSystem:
   m_ObjectHideFlags: 1

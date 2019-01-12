@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4379439919092178}
   - component: {fileID: 198362190086612138}
   - component: {fileID: 199995729453414410}
+  - component: {fileID: 114522768183438060}
   m_Layer: 0
   m_Name: FX_Mobile_Air_Explosion_02_Thwack
   m_TagString: Untagged
@@ -196,6 +197,17 @@ Transform:
   m_Father: {fileID: 4379439919092178}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114522768183438060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227460432302480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1615d62937d3a4f41af605124d27ab29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198021598603128704
 ParticleSystem:
   m_ObjectHideFlags: 1

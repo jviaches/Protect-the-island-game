@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4056198863342448}
   - component: {fileID: 198215982762184640}
   - component: {fileID: 199790726671175150}
+  - component: {fileID: 114415416431146720}
   m_Layer: 0
   m_Name: FX_Mobile_Air_Explosion_01_Text_Thud
   m_TagString: Untagged
@@ -196,6 +197,17 @@ Transform:
   m_Father: {fileID: 4056198863342448}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114415416431146720
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1505298365295036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1615d62937d3a4f41af605124d27ab29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198215982762184640
 ParticleSystem:
   m_ObjectHideFlags: 1
