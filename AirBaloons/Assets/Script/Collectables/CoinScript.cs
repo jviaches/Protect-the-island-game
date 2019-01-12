@@ -6,10 +6,17 @@ public class CoinScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-        PlayerScript player = GameObject.Find("Player").GetComponent<PlayerScript>();
+        GetComponent<AudioSource>().Play();
 
+        PlayerScript player = GameObject.Find("Player").GetComponent<PlayerScript>();
         player.CoinsUpdate(1);
+
+        Invoke("destroyCoin", 0.07f);
         
+    }
+
+    private void destroyCoin()
+    {
         Destroy(gameObject);
     }
 }
