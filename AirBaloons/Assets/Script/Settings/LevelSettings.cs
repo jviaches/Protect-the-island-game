@@ -19,7 +19,6 @@ public static class LevelSettings
         set { lastCompletedLevelIndex = value; }
     }
 
-
     static LevelSettings()
     {
         if (Episode1Levels.Count > 0)
@@ -34,10 +33,10 @@ public static class LevelSettings
         Episode1Levels.Add(new Level2(), 0);
     }
 
-    public static int NextLevel(int currLevel)
+    public static int NextLevel()
     {
-        if (currLevel + 1 > Episode1Levels.Count)
-            return currLevel;
+        if (GetCurrentLevel().LevelIndex + 1 > Episode1Levels.Count)
+            return GetCurrentLevel().LevelIndex;
 
         return ++SelectedLevelIndex;
     }

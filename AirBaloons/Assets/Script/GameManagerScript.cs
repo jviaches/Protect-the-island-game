@@ -1,12 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour {
+
     private PlayerScript player;
+
+    private float levelTimer = 5;  // in sec.  TODO: move to Settings
+    private Text levelTimerText;
 
     void Start () {
         player = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Player")).GetComponent<PlayerScript>(); // TODO: load from file
+
+        levelTimerText = GameObject.Find("bar_timer_text").GetComponent<Text>();
+
         InvokeRepeating("generateBaloons", 0f, 2.5f);
         InvokeRepeating("generateBonusPlanes", 0f, 5f);
     }
@@ -21,5 +30,18 @@ public class GameManagerScript : MonoBehaviour {
     {
         GameObject plane = Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Plane8_1"));
         plane.transform.position = new Vector3(-160, 7.2f, -87f); //TODO: set in Settings
+    }
+
+    void Update()
+    {
+        levelTimer -= Time.deltaTime;
+        if (levelTimer <= 0.01f )
+        {
+            // temporary
+            LevelSettings.NextLevel();
+            SceneManager.LoadScene("LevelsScene");
+        }
+
+        levelTimerText.text = (int)levelTimer + " sec";
     }
 }

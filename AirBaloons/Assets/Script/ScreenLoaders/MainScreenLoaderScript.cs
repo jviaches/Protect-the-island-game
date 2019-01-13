@@ -13,7 +13,7 @@ public class MainScreenLoaderScript : MonoBehaviour {
         playButton = GameObject.Find("play").GetComponent<Button>();
         settingsButton = GameObject.Find("settings").GetComponent<Button>();
 
-        playButton.onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
+        playButton.onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
         settingsButton.onClick.AddListener(() => SceneManager.LoadScene("SettingsScene"));
         exitButton.onClick.AddListener(() => Application.Quit());
     }
