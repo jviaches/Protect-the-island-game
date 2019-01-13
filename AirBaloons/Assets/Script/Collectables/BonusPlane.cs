@@ -22,7 +22,7 @@ public class BonusPlane : MonoBehaviour
 
     void OnMouseDown()
     {
-        // generate 2 coins as reward
+        // generate 10 coins as reward
         for (int i = 0; i < 10; i++)
         {
             Vector3 position = new Vector3(Random.Range(3,8), Random.Range(3, 8), 0);
