@@ -7,24 +7,16 @@ using UnityEngine;
 public static class LevelSettings
 {
     public static int LevelsInEpisode = 16;
-
-
-
-    // 1rs param level, 2nd param amount of stars, 3rd param score
-    public static Dictionary<ILevel, KeyValuePair<int, int>> Episode1Levels = new Dictionary<ILevel, KeyValuePair<int, int>>();
-
-    public static int SelectedLevelIndex = 0;                   // Level chosen by user
-
-    public static readonly float CollectablesHeight = 24;                // Same high as player to pickup coins, buffs, etc..
-    public static readonly float MinimumAsteroidMovingSpeed = 4f;
-    public static readonly float MaximumAsteroidMovingSpeed = 8f;
+    
+    public static Dictionary<ILevel, int> Episode1Levels = new Dictionary<ILevel, int>();   // 1rs param level, 2nd param amount of stars
+    public static int SelectedLevelIndex = 1;                   // Level chosen by user
 
     // Persistance 
-    private static int playerLastCompletedLevelIndex = 0;
-    public static int PlayerLastCompletedLevelIndex
+    private static int lastCompletedLevelIndex = 0;
+    public static int LastCompletedLevelIndex
     {
-        get { return playerLastCompletedLevelIndex; }
-        set { playerLastCompletedLevelIndex = value; }
+        get { return lastCompletedLevelIndex; }
+        set { lastCompletedLevelIndex = value; }
     }
 
 
@@ -38,9 +30,10 @@ public static class LevelSettings
 
     private static void InitEpisode1()
     {
-        Episode1Levels.Add(new Level1(), new KeyValuePair<int, int>(0, 0));
-        //Episode1Levels.Add(new Level2(), new KeyValuePair<int, int>(0, 0));
+        Episode1Levels.Add(new Level1(), 0);
+        Episode1Levels.Add(new Level2(), 0);
     }
+
     public static int NextLevel(int currLevel)
     {
         if (currLevel + 1 > Episode1Levels.Count)
