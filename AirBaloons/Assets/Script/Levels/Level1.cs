@@ -8,7 +8,5 @@ namespace Assets.Script.Levels
     public class Level1 : ILevel
     {
         public int LevelIndex { get  { return 1; } }
-
-        public float LevelTimer { get { return 30f; } }
     }
 }

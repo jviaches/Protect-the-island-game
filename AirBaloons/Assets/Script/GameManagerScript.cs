@@ -8,7 +8,7 @@ public class GameManagerScript : MonoBehaviour {
 
     private PlayerScript player;
 
-    private float levelTimer = 5;  // in sec.  TODO: move to Settings
+    private float levelTimer = 30;  // in sec.  TODO: move to Settings
     private Text levelTimerText;
 
     void Start () {
@@ -39,6 +39,9 @@ public class GameManagerScript : MonoBehaviour {
         {
             // temporary
             LevelSettings.NextLevel();
+
+            print("Level index after LevelSettings.NextLevel()=" + LevelSettings.LastCompletedLevelIndex);
+
             SceneManager.LoadScene("LevelsScene");
         }
 

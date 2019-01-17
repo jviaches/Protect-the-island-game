@@ -8,6 +8,5 @@ namespace Assets.Script.Levels
     public interface ILevel
     {
         int LevelIndex { get; }
-        float LevelTimer { get; }
     }
 }
