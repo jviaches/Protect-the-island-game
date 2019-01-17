@@ -1287,7 +1287,7 @@ GameObject:
   - component: {fileID: 650998565}
   - component: {fileID: 650998564}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: Canvas-internal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1797,7 +1797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 823681628}
   m_Layer: 0
-  m_Name: Clouds (1)
+  m_Name: Clouds-external
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
