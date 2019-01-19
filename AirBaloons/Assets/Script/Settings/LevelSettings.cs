@@ -9,7 +9,7 @@ public static class LevelSettings
     public static int LevelsInEpisode = 16;
     
     public static Dictionary<ILevel, int> Episode1Levels = new Dictionary<ILevel, int>();   // 1rs param level, 2nd param amount of stars
-    public static int SelectedLevelIndex = 1;                   // Level chosen by user
+    public static int SelectedLevelIndex = 0;                   // Level chosen by user
 
     // Persistance 
     private static int lastCompletedLevelIndex = 0;
@@ -31,19 +31,24 @@ public static class LevelSettings
     {
         Episode1Levels.Add(new Level1(), 0);
         Episode1Levels.Add(new Level2(), 0);
+        Episode1Levels.Add(new Level3(), 0);
+        //Episode1Levels.Add(new Level2(), 0);
     }
 
-    public static int NextLevel()
+    public static void NextLevel()
     {
-        if (GetCurrentLevel().LevelIndex + 1 > Episode1Levels.Count)
-            return GetCurrentLevel().LevelIndex;
+        int complLevel = LastCompletedLevelIndex == 0 ? 1 : LastCompletedLevelIndex;
 
-        return ++SelectedLevelIndex;
+        if (SelectedLevelIndex < Episode1Levels.Count)
+        {            
+            LastCompletedLevelIndex = LastCompletedLevelIndex >= SelectedLevelIndex ? LastCompletedLevelIndex: SelectedLevelIndex;
+            //++SelectedLevelIndex;
+        }
     }
 
-    public static ILevel GetCurrentLevel()
-    {
-        int lvlIndex = SelectedLevelIndex == 0 ? 1 : SelectedLevelIndex;    // can be 0 in case if no games were played before
-        return Episode1Levels.Keys.First(lvl => lvl.LevelIndex == lvlIndex);
-    }
+    //public static ILevel GetCurrentLevel()
+    //{
+    //    int lvlIndex = SelectedLevelIndex == 0 ? 1 : 1;    // can be 0 in case if no games were played before
+    //    return Episode1Levels.Keys.First(lvl => lvl.LevelIndex == lvlIndex);
+    //}
 }
