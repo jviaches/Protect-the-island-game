@@ -36,14 +36,7 @@ public class GameManagerScript : MonoBehaviour {
     {
         levelTimer -= Time.deltaTime;
         if (levelTimer <= 0.01f )
-        {
-            // temporary
-            LevelSettings.NextLevel();
-
-            //print("Level index after LevelSettings.NextLevel()=" + LevelSettings.LastCompletedLevelIndex);
-
             SceneManager.LoadScene("LevelsScene");
-        }
 
         levelTimerText.text = (int)levelTimer + " sec";
     }

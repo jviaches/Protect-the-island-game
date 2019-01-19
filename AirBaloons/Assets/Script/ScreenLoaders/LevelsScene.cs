@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelsScene : MonoBehaviour
 {
+    //private Dictionary<int, Button> buttonLevelRelation;
     private Button closebutton;
     private Button settingsbutton;
 
@@ -18,73 +19,89 @@ public class LevelsScene : MonoBehaviour
         settingsbutton = GameObject.Find("square_button_settings").GetComponent<Button>();
         settingsbutton.onClick.AddListener(() => SceneManager.LoadScene("SettingsScene"));
 
-        for (int i = 1; i <= LevelSettings.LevelsInEpisode; i++)
+        for (int levelIndex = 1; levelIndex <= LevelSettings.LevelsInEpisode; levelIndex++)
         {
             // player never played before
-            if (LevelSettings.LastCompletedLevelIndex == 0)
+            if (levelIndex == 1)
             {
-                GameObject.Find("LevelText1").GetComponent<Text>().enabled = true;  // format: LevelText1
-                GameObject.Find("level1").GetComponent<Button>().enabled = true;    // star format: level_1
-                GameObject.Find("star1_1").GetComponent<Image>().enabled = false;   // star format: star1_1
-                GameObject.Find("star1_2").GetComponent<Image>().enabled = false;   // star format: star1_2
-                GameObject.Find("star1_3").GetComponent<Image>().enabled = false;   // star format: star1_3
+                // not played yet
+                if (LevelSettings.LastCompletedLevelIndex == 0)
+                {
+                    GameObject.Find("LevelText1").GetComponent<Text>().enabled = true;  // format: LevelText1
+                    GameObject.Find("level1").GetComponent<Button>().enabled = true;    // star format: level_1
+                    GameObject.Find("star1_1").GetComponent<Image>().enabled = false;   // star format: star1_1
+                    GameObject.Find("star1_2").GetComponent<Image>().enabled = false;   // star format: star1_2
+                    GameObject.Find("star1_3").GetComponent<Image>().enabled = false;   // star format: star1_3
+                }
+                else
+                {
+                    GameObject.Find("level1").GetComponent<Button>().enabled = true;   // star format: level_1
+                    GameObject.Find("star1_1").GetComponent<Image>().enabled = true;   // star format: star1_1
+                    GameObject.Find("star1_2").GetComponent<Image>().enabled = true;   // star format: star1_2
+                    GameObject.Find("star1_3").GetComponent<Image>().enabled = true;   // star format: star1_3
+                }
+
                 GameObject.Find("lock1").GetComponent<Image>().enabled = false;
 
                 Button lvlButton = GameObject.Find("level1").GetComponent<Button>();
                 lvlButton.onClick.AddListener(() => { loadLevel(1); }); // TODO: load proper level event
             }
-
-            // enable all played levels
-            if (i <= LevelSettings.LastCompletedLevelIndex)
+            else
             {
-                GameObject.Find("level" + i).GetComponent<Button>().enabled = true;        // star format: level_1
-                GameObject.Find("star" + i + "_1").GetComponent<Image>().enabled = true;   // star format: star1_1
-                GameObject.Find("star" + i + "_2").GetComponent<Image>().enabled = true;   // star format: star1_2
-                GameObject.Find("star" + i + "_3").GetComponent<Image>().enabled = true;   // star format: star1_3
-                GameObject.Find("LevelText" + i).GetComponent<Text>().enabled = true;      // format: LevelText1
+                // enable all played levels
+                if (levelIndex - 1 < LevelSettings.LastCompletedLevelIndex)
+                {
+                    print("LastCompletedLevelIndex=" + LevelSettings.LastCompletedLevelIndex);
+                    print("Found lvl " + levelIndex + " to enable");
+                    GameObject.Find("level" + levelIndex).GetComponent<Button>().enabled = true;        // star format: level_1
+                    GameObject.Find("star" + levelIndex + "_1").GetComponent<Image>().enabled = true;   // star format: star1_1
+                    GameObject.Find("star" + levelIndex + "_2").GetComponent<Image>().enabled = true;   // star format: star1_2
+                    GameObject.Find("star" + levelIndex + "_3").GetComponent<Image>().enabled = true;   // star format: star1_3
+                    GameObject.Find("LevelText" + levelIndex).GetComponent<Text>().enabled = true;      // format: LevelText1
 
-                GameObject.Find("lock" + i).GetComponent<Image>().enabled = false;
+                    GameObject.Find("lock" + levelIndex).GetComponent<Image>().enabled = false;
 
-                Button lvlButton = GameObject.Find("level" + i).GetComponent<Button>();
-                lvlButton.onClick.AddListener(() => { loadLevel(i); }); // TODO: load proper level event
+                    Button lvlButton = GameObject.Find("level" + levelIndex).GetComponent<Button>();
+                    int lvl = levelIndex;                                  // have to do this way, because for some reason on invocation levelIndex change its value to last one.
+                    lvlButton.onClick.AddListener(() => loadLevel(lvl)); // TODO: load proper level event
+                }
+                else if (levelIndex - 1 == LevelSettings.LastCompletedLevelIndex)
+                {
+                    print("LastCompletedLevelIndex=" + LevelSettings.LastCompletedLevelIndex + " levelIndex=" + levelIndex + " SelLevl=" + LevelSettings.SelectedLevelIndex);
+                    GameObject.Find("level" + levelIndex).GetComponent<Button>().enabled = true;        // star format: level_1
+                    GameObject.Find("star" + levelIndex + "_1").GetComponent<Image>().enabled = false;   // star format: star1_1
+                    GameObject.Find("star" + levelIndex + "_2").GetComponent<Image>().enabled = false;   // star format: star1_2
+                    GameObject.Find("star" + levelIndex + "_3").GetComponent<Image>().enabled = false;   // star format: star1_3
+                    GameObject.Find("LevelText" + levelIndex).GetComponent<Text>().enabled = true;      // format: LevelText1
+
+                    GameObject.Find("lock" + levelIndex).GetComponent<Image>().enabled = false;
+
+                    Button lvlButton = GameObject.Find("level" + levelIndex).GetComponent<Button>();
+                    int lvl = levelIndex;                                  // have to do this way, because for some reason on invocation levelIndex change its value to last one.
+                    lvlButton.onClick.AddListener(() => loadLevel(lvl)); // TODO: load proper level event
+                }
+                // disable all not played yet levels
+                else if (levelIndex - 1 > LevelSettings.LastCompletedLevelIndex)
+                {
+                    GameObject.Find("level" + levelIndex).GetComponent<Button>().enabled = false;        // star format: level_1
+                    GameObject.Find("star" + levelIndex + "_1").GetComponent<Image>().enabled = false;   // star format: star1_1
+                    GameObject.Find("star" + levelIndex + "_2").GetComponent<Image>().enabled = false;   // star format: star1_2
+                    GameObject.Find("star" + levelIndex + "_3").GetComponent<Image>().enabled = false;   // star format: star1_3
+                    GameObject.Find("LevelText" + levelIndex).GetComponent<Text>().enabled = false;      // format: LevelText1
+
+                    GameObject.Find("lock" + levelIndex).GetComponent<Image>().enabled = true;
+                }
+
+                //print("LastCompletedLevelIndex=" + LevelSettings.LastCompletedLevelIndex + " levelIndex=" + levelIndex);
             }
-
-            // enable next level (to last played one)
-            if (i == LevelSettings.LastCompletedLevelIndex + 1)
-            {
-                print("Next Level " + i);
-
-                GameObject.Find("star" + i + "_1").GetComponent<Image>().enabled = false;   // star format: star1_1
-                GameObject.Find("star" + i + "_2").GetComponent<Image>().enabled = false;   // star format: star1_2
-                GameObject.Find("star" + i + "_3").GetComponent<Image>().enabled = false;   // star format: star1_3
-
-                GameObject.Find("level" + i).GetComponent<Button>().enabled = true;        // star format: level_1
-                GameObject.Find("LevelText" + i).GetComponent<Text>().enabled = true;      // format: LevelText1
-                GameObject.Find("lock" + i).GetComponent<Image>().enabled = false;
-
-                Button lvlButton = GameObject.Find("level" + i).GetComponent<Button>();
-                lvlButton.onClick.AddListener(() => { loadLevel(i); }); // TODO: load proper level event
-            }
-
-            // disable all not played yet levels
-            if (i > LevelSettings.LastCompletedLevelIndex + 1)
-            {
-                GameObject.Find("level" + i).GetComponent<Button>().enabled = false;        // star format: level_1
-                GameObject.Find("star" + i + "_1").GetComponent<Image>().enabled = false;   // star format: star1_1
-                GameObject.Find("star" + i + "_2").GetComponent<Image>().enabled = false;   // star format: star1_2
-                GameObject.Find("star" + i + "_3").GetComponent<Image>().enabled = false;   // star format: star1_3
-                GameObject.Find("LevelText" + i).GetComponent<Text>().enabled = false;      // format: LevelText1
-
-                GameObject.Find("lock" + i).GetComponent<Image>().enabled = true;
-            }            
         }
     }
 
     private void loadLevel(int level)
     {
-        LevelSettings.SelectedLevelIndex = level;
-
-        print("loadLvl(). Selected level=" + LevelSettings.SelectedLevelIndex);
+        LevelSettings.NextLevel(level);
+        
+        print("After loadLevel() => selLvl=" + LevelSettings.SelectedLevelIndex + " LastComplLvl="+ LevelSettings.LastCompletedLevelIndex);
 
         SceneManager.LoadScene("GameScene");  // load level
     }
