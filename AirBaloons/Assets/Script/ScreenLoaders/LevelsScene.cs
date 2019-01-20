@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelsScene : MonoBehaviour
 {
-    //private Dictionary<int, Button> buttonLevelRelation;
     private Button closebutton;
     private Button settingsbutton;
 
@@ -44,7 +43,7 @@ public class LevelsScene : MonoBehaviour
                 GameObject.Find("lock1").GetComponent<Image>().enabled = false;
 
                 Button lvlButton = GameObject.Find("level1").GetComponent<Button>();
-                lvlButton.onClick.AddListener(() => { loadLevel(1); }); // TODO: load proper level event
+                lvlButton.onClick.AddListener(() => { loadLevel(1); });
             }
             else
             {
@@ -67,7 +66,7 @@ public class LevelsScene : MonoBehaviour
                 }
                 else if (levelIndex - 1 == LevelSettings.LastCompletedLevelIndex)
                 {
-                    print("LastCompletedLevelIndex=" + LevelSettings.LastCompletedLevelIndex + " levelIndex=" + levelIndex + " SelLevl=" + LevelSettings.SelectedLevelIndex);
+                    //print("LastCompletedLevelIndex=" + LevelSettings.LastCompletedLevelIndex + " levelIndex=" + levelIndex + " SelLevl=" + LevelSettings.SelectedLevelIndex);
                     GameObject.Find("level" + levelIndex).GetComponent<Button>().enabled = true;        // star format: level_1
                     GameObject.Find("star" + levelIndex + "_1").GetComponent<Image>().enabled = false;   // star format: star1_1
                     GameObject.Find("star" + levelIndex + "_2").GetComponent<Image>().enabled = false;   // star format: star1_2
@@ -77,8 +76,8 @@ public class LevelsScene : MonoBehaviour
                     GameObject.Find("lock" + levelIndex).GetComponent<Image>().enabled = false;
 
                     Button lvlButton = GameObject.Find("level" + levelIndex).GetComponent<Button>();
-                    int lvl = levelIndex;                                  // have to do this way, because for some reason on invocation levelIndex change its value to last one.
-                    lvlButton.onClick.AddListener(() => loadLevel(lvl)); // TODO: load proper level event
+                    int lvl = levelIndex;   // have to do this way, because for some reason on invocation levelIndex change its value to last one.
+                    lvlButton.onClick.AddListener(() => loadLevel(lvl));
                 }
                 // disable all not played yet levels
                 else if (levelIndex - 1 > LevelSettings.LastCompletedLevelIndex)
@@ -91,8 +90,6 @@ public class LevelsScene : MonoBehaviour
 
                     GameObject.Find("lock" + levelIndex).GetComponent<Image>().enabled = true;
                 }
-
-                //print("LastCompletedLevelIndex=" + LevelSettings.LastCompletedLevelIndex + " levelIndex=" + levelIndex);
             }
         }
     }

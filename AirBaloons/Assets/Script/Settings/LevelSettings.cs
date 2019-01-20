@@ -43,9 +43,9 @@ public static class LevelSettings
             LastCompletedLevelIndex = LastCompletedLevelIndex >= SelectedLevelIndex ? LastCompletedLevelIndex : SelectedLevelIndex;            
     }
 
-    //public static ILevel GetCurrentLevel()
-    //{
-    //    int lvlIndex = SelectedLevelIndex == 0 ? 1 : 1;    // can be 0 in case if no games were played before
-    //    return Episode1Levels.Keys.First(lvl => lvl.LevelIndex == lvlIndex);
-    //}
+    public static ILevel GetCurrentLevel()
+    {
+        int lvlIndex = SelectedLevelIndex == 0 ? 1 : SelectedLevelIndex;  
+        return Episode1Levels.Keys.First(lvl => lvl.LevelIndex == lvlIndex);
+    }
 }

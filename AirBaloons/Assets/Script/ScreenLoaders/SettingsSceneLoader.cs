@@ -23,9 +23,4 @@ public class SettingsSceneLoader : MonoBehaviour {
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
         saveButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));  // TODO: wire to save setting in file
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

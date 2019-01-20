@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Script.Levels;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +8,14 @@ public class CoinScript : MonoBehaviour
     private const float speed = 20f;
     private bool allowedToBeCollected;
     private bool isCointAlreadyCounted;
+    private ILevel currLevel;
 
     private GameObject itemsCollectedObject;
 
     void Start()
     {
         itemsCollectedObject = GameObject.Find("ItemsCollectionObject");
+        currLevel = LevelSettings.GetCurrentLevel();
     }
 
     void Update()
@@ -46,9 +49,10 @@ public class CoinScript : MonoBehaviour
 
         //GetComponent<Animator>().SetBool("Pulse", true);
         //GetComponent<Animator>().PlayInFixedTime("Pulsation", 0, 1f);
+        int coinsCalculated = currLevel.MoneyGenerationModifier + bonus;
 
 
-        GameObject.Find("Player").GetComponent<PlayerScript>().CoinsUpdate(1 + bonus);
+        GameObject.Find("Player").GetComponent<PlayerScript>().CoinsUpdate(coinsCalculated);
 
         isCointAlreadyCounted = true;
         allowedToBeCollected = true;
