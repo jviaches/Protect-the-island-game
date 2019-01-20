@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Script.Settings;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,7 +9,7 @@ public class GameManagerScript : MonoBehaviour {
 
     private PlayerScript player;
 
-    private float levelTimer = 0;  // in sec.  TODO: move to Settings
+    private float levelTimer = LevelSettings.LevelTimer;
     private Text levelTimerText;
 
     void Start () {
@@ -16,20 +17,20 @@ public class GameManagerScript : MonoBehaviour {
 
         levelTimerText = GameObject.Find("bar_timer_text").GetComponent<Text>();
 
-        InvokeRepeating("generateBaloons", 0f, 2.5f);
-        InvokeRepeating("generateBonusPlanes", 0f, 5f);
+        InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy);
+        InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy);
     }
 	
     private void generateBaloons()
     {
-        var random = Random.onUnitSphere * 40; //Returns a random point on the surface of a sphere with radius 1
+        var random = Random.onUnitSphere * GameSettings.BornRadius; //Returns a random point on the surface of a sphere with radius 40
         Instantiate((GameObject)Resources.Load("Prefabs/Actors/Baloon" + Random.Range(1,3)), random, Quaternion.identity);
     }
 
     private void generateBonusPlanes()
     {
         GameObject plane = Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Plane8_1"));
-        plane.transform.position = new Vector3(-160, 7.2f, -87f); //TODO: set in Settings
+        plane.transform.position = GameSettings.PlanesBornPosition;
     }
 
     void Update()
