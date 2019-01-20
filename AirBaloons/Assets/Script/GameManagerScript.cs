@@ -10,16 +10,18 @@ public class GameManagerScript : MonoBehaviour {
 
     private PlayerScript player;
 
+    private ILevel currLevel;
     private float levelTimer = LevelSettings.LevelTimer;
     private Text levelTimerText;
 
     void Start () {
         player = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Player")).GetComponent<PlayerScript>(); // TODO: load from file
+        currLevel = LevelSettings.GetCurrentLevel();
 
         levelTimerText = GameObject.Find("bar_timer_text").GetComponent<Text>();
 
-        InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy);
-        InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy);
+        InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy * currLevel.BaloonGenerationFrequencyModifier);
+        InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy * currLevel.PlaneGenerationFrequencyModifier);
     }
 	
     private void generateBaloons()

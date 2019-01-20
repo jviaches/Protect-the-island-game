@@ -13,7 +13,7 @@ namespace Assets.Script.Settings
         public static Vector3 PlanesBornPosition = new Vector3(-160, 7.2f, -87f);
 
         public static float BallonsGenerationFrequensy = 2.5f;
-        public static float PlanesGenerationFrequensy = 5f;
+        public static float PlanesGenerationFrequensy = 1f;
     }
 }
 
