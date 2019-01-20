@@ -14,6 +14,10 @@ namespace Assets.Script.Settings
 
         public static float BallonsGenerationFrequensy = 2.5f;
         public static float PlanesGenerationFrequensy = 1f;
+
+        public static bool IsMoneyIncreaseBuffOn = false;
+        public static int MoneyIncreaseBuffMultiplayer = 4;
+        public static float MoneyIncreaseBuffProbability = 0.8f;
     }
 }
 

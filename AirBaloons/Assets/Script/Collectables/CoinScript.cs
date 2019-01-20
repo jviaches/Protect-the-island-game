@@ -1,4 +1,5 @@
 ﻿using Assets.Script.Levels;
+using Assets.Script.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class CoinScript : MonoBehaviour
     private bool allowedToBeCollected;
     private bool isCointAlreadyCounted;
     private ILevel currLevel;
+
+    public int Value = 1;   // by default value is 1 coin. Can be changed by buff or level money modifier.
 
     private GameObject itemsCollectedObject;
 
@@ -40,7 +43,12 @@ public class CoinScript : MonoBehaviour
     void OnMouseDown()
     {
         if (!isCointAlreadyCounted)
-            coinCounted(1);
+        {
+            if (GameSettings.IsMoneyIncreaseBuffOn)
+                coinCounted(Value * 4);
+            else
+                coinCounted(Value);
+        }
     }
 
     private void coinCounted(int bonus = 0)
@@ -49,8 +57,9 @@ public class CoinScript : MonoBehaviour
 
         //GetComponent<Animator>().SetBool("Pulse", true);
         //GetComponent<Animator>().PlayInFixedTime("Pulsation", 0, 1f);
-        int coinsCalculated = currLevel.MoneyGenerationModifier + bonus;
 
+        int coinsCalculated = (currLevel.MoneyGenerationModifier * Value) + bonus;
+        print("Coins collected: "+ coinsCalculated);
 
         GameObject.Find("Player").GetComponent<PlayerScript>().CoinsUpdate(coinsCalculated);
 
@@ -61,6 +70,11 @@ public class CoinScript : MonoBehaviour
     private void destroyCoin()
     {
         if (!isCointAlreadyCounted)
-            coinCounted();
+        {
+            if (GameSettings.IsMoneyIncreaseBuffOn)
+                coinCounted(Value * GameSettings.MoneyIncreaseBuffMultiplayer);
+            else
+                coinCounted(Value);
+        }
     }
 }

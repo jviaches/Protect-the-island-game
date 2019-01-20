@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Script.Settings;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,8 +25,17 @@ public class BaloonScript : MonoBehaviour
     {
         // generate 2 coins as reward
         Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.left, Quaternion.identity);
-        Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);
 
+        if (!GameSettings.IsMoneyIncreaseBuffOn)
+        {
+            float buffProbability = Random.Range(0f, 1f);
+            print("buffProbability=" + buffProbability);
+
+            if (buffProbability > GameSettings.MoneyIncreaseBuffProbability)
+                Instantiate((GameObject)Resources.Load("Prefabs/Buffs/MoneyIncreaseBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
+            else
+                Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);
+        }
 
         Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
         int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
