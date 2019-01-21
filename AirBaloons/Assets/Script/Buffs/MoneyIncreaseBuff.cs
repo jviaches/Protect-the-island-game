@@ -14,7 +14,7 @@ public class MoneyIncreaseBuff : MonoBehaviour {
     void OnMouseDown()
     {
         GameSettings.IsMoneyIncreaseBuffOn = true;
-        destroyBuff();
+        gameObject.transform.position = GameObject.Find("ItemsCollectionObject").transform.position;
     }
 
     void Update()
@@ -23,13 +23,10 @@ public class MoneyIncreaseBuff : MonoBehaviour {
         {
             activationTimer -= Time.deltaTime;
             if (activationTimer <= 0.01f)
+            {
                 GameSettings.IsMoneyIncreaseBuffOn = false;
+                Destroy(gameObject);
+            }
         }
-    }
-
-    // if player was not able to pick up
-    private void destroyBuff()
-    {
-        Destroy(gameObject);
     }
 }

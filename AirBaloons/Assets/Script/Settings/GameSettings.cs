@@ -20,4 +20,3 @@ namespace Assets.Script.Settings
         public static float MoneyIncreaseBuffProbability = 0.8f;
     }
 }
-
