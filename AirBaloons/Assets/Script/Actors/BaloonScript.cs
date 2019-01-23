@@ -7,7 +7,7 @@ public class BaloonScript : MonoBehaviour
 {
     private GameObject island;
     private GameObject explosion;
-    private float speed = 1f;
+    public float speed = GameSettings.BaloonsSpeed;
     private float step;
 
     void Start()
@@ -33,6 +33,17 @@ public class BaloonScript : MonoBehaviour
 
             if (buffProbability > GameSettings.MoneyIncreaseBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/MoneyIncreaseBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
+            else
+                Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);
+        }
+
+        if (!GameSettings.IsSpeedSlownessBuffOn)
+        {
+            float buffProbability = Random.Range(0f, 1f);
+            print("buffProbability=" + buffProbability);
+
+            if (buffProbability > GameSettings.SpeedSlownessBuffProbability)
+                Instantiate((GameObject)Resources.Load("Prefabs/Buffs/SpeeedSlownessBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
             else
                 Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);
         }

@@ -8,15 +8,33 @@ namespace Assets.Script.Settings
 {
     public static class GameSettings
     {
-        public static float BornRadius = 40;    //point on the surface of a sphere with radius 40
+        public static readonly float BornRadius = 40;    //point on the surface of a sphere with radius 40
 
-        public static Vector3 PlanesBornPosition = new Vector3(-160, 7.2f, -87f);
+        public static readonly Vector3 PlanesBornPosition = new Vector3(-160, 7.2f, -87f);
 
-        public static float BallonsGenerationFrequensy = 2.5f;
-        public static float PlanesGenerationFrequensy = 1f;
+        private static readonly float baseBaloonsSpeed = 1f;
+        public static float BaloonsSpeed
+        {
+            get
+            {
+                if (IsSpeedSlownessBuffOn)
+                    return baseBaloonsSpeed - SpeedSlownessBuffModifier;
+                else
+                    return baseBaloonsSpeed;
+            }
+        }
+
+        public static readonly float BallonsGenerationFrequensy = 2.5f;
+        public static readonly float PlanesGenerationFrequensy = 1f;
 
         public static bool IsMoneyIncreaseBuffOn = false;
-        public static int MoneyIncreaseBuffMultiplayer = 4;
-        public static float MoneyIncreaseBuffProbability = 0.8f;
+        public static readonly int MoneyIncreaseBuffMultiplayer = 4;
+        public static readonly float MoneyIncreaseBuffProbability = 0.8f;
+
+        public static bool IsSpeedSlownessBuffOn = false;
+        public static readonly float SpeedSlownessBuffModifier = 0.5f;
+        public static readonly float SpeedSlownessBuffProbability = 0.8f;
+
+        
     }
 }

@@ -15,6 +15,7 @@ public class GameManagerScript : MonoBehaviour {
     private float levelTimer = LevelSettings.LevelTimer;
     private Text levelTimerText;
     private GameObject moneyBuffUI;
+    private GameObject speedBuffUI;
 
     void Start () {
 
@@ -25,9 +26,12 @@ public class GameManagerScript : MonoBehaviour {
         currLevel = LevelSettings.GetCurrentLevel();
 
         levelTimerText = GameObject.Find("bar_timer_text").GetComponent<Text>();
-        moneyBuffUI = GameObject.Find("money-buff");
 
+        moneyBuffUI = GameObject.Find("money-buff");
         GameObject.Find("money-buff").SetActive(false);
+
+        speedBuffUI = GameObject.Find("speed-buff");
+        GameObject.Find("speed-buff").SetActive(false);
 
         InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy * currLevel.BaloonGenerationFrequencyModifier);
         InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy * currLevel.PlaneGenerationFrequencyModifier);
@@ -53,15 +57,23 @@ public class GameManagerScript : MonoBehaviour {
 
     void Update()
     {
+        // update level timer
         levelTimer -= Time.deltaTime;
         if (levelTimer <= 0.01f )
             SceneManager.LoadScene("LevelsScene");
 
+        levelTimerText.text = (int)levelTimer + " sec";
+
+        // handle money multiplyer buff
         if (GameSettings.IsMoneyIncreaseBuffOn)
             moneyBuffUI.SetActive(true);
         else if(false == GameSettings.IsMoneyIncreaseBuffOn)
             moneyBuffUI.SetActive(false);
 
-        levelTimerText.text = (int)levelTimer + " sec";
+        // handle speed decrease buff
+        if (GameSettings.IsSpeedSlownessBuffOn)
+            speedBuffUI.SetActive(true);
+        else if (false == GameSettings.IsSpeedSlownessBuffOn)
+            speedBuffUI.SetActive(false);
     }
 }

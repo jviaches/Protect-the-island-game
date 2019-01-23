@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class MoneyIncreaseBuff : MonoBehaviour {
 
-    private float activationTimer = 10; // stay active for 10 sec
-
-    void Start () {
-        Invoke("destroyBuff", 10f);
-    }
+    private float activationTimer = 20; // stay active for 10 sec
 
     void OnMouseDown()
     {
