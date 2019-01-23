@@ -8,6 +8,7 @@ public class SettingsSceneLoader : MonoBehaviour {
     private Button saveButton;
     private Toggle systemSound;
     private Slider volumeSlider;
+    private Dropdown languageDropDwn;
 
     void Start () {
         exitButton = GameObject.Find("ExitButton").GetComponent<Button>();
@@ -19,6 +20,8 @@ public class SettingsSceneLoader : MonoBehaviour {
         volumeSlider = GameObject.Find("volume_slider").GetComponent<Slider>();
         volumeSlider.onValueChanged.AddListener((isOn) => AudioListener.volume = volumeSlider.value);
 
+        languageDropDwn = GameObject.Find("lang-dropdown").GetComponent<Dropdown>();
+        languageDropDwn.interactable = false;
 
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
         saveButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));  // TODO: wire to save setting in file
