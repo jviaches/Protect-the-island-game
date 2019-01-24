@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpeedSlownessBuff : MonoBehaviour {
 
-    private float activationTimer = 100; // stay active for 10 sec
+    private float activationTimer = 20; // stay active for 10 sec
 
     void OnMouseDown()
     {
@@ -17,13 +17,14 @@ public class SpeedSlownessBuff : MonoBehaviour {
 
     void Update()
     {
+        updateBaloonSpeed();
+
         if (GameSettings.IsSpeedSlownessBuffOn)
         {
             activationTimer -= Time.deltaTime;
             if (activationTimer <= 0.01f)
             {
-                GameSettings.IsSpeedSlownessBuffOn = false;
-                updateBaloonSpeed();
+                GameSettings.IsSpeedSlownessBuffOn = false;                
                 Destroy(gameObject);
             }
         }
