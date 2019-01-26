@@ -17,9 +17,11 @@ public class GameManagerScript : MonoBehaviour {
     private GameObject moneyBuffUI;
     private GameObject speedBuffUI;
 
+    private GameObject levelCompletedDialog;
+
     private IslandScript islandScript;
 
-    private bool isLevelSuccessfullyCompleted;
+    private bool isLevelSuccessfullyCompleted = false;
 
     void Start () {
 
@@ -38,6 +40,9 @@ public class GameManagerScript : MonoBehaviour {
 
         speedBuffUI = GameObject.Find("speed-buff");
         GameObject.Find("speed-buff").SetActive(false);
+
+        levelCompletedDialog = GameObject.Find("level_completed");
+        levelCompletedDialog.SetActive(false);
 
         InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy * currLevel.BaloonGenerationFrequencyModifier);
         InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy * currLevel.PlaneGenerationFrequencyModifier);
@@ -63,23 +68,34 @@ public class GameManagerScript : MonoBehaviour {
 
     void Update()
     {
+
+        if (isLevelSuccessfullyCompleted)
+            return;
+        
         // update level timer
         levelTimer -= Time.deltaTime;
 
         if (islandScript.Health <= 0)
         {
-            isLevelSuccessfullyCompleted = false;
-            //GameObject.Find("level-goal-notification").SetActive(true);
-            Time.timeScale = 0;
-
-            CancelInvoke("generateBaloons");
-            CancelInvoke("generateBonusPlanes");
+            levelCompletedDialog.SetActive(false);
+            stopLevel();
         }
 
         if (levelTimer <= 0.01f)
         {
             isLevelSuccessfullyCompleted = true;
-            SceneManager.LoadScene("LevelsScene");
+            levelCompletedDialog.SetActive(true);
+
+            GameObject.Find("square_button_menu").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
+            GameObject.Find("square_button_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
+
+            GameObject.Find("square_button_play").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                LevelSettings.NextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
+                SceneManager.LoadScene("LevelsScene");
+            });
+
+            stopLevel();
         }
 
 
@@ -96,5 +112,22 @@ public class GameManagerScript : MonoBehaviour {
             speedBuffUI.SetActive(true);
         else if (false == GameSettings.IsSpeedSlownessBuffOn)
             speedBuffUI.SetActive(false);
+    }
+
+    private void stopLevel()
+    {
+        CancelInvoke("generateBaloons");
+        CancelInvoke("generateBonusPlanes");
+
+        BaloonScript[] ballons = FindObjectsOfType<BaloonScript>();
+
+        for (int i = 0; i < ballons.Length; i++)
+            Destroy(ballons[i].gameObject);
+
+        BonusPlane[] planes = FindObjectsOfType<BonusPlane>();
+
+        for (int i = 0; i < planes.Length; i++)
+            Destroy(planes[i].gameObject);
+
     }
 }
