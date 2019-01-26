@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Script.Settings;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class SettingsSceneLoader : MonoBehaviour {
     private Toggle systemSound;
     private Slider volumeSlider;
     private Dropdown languageDropDwn;
+    private Toggle tutorial_switch;
 
     void Start () {
         exitButton = GameObject.Find("ExitButton").GetComponent<Button>();
@@ -22,6 +24,10 @@ public class SettingsSceneLoader : MonoBehaviour {
 
         languageDropDwn = GameObject.Find("lang-dropdown").GetComponent<Dropdown>();
         languageDropDwn.interactable = false;
+
+        tutorial_switch = GameObject.Find("tutorial_switch").GetComponent<Toggle>();
+        tutorial_switch.isOn = GameSettings.isTutotrialOn;
+        tutorial_switch.onValueChanged.AddListener((isOn) => GameSettings.isTutotrialOn = isOn);
 
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
         saveButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));  // TODO: wire to save setting in file

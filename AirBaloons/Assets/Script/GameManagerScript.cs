@@ -27,8 +27,11 @@ public class GameManagerScript : MonoBehaviour {
 
     void Start () {
 
-        Time.timeScale = 0.00001f;
-        Invoke("showLevelGoalNotification", 0.00002f);
+        if (!GameSettings.isTutotrialOn)
+        {
+            Time.timeScale = 0.00001f;
+            Invoke("hideLevelGoalNotification", 0.00002f);
+        }
         
         player = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Player")).GetComponent<PlayerScript>(); // TODO: load from file
         currLevel = LevelSettings.GetCurrentLevel();
@@ -54,7 +57,7 @@ public class GameManagerScript : MonoBehaviour {
         InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy * currLevel.PlaneGenerationFrequencyModifier);
     }
 
-    private void showLevelGoalNotification()
+    private void hideLevelGoalNotification()
     {
         GameObject.Find("level-goal-notification").SetActive(false);
         Time.timeScale = 1f;
