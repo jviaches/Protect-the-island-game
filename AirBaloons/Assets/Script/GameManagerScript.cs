@@ -17,6 +17,10 @@ public class GameManagerScript : MonoBehaviour {
     private GameObject moneyBuffUI;
     private GameObject speedBuffUI;
 
+    private IslandScript islandScript;
+
+    private bool isLevelSuccessfullyCompleted;
+
     void Start () {
 
         Time.timeScale = 0.00001f;
@@ -24,6 +28,8 @@ public class GameManagerScript : MonoBehaviour {
         
         player = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Player")).GetComponent<PlayerScript>(); // TODO: load from file
         currLevel = LevelSettings.GetCurrentLevel();
+
+        islandScript = GameObject.Find("IslandShield").GetComponent<IslandScript>();
 
         levelTimerText = GameObject.Find("bar_timer_text").GetComponent<Text>();
 
@@ -45,7 +51,7 @@ public class GameManagerScript : MonoBehaviour {
 
     private void generateBaloons()
     {
-        var random = UnityEngine.Random.onUnitSphere * GameSettings.BornRadius; //Returns a random point on the surface of a sphere with radius 40
+        var random = UnityEngine.Random.onUnitSphere * GameSettings.BaloonsBornRadius; //Returns a random point on the surface of a sphere with radius 40
         Instantiate((GameObject)Resources.Load("Prefabs/Actors/Baloon" + UnityEngine.Random.Range(1,3)), random, Quaternion.identity);
     }
 
@@ -59,8 +65,23 @@ public class GameManagerScript : MonoBehaviour {
     {
         // update level timer
         levelTimer -= Time.deltaTime;
-        if (levelTimer <= 0.01f )
+
+        if (islandScript.Health <= 0)
+        {
+            isLevelSuccessfullyCompleted = false;
+            //GameObject.Find("level-goal-notification").SetActive(true);
+            Time.timeScale = 0;
+
+            CancelInvoke("generateBaloons");
+            CancelInvoke("generateBonusPlanes");
+        }
+
+        if (levelTimer <= 0.01f)
+        {
+            isLevelSuccessfullyCompleted = true;
             SceneManager.LoadScene("LevelsScene");
+        }
+
 
         levelTimerText.text = (int)levelTimer + " sec";
 

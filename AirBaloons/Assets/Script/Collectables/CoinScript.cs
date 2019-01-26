@@ -59,7 +59,7 @@ public class CoinScript : MonoBehaviour
         //GetComponent<Animator>().PlayInFixedTime("Pulsation", 0, 1f);
 
         int coinsCalculated = (currLevel.MoneyGenerationModifier * Value) + bonus;
-        print("Coins collected: "+ coinsCalculated);
+        //print("Coins collected: "+ coinsCalculated);
 
         GameObject.Find("Player").GetComponent<PlayerScript>().CoinsUpdate(coinsCalculated);
 

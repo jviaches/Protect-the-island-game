@@ -8,9 +8,10 @@ namespace Assets.Script.Settings
 {
     public static class GameSettings
     {
-        public static readonly float BornRadius = 40;    //point on the surface of a sphere with radius 40
+        public static readonly float BaloonsBornRadius = 40;    //point on the surface of a sphere with radius 40
 
         public static readonly Vector3 PlanesBornPosition = new Vector3(-160, 7.2f, -87f);
+        public static int BaseIslandHealth = 100;
 
         private static readonly float baseBaloonsSpeed = 1f;
         public static float BaloonsSpeed

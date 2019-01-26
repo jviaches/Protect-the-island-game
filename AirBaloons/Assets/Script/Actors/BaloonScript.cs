@@ -1,4 +1,5 @@
-﻿using Assets.Script.Settings;
+﻿using Assets.Script.Actors;
+using Assets.Script.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,15 +11,38 @@ public class BaloonScript : MonoBehaviour
     public float speed = GameSettings.BaloonsSpeed;
     private float step;
 
+    public int DPS { get  { return 10;  }  }
+
+    public bool isIslandEngaged = false;
+
     void Start()
     {
-        island = GameObject.Find("Island");
+        island = GameObject.Find("IslandShield");
         step = speed * Time.deltaTime;
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, island.transform.position, step);
+        if(!isIslandEngaged)
+            transform.position = Vector3.MoveTowards(transform.position, island.transform.position, step);
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "islandShield")
+        {
+            print("Ballon detected in area");
+            isIslandEngaged = true;
+
+            InvokeRepeating("startDamage", 0, 1);
+        }
+    }
+
+    private void startDamage()
+    {
+        island.GetComponent<IslandScript>().HealthUpdate(-DPS);
+        print("Ballon doing damage: " + DPS + " Time: " + Time.timeSinceLevelLoad);
     }
 
     void OnMouseDown()
