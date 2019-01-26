@@ -34,6 +34,7 @@ public class GameManagerScript : MonoBehaviour {
         currLevel = LevelSettings.GetCurrentLevel();
 
         islandScript = GameObject.Find("IslandShield").GetComponent<IslandScript>();
+        GameObject.Find("bar_health_text").GetComponent<Text>().text = islandScript.Health.ToString();
 
         levelTimerText = GameObject.Find("bar_timer_text").GetComponent<Text>();
 

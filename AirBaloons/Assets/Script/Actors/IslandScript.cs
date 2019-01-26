@@ -10,7 +10,7 @@ public class IslandScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Health = 10;// GameSettings.BaseIslandHealth;
+        Health = GameSettings.BaseIslandHealth;
     }
 	
 	// Update is called once per frame
