@@ -50,8 +50,8 @@ public class LevelsScene : MonoBehaviour
                 // enable all played levels
                 if (levelIndex - 1 < LevelSettings.LastCompletedLevelIndex)
                 {
-                    print("LastCompletedLevelIndex=" + LevelSettings.LastCompletedLevelIndex);
-                    print("Found lvl " + levelIndex + " to enable");
+                    //print("LastCompletedLevelIndex=" + LevelSettings.LastCompletedLevelIndex);
+                    //print("Found lvl " + levelIndex + " to enable");
                     GameObject.Find("level" + levelIndex).GetComponent<Button>().enabled = true;        // star format: level_1
                     GameObject.Find("star" + levelIndex + "_1").GetComponent<Image>().enabled = true;   // star format: star1_1
                     GameObject.Find("star" + levelIndex + "_2").GetComponent<Image>().enabled = true;   // star format: star1_2
@@ -98,7 +98,7 @@ public class LevelsScene : MonoBehaviour
     {
         LevelSettings.NextLevel(level);
         
-        print("After loadLevel() => selLvl=" + LevelSettings.SelectedLevelIndex + " LastComplLvl="+ LevelSettings.LastCompletedLevelIndex);
+        //print("After loadLevel() => selLvl=" + LevelSettings.SelectedLevelIndex + " LastComplLvl="+ LevelSettings.LastCompletedLevelIndex);
 
         SceneManager.LoadScene("GameScene");  // load level
     }
