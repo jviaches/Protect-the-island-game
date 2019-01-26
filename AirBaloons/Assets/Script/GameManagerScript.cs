@@ -18,10 +18,12 @@ public class GameManagerScript : MonoBehaviour {
     private GameObject speedBuffUI;
 
     private GameObject levelCompletedDialog;
+    private GameObject levelFailedDialog;
 
     private IslandScript islandScript;
 
     private bool isLevelSuccessfullyCompleted = false;
+    private bool isLevelFailed = false;
 
     void Start () {
 
@@ -43,6 +45,9 @@ public class GameManagerScript : MonoBehaviour {
 
         levelCompletedDialog = GameObject.Find("level_completed");
         levelCompletedDialog.SetActive(false);
+
+        levelFailedDialog = GameObject.Find("level_failed");
+        levelFailedDialog.SetActive(false);
 
         InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy * currLevel.BaloonGenerationFrequencyModifier);
         InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy * currLevel.PlaneGenerationFrequencyModifier);
@@ -69,18 +74,24 @@ public class GameManagerScript : MonoBehaviour {
     void Update()
     {
 
-        if (isLevelSuccessfullyCompleted)
+        if (isLevelSuccessfullyCompleted || isLevelFailed)
             return;
         
         // update level timer
         levelTimer -= Time.deltaTime;
 
+
         if (islandScript.Health <= 0)
         {
-            levelCompletedDialog.SetActive(false);
+            isLevelFailed = true;
+            levelFailedDialog.SetActive(true);
+
+            GameObject.Find("square_button_fail_menu").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
+            GameObject.Find("square_button_fail_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
+
             stopLevel();
         }
-
+       
         if (levelTimer <= 0.01f)
         {
             isLevelSuccessfullyCompleted = true;
