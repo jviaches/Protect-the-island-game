@@ -47,6 +47,16 @@ public class BaloonScript : MonoBehaviour
 
     void OnMouseDown()
     {
+        dropItems();
+    }
+
+    void OnDestroy()
+    {
+        dropItems();
+    }
+
+    private void dropItems()
+    { 
         // generate 2 coins as reward
         Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.left, Quaternion.identity);
 

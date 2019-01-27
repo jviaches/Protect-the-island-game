@@ -20,8 +20,19 @@ public class BonusPlane : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, destination, step);
     }
 
+
+    void OnDestroy()
+    {
+        dropItems();
+    }
+
     void OnMouseDown()
     {
+        dropItems();
+    }
+
+    private void dropItems()
+    { 
         // generate 10 coins as reward
         for (int i = 0; i < 10; i++)
         {

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - island
   - islandShield
+  - death_surface
+  - enemy
   layers:
   - Default
   - TransparentFX

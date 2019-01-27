@@ -20,6 +20,9 @@ public class GameManagerScript : MonoBehaviour {
     private GameObject levelCompletedDialog;
     private GameObject levelFailedDialog;
 
+
+    private GameObject goldenAbilityWidget;
+
     private IslandScript islandScript;
 
     private bool isLevelSuccessfullyCompleted = false;
@@ -56,6 +59,15 @@ public class GameManagerScript : MonoBehaviour {
 
         levelFailedDialog = GameObject.Find("level_failed");
         levelFailedDialog.SetActive(false);
+
+        goldenAbilityWidget = GameObject.Find("GoldenWaveAbilityIcon");
+        goldenAbilityWidget.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            // TODO: create expand sphere
+            GameObject island = GameObject.Find("IslandShield");
+
+            Instantiate((GameObject)Resources.Load("Prefabs/Abilities/GoldenWave"), island.transform.position, Quaternion.identity);
+        });
 
         InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy * currLevel.BaloonGenerationFrequencyModifier);
         InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy * currLevel.PlaneGenerationFrequencyModifier);
