@@ -1,8 +1,10 @@
-﻿using Assets.Script.Levels;
+﻿using Assets.Script.Infra;
+using Assets.Script.Levels;
 using Assets.Script.Settings;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -59,6 +61,13 @@ public class GameManagerScript : MonoBehaviour {
 
         //InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy * currLevel.BaloonGenerationFrequencyModifier);
         //InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy * currLevel.PlaneGenerationFrequencyModifier);
+
+        // create enemy after at certain amount of time
+        for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
+        {
+            //Invoke("generateFloatableItems", currLevel.TimeActivationDic.ElementAt(i).Key);
+            StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(i).Value, currLevel.TimeActivationDic.ElementAt(i).Key));
+        }
     }
 
     private void hideLevelGoalNotification()
@@ -86,9 +95,7 @@ public class GameManagerScript : MonoBehaviour {
         if (isLevelSuccessfullyCompleted || isLevelFailed)
             return;
         
-        // update level timer
         levelTimer -= Time.deltaTime;
-
 
         if (islandScript.Health <= 0)
         {
@@ -116,8 +123,9 @@ public class GameManagerScript : MonoBehaviour {
             });
 
             stopLevel();
-        }
+        }      
 
+        // ------ UI updates -------
 
         levelTimerText.text = (int)levelTimer + " sec";
 
@@ -148,6 +156,13 @@ public class GameManagerScript : MonoBehaviour {
 
         for (int i = 0; i < planes.Length; i++)
             Destroy(planes[i].gameObject);
+    }
 
+    private IEnumerator generateFloatableItems(FloatItem floatItem, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        GameObject flingEnemy = Instantiate((GameObject)Resources.Load(floatItem.Prefab), floatItem.Location, Quaternion.LookRotation(islandScript.transform.position));
+        flingEnemy.transform.Rotate(-90, 0, -180);
     }
 }
