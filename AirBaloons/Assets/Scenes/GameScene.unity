@@ -2420,8 +2420,9 @@ GameObject:
   - component: {fileID: 454088699}
   - component: {fileID: 454088701}
   - component: {fileID: 454088700}
+  - component: {fileID: 454088702}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GoldenWaveAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2482,6 +2483,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 454088698}
   m_CullTransparentMesh: 0
+--- !u!114 &454088702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 454088698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864dcdcaf2a059e41a8aa17c925c50b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &455382229
 Prefab:
   m_ObjectHideFlags: 0
@@ -5714,7 +5726,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.358
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &1170618027

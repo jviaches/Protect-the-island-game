@@ -5,19 +5,18 @@ using UnityEngine.UI;
 
 public class GoldenWaveAbility : MonoBehaviour {
 
-    private float abilityTimer = 3f;
+    private float abilityActivationDurationTimer = 3f;
 
-	void Start () {
-
+    void Start () {
     }
 	
 	void Update () {
 
-        if (abilityTimer <= 0.00001f)
+        if (abilityActivationDurationTimer <= 0.00001f)
             Destroy(gameObject);
 
-        abilityTimer -= Time.deltaTime;
-        gameObject.transform.localScale += new Vector3(0.8f, 0.8f, 0.8f);
+        abilityActivationDurationTimer -= Time.deltaTime;
+        gameObject.transform.localScale += new Vector3(0.8f, 0.8f, 0.8f);       
     }
 
     void OnTriggerEnter(Collider other)
