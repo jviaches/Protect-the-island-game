@@ -112,7 +112,7 @@ public class GameManagerScript : MonoBehaviour {
             isLevelFailed = true;
             levelFailedDialog.SetActive(true);
 
-            GameObject.Find("square_button_fail_menu").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
+            GameObject.Find("square_button_fail_levels").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
             GameObject.Find("square_button_fail_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
 
             stopLevel();
@@ -123,7 +123,7 @@ public class GameManagerScript : MonoBehaviour {
             isLevelSuccessfullyCompleted = true;
             levelCompletedDialog.SetActive(true);
 
-            GameObject.Find("square_button_menu").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
+            GameObject.Find("square_button_levels").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
             GameObject.Find("square_button_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
 
             GameObject.Find("square_button_play").GetComponent<Button>().onClick.AddListener(() =>

@@ -4524,7 +4524,7 @@ GameObject:
   - component: {fileID: 908683728}
   - component: {fileID: 908683727}
   m_Layer: 0
-  m_Name: square_button_fail_menu
+  m_Name: square_button_fail_levels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

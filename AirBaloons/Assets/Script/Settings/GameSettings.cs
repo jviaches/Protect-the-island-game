@@ -35,7 +35,7 @@ namespace Assets.Script.Settings
             }
         }
 
-        public static readonly float BallonsGenerationFrequensy = 2.5f;
+        public static readonly float BallonsGenerationFrequensy = 1;
         public static readonly float PlanesGenerationFrequensy = 1f;
 
         public static bool IsMoneyIncreaseBuffOn = false;

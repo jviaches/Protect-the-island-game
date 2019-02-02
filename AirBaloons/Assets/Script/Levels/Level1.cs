@@ -12,7 +12,7 @@ namespace Assets.Script.Levels
     {
         public int LevelIndex { get  { return 1; } }
 
-        public float BaloonGenerationFrequencyModifier { get { return 0.5f; } }
+        public float BaloonGenerationFrequencyModifier { get { return 2.5f; } }
 
         public float PlaneGenerationFrequencyModifier { get { return 40; } }
 
