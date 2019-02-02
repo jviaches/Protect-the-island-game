@@ -45,10 +45,10 @@ public class GameManagerScript : MonoBehaviour {
         speedBuffUI = GameObject.Find("speed-buff");
         GameObject.Find("speed-buff").SetActive(false);
 
-        levelCompletedDialog = GameObject.Find("level_completed");
+        levelCompletedDialog = GameObject.Find("level_completed_Canvas");
         levelCompletedDialog.SetActive(false);
 
-        levelFailedDialog = GameObject.Find("level_failed");
+        levelFailedDialog = GameObject.Find("level_failed_Canvas");
         levelFailedDialog.SetActive(false);
 
         if (!GameSettings.isTutotrialOn)
@@ -68,7 +68,8 @@ public class GameManagerScript : MonoBehaviour {
         Time.timeScale = 1f;
 
         InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy + currLevel.BaloonGenerationFrequencyModifier);
-        InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
+        InvokeRepeating("generateBonusPlanes", GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier, 
+                                               GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
 
         // create enemy after at certain amount of time
         //for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)

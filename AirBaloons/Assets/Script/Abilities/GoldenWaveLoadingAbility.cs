@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GoldenWaveLoadingAbility : MonoBehaviour {
 
-    private const  float baseAbilityLoadingDurationTimer = 20f;
+    private const  float baseAbilityLoadingDurationTimer = 40f;
     private float abilityLoadingDurationTimer = baseAbilityLoadingDurationTimer;
 
     private bool isReadyForActivation = true;
