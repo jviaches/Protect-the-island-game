@@ -63,9 +63,9 @@ public class BaloonScript : MonoBehaviour
         if (!GameSettings.IsMoneyIncreaseBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
-            print("buffProbability=" + buffProbability);
+            //print("Money Increase buffProbability=" + buffProbability);
 
-            if (buffProbability > GameSettings.MoneyIncreaseBuffProbability)
+            if (buffProbability <= GameSettings.MoneyIncreaseBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/MoneyIncreaseBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
             else
                 Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);
@@ -74,9 +74,9 @@ public class BaloonScript : MonoBehaviour
         if (!GameSettings.IsSpeedSlownessBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
-            print("buffProbability=" + buffProbability);
+            //print("Slowness buffProbability=" + buffProbability);
 
-            if (buffProbability > GameSettings.SpeedSlownessBuffProbability)
+            if (buffProbability <= GameSettings.SpeedSlownessBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/SpeeedSlownessBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
             else
                 Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);

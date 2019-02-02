@@ -31,16 +31,6 @@ public class GameManagerScript : MonoBehaviour {
 
     void Start () {
 
-        if (!GameSettings.isTutotrialOn)
-        {
-            Time.timeScale = 0.00001f;
-            Invoke("hideLevelGoalNotification", 0.00002f);
-        }
-        else
-        {
-            hideLevelGoalNotification();
-        }
-        
         player = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Player")).GetComponent<PlayerScript>(); // TODO: load from file
         currLevel = LevelSettings.GetCurrentLevel();
 
@@ -61,21 +51,30 @@ public class GameManagerScript : MonoBehaviour {
         levelFailedDialog = GameObject.Find("level_failed");
         levelFailedDialog.SetActive(false);
 
-        InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy + currLevel.BaloonGenerationFrequencyModifier);
-        //InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
-
-        // create enemy after at certain amount of time
-        for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
+        if (!GameSettings.isTutotrialOn)
         {
-            //Invoke("generateFloatableItems", currLevel.TimeActivationDic.ElementAt(i).Key);
-            StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(i).Value, currLevel.TimeActivationDic.ElementAt(i).Key));
+            Time.timeScale = 0.00001f;
+            Invoke("hideLevelGoalNotification", 0.00002f);
         }
+        else
+        {
+            hideLevelGoalNotification();
+        }      
     }
 
     private void hideLevelGoalNotification()
     {
         GameObject.Find("level-goal-notification").SetActive(false);
         Time.timeScale = 1f;
+
+        InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy + currLevel.BaloonGenerationFrequencyModifier);
+        InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
+
+        // create enemy after at certain amount of time
+        //for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
+        //{
+        //    StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(i).Value, currLevel.TimeActivationDic.ElementAt(i).Key));
+        //}
     }
 
     private void generateBaloons()
@@ -84,12 +83,19 @@ public class GameManagerScript : MonoBehaviour {
         //GameObject balloon = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1,3)), random, Quaternion.identity);
         //balloon.transform.Rotate(-90, 0, 0);
 
-        var random = UnityEngine.Random.Range(0, GameSettings.BalloonsBornPositions.Length - 1);
         GameObject balloon = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3)));
 
-        if (GameSettings.BalloonsBornPositions[random] != lastBornBalloonPosition)
+        for (int i = 0; i < 10; i++)    // 10 attemtps to make sure, no previos location was generated
         {
-            balloon.transform.position = GameSettings.BalloonsBornPositions[random];
+            var random = UnityEngine.Random.Range(0, GameSettings.BalloonsBornPositions.Length - 1);
+            if (GameSettings.BalloonsBornPositions[random].x != lastBornBalloonPosition.x &&
+                GameSettings.BalloonsBornPositions[random].y != lastBornBalloonPosition.y &&
+                GameSettings.BalloonsBornPositions[random].z != lastBornBalloonPosition.z)
+            {
+                balloon.transform.position = GameSettings.BalloonsBornPositions[random];
+                lastBornBalloonPosition = GameSettings.BalloonsBornPositions[random];
+                break;
+            }
         }
     }
 
@@ -154,6 +160,8 @@ public class GameManagerScript : MonoBehaviour {
 
     private void stopLevel()
     {
+        Time.timeScale = 0;
+
         CancelInvoke("generateBaloons");
         CancelInvoke("generateBonusPlanes");
 
