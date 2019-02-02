@@ -24,6 +24,8 @@ public class GameManagerScript : MonoBehaviour {
 
     private IslandScript islandScript;
 
+    private Vector3 lastBornBalloonPosition = Vector3.zero;
+
     private bool isLevelSuccessfullyCompleted = false;
     private bool isLevelFailed = false;
 
@@ -59,8 +61,8 @@ public class GameManagerScript : MonoBehaviour {
         levelFailedDialog = GameObject.Find("level_failed");
         levelFailedDialog.SetActive(false);
 
-        //InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy * currLevel.BaloonGenerationFrequencyModifier);
-        //InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy * currLevel.PlaneGenerationFrequencyModifier);
+        InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy + currLevel.BaloonGenerationFrequencyModifier);
+        //InvokeRepeating("generateBonusPlanes", 0f, GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
 
         // create enemy after at certain amount of time
         for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
@@ -78,9 +80,17 @@ public class GameManagerScript : MonoBehaviour {
 
     private void generateBaloons()
     {
-        var random = UnityEngine.Random.onUnitSphere * GameSettings.BaloonsBornRadius; //Returns a random point on the surface of a sphere with radius 40
-        GameObject balloon = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1,3)), random, Quaternion.identity);
-        balloon.transform.Rotate(-90, 0, 0);
+        //var random = UnityEngine.Random.onUnitSphere * GameSettings.BaloonsBornRadius; //Returns a random point on the surface of a sphere with radius 40
+        //GameObject balloon = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1,3)), random, Quaternion.identity);
+        //balloon.transform.Rotate(-90, 0, 0);
+
+        var random = UnityEngine.Random.Range(0, GameSettings.BalloonsBornPositions.Length - 1);
+        GameObject balloon = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3)));
+
+        if (GameSettings.BalloonsBornPositions[random] != lastBornBalloonPosition)
+        {
+            balloon.transform.position = GameSettings.BalloonsBornPositions[random];
+        }
     }
 
     private void generateBonusPlanes()
