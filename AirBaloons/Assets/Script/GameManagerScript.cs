@@ -15,10 +15,11 @@ public class GameManagerScript : MonoBehaviour {
 
     private ILevel currLevel;
     private float levelTimer = LevelSettings.LevelTimer;
+
     private Text levelTimerText;
+
     private GameObject moneyBuffUI;
     private GameObject speedBuffUI;
-
     private GameObject levelCompletedDialog;
     private GameObject levelFailedDialog;
 
