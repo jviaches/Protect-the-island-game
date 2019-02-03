@@ -7,7 +7,7 @@ using UnityEngine;
 public static class LevelSettings
 {
     public static int LevelsInEpisode = 10;
-    public static int LevelTimer = 2; // Time take to level to complete (in sec)
+    public static int LevelTimer = 100; // Time take to level to complete (in sec)
 
     public static Dictionary<ILevel, int> Episode1Levels = new Dictionary<ILevel, int>();   // 1rs param level, 2nd param amount of stars
     public static int SelectedLevelIndex = 1;                   // Level chosen by user

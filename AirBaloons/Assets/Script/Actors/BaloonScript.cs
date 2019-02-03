@@ -8,22 +8,24 @@ public class BaloonScript : MonoBehaviour
 {
     private GameObject island;
     private GameObject explosion;
-    public float speed = GameSettings.BaloonsSpeed;
+    
     private float step;
 
-    public int DPS { get  { return 10;  }  }
+    public float Speed = GameSettings.BaloonsSpeed;
 
-    public bool isIslandEngaged = false;
+    public int DPS { get  { return 5;  }  }
+
+    public bool IsIslandEngaged = false;
 
     void Start()
     {
         island = GameObject.Find("IslandShield");
-        step = speed * Time.deltaTime;
+        step = Speed * Time.deltaTime;
     }
 
     void Update()
     {
-        if(!isIslandEngaged)
+        if(!IsIslandEngaged)
             transform.position = Vector3.MoveTowards(transform.position, island.transform.position, step);
     }
 
@@ -33,7 +35,7 @@ public class BaloonScript : MonoBehaviour
         if (other.tag == "islandShield")
         {
             print("Ballon detected in area");
-            isIslandEngaged = true;
+            IsIslandEngaged = true;
 
             InvokeRepeating("startDamage", 0, 1);
         }

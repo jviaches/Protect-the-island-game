@@ -36,7 +36,7 @@ public class SpeedSlownessBuff : MonoBehaviour {
         BaloonScript[] baloons = GameObject.FindObjectsOfType<BaloonScript>();
         for (int i = 0; i < baloons.Length; i++)
         {
-            baloons[i].speed = GameSettings.BaloonsSpeed;
+            baloons[i].Speed = GameSettings.BaloonsSpeed;
         }
     }
 }

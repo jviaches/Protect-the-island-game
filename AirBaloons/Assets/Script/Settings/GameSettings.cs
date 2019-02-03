@@ -22,7 +22,7 @@ namespace Assets.Script.Settings
 
         public static int BaseIslandHealth = 100;
 
-        private static readonly float baseBaloonsSpeed = 0.8f;
+        private static readonly float baseBaloonsSpeed = 3f;
         public static float BaloonsSpeed
         {
             get

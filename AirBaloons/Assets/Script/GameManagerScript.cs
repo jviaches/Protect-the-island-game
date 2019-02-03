@@ -161,8 +161,6 @@ public class GameManagerScript : MonoBehaviour {
 
     private void stopLevel()
     {
-        Time.timeScale = 0;
-
         CancelInvoke("generateBaloons");
         CancelInvoke("generateBonusPlanes");
 
@@ -175,6 +173,8 @@ public class GameManagerScript : MonoBehaviour {
 
         for (int i = 0; i < planes.Length; i++)
             Destroy(planes[i].gameObject);
+
+        Time.timeScale = 0;
     }
 
     private IEnumerator generateFloatableItems(FloatItem floatItem, float delayTime)
