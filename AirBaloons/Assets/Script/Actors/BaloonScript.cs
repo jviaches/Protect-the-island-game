@@ -44,7 +44,12 @@ public class BaloonScript : MonoBehaviour
     private void startDamage()
     {
         island.GetComponent<IslandScript>().HealthUpdate(-DPS);
-        print("Ballon doing damage: " + DPS + " Time: " + Time.timeSinceLevelLoad);
+        //print("Ballon doing damage: " + DPS + " Time: " + Time.timeSinceLevelLoad);
+
+        Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
+        int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
+
+        explosion = Instantiate((GameObject)explosionsObjects[randomExplosionIndex], gameObject.transform.position + Vector3.up, Quaternion.identity);
     }
 
     void OnMouseDown()
@@ -87,7 +92,7 @@ public class BaloonScript : MonoBehaviour
         Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
         int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
 
-        explosion = Instantiate((GameObject)explosionsObjects[randomExplosionIndex], gameObject.transform.position + Vector3.up, Quaternion.identity);
+        explosion = Instantiate((GameObject)explosionsObjects[randomExplosionIndex], gameObject.transform.position + Vector3.up, Quaternion.identity);        
         Destroy(gameObject);
     }
 }
