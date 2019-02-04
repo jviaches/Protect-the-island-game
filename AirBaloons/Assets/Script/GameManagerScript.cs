@@ -52,15 +52,16 @@ public class GameManagerScript : MonoBehaviour {
         levelFailedDialog = GameObject.Find("level_failed_Canvas");
         levelFailedDialog.SetActive(false);
 
-        if (!GameSettings.isTutotrialOn)
+        if (GameSettings.isTutotrialOn)
         {
-            Time.timeScale = 0.00001f;
-            Invoke("hideLevelGoalNotification", 0.00002f);
+            GameObject.Find("level-goal-notification").SetActive(true);
+            //Time.timeScale = 0.00001f;
+            Invoke("hideLevelGoalNotification", 2f);
         }
         else
         {
             hideLevelGoalNotification();
-        }      
+        }
     }
 
     private void hideLevelGoalNotification()
@@ -73,10 +74,10 @@ public class GameManagerScript : MonoBehaviour {
                                                GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
 
         // create enemy after at certain amount of time
-        //for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
-        //{
-        //    StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(i).Value, currLevel.TimeActivationDic.ElementAt(i).Key));
-        //}
+        for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
+        {
+            StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(i).Value, currLevel.TimeActivationDic.ElementAt(i).Key));
+        }
     }
 
     private void generateBaloons()
