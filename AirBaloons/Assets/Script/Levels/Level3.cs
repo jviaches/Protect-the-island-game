@@ -17,7 +17,7 @@ namespace Assets.Script.Levels
 
         public int MoneyGenerationModifier { get { return 1; } }
 
-        private Dictionary<float, FloatItem> timeActivationDic;
+        private readonly Dictionary<float, FloatItem> timeActivationDic;
         public Dictionary<float, FloatItem> TimeActivationDic
         {
             get { return timeActivationDic; }
