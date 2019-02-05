@@ -21,7 +21,7 @@ public class IslandScript : MonoBehaviour {
     public void HealthUpdate(int healthAmount)
     {
         Health += healthAmount;
-        GameObject.Find("bar_health_text").GetComponent<Text>().text = Health.ToString() + 'a';
+        GameObject.Find("bar_health_text").GetComponent<Text>().text = Health.ToString();
         GameObject.Find("health_fill").GetComponent<Image>().fillAmount = Health / GameSettings.BaseIslandHealth;
     }
 }

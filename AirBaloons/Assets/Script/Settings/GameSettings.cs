@@ -34,6 +34,10 @@ namespace Assets.Script.Settings
             }
         }
 
+        public static int BalloonHealth = 10;
+
+        public static int PlayerClickDamage = 10;
+
         public static readonly float BallonsGenerationFrequensy = 1;
         public static readonly float PlanesGenerationFrequensy = 40f;
 

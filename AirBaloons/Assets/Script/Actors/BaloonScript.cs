@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaloonScript : MonoBehaviour
+public class BaloonScript : MonoBehaviour, IEnemy
 {
     private GameObject island;
     private GameObject explosion;
@@ -15,12 +15,15 @@ public class BaloonScript : MonoBehaviour
 
     public int DPS { get  { return 5;  }  }
 
+    public int Health { get; set; }
+
     public bool IsIslandEngaged = false;
 
     void Start()
     {
         island = GameObject.Find("IslandShield");
         step = Speed * Time.deltaTime;
+        Health = GameSettings.BalloonHealth;
     }
 
     void Update()
@@ -54,13 +57,26 @@ public class BaloonScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        dropItems();
+        Health -= GameSettings.PlayerClickDamage;
+        if (Health <= 0)
+        {
+            // TODO: simulate explosion of some kind...
+
+            //Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
+            //int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
+
+            //explosion = Instantiate((GameObject)explosionsObjects[randomExplosionIndex], gameObject.transform.position + Vector3.up, Quaternion.identity);
+
+            dropItems();
+        }
+
+        //print("OnMouseDown. Health = " + Health);
     }
 
-    void OnDestroy()
-    {
-        dropItems();
-    }
+    //void OnDestroy()
+    //{
+    //    dropItems();
+    //}
 
     private void dropItems()
     { 

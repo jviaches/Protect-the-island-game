@@ -8,5 +8,6 @@ namespace Assets.Script.Actors
     interface IEnemy
     {
         int DPS { get; }
+        int Health { get; set; }
     }
 }
