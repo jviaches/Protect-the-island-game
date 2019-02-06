@@ -70,6 +70,9 @@ public class BaloonScript : MonoBehaviour, IEnemy
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "goldenWave")
+            dropItems();
+
         if (other.tag == "islandShield")
         {
             //print("Ballon detected in area");
