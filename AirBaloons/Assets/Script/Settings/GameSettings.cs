@@ -10,10 +10,10 @@ namespace Assets.Script.Settings
     {
         public static readonly float BaloonsBornRadius = 40;    //point on the surface of a sphere with radius 40
 
-        public static readonly Vector3 PlanesBornPosition = new Vector3(-106.5f, 5.8f, -87f);
+        public static readonly Vector3 PlanesBornPosition = new Vector3(-75f, 6.7f, -9.4f);
         public static readonly Vector3[] BalloonsBornPositions = new Vector3[]
         {
-            new Vector3(-60.8f, 6.7f, -9.4f),     // 3 oclock
+            new Vector3(-75f, 6.7f, -9.4f),     // 3 oclock
             new Vector3(-24.2f, 11.3f, 28f),      // 5 oclock
             new Vector3(-19.4f, 31f, -9.4f),      // 6 oclock
             new Vector3(-5.7f, 11.3f, 26.8f),     // 7 oclock
@@ -38,8 +38,8 @@ namespace Assets.Script.Settings
 
         public static int PlayerClickDamage = 10;
 
-        public static readonly float BallonsGenerationFrequensy = 1;
-        public static readonly float PlanesGenerationFrequensy = 40f;
+        public static readonly float BallonsGenerationFrequensy = 20;
+        public static readonly float PlanesGenerationFrequensy = 2f;
 
         public static bool IsMoneyIncreaseBuffOn = false;
         public static readonly int MoneyIncreaseBuffMultiplayer = 4;

@@ -11,7 +11,7 @@ public class BonusPlane : MonoBehaviour
 
     void Start()
     {
-        destination = new Vector3(160, 7.2f, -87f); //TODO: set in Settings
+        destination = new Vector3(20.6f, 5f, -9.4f);
         step = speed * Time.deltaTime;
     }
 
@@ -20,10 +20,10 @@ public class BonusPlane : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, destination, step);
     }
 
-
-    void OnDestroy()
+    void OnTriggerEnter(Collider other)
     {
-        dropItems();
+        if (other.tag == "goldenWave")
+            dropItems();
     }
 
     void OnMouseDown()

@@ -13,7 +13,7 @@ namespace Assets.Script.Levels
 
         public float BaloonGenerationFrequencyModifier { get { return 1.2f; } }
 
-        public float PlaneGenerationFrequencyModifier { get { return 40; } }
+        public float PlaneGenerationFrequencyModifier { get { return 20; } }
 
         public int MoneyGenerationModifier { get { return 1; } }
 

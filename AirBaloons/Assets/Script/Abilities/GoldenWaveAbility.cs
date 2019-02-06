@@ -8,6 +8,7 @@ public class GoldenWaveAbility : MonoBehaviour {
     private float abilityActivationDurationTimer = 3f;
 
     void Start () {
+        this.tag = "goldenWave";
     }
 	
 	void Update () {
