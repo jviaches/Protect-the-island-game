@@ -8,8 +8,9 @@ public class BaloonScript : MonoBehaviour, IEnemy
 {
     private GameObject island;
     private GameObject explosion;
-    
+    private Vector3 originalScale;
     private float step;
+    private bool? isClicked = null;
 
     public float Speed = GameSettings.BaloonsSpeed;
 
@@ -24,20 +25,54 @@ public class BaloonScript : MonoBehaviour, IEnemy
         island = GameObject.Find("IslandShield");
         step = Speed * Time.deltaTime;
         Health = GameSettings.BalloonHealth;
+
+        originalScale = gameObject.transform.localScale;
     }
 
     void Update()
     {
-        if(!IsIslandEngaged)
+        if (!IsIslandEngaged)
             transform.position = Vector3.MoveTowards(transform.position, island.transform.position, step);
+
+        if (isClicked != null)
+        {
+            if (isClicked == true)
+                StartCoroutine(ScaleOverTime(0.1f, true));
+            else
+                StartCoroutine(ScaleOverTime(0.1f, false));
+        }
     }
 
+    private IEnumerator ScaleOverTime(float time, bool upscale)
+    {
+        Vector3 destinationScale;
+
+        if (upscale)
+            destinationScale = new Vector3(0.16f, 0.16f, 0.16f);
+        else
+            destinationScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        float currentTime = 0.0f;
+
+        do
+        {
+           gameObject.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / time);
+            currentTime += Time.deltaTime;
+            yield return null;
+
+            if (upscale)
+                isClicked = false;
+            else
+                isClicked = null;
+
+        } while (currentTime <= time);
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "islandShield")
         {
-            print("Ballon detected in area");
+            //print("Ballon detected in area");
             IsIslandEngaged = true;
 
             InvokeRepeating("startDamage", 0, 1);
@@ -59,24 +94,10 @@ public class BaloonScript : MonoBehaviour, IEnemy
     {
         Health -= GameSettings.PlayerClickDamage;
         if (Health <= 0)
-        {
-            // TODO: simulate explosion of some kind...
-
-            //Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
-            //int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
-
-            //explosion = Instantiate((GameObject)explosionsObjects[randomExplosionIndex], gameObject.transform.position + Vector3.up, Quaternion.identity);
-
             dropItems();
-        }
-
-        //print("OnMouseDown. Health = " + Health);
+        else
+            isClicked = true;
     }
-
-    //void OnDestroy()
-    //{
-    //    dropItems();
-    //}
 
     private void dropItems()
     { 
