@@ -75,9 +75,7 @@ public class GameManagerScript : MonoBehaviour {
 
         // create enemy after at certain amount of time
         for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
-        {
             StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(i).Value, currLevel.TimeActivationDic.ElementAt(i).Key));
-        }
     }
 
     private void generateBaloons()

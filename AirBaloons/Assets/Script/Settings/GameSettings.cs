@@ -28,29 +28,28 @@ namespace Assets.Script.Settings
             get
             {
                 if (IsSpeedSlownessBuffOn)
-                    return baseBaloonsSpeed - SpeedSlownessBuffModifier;
+                    return baseBaloonsSpeed + (LevelSettings.GetCurrentLevel().LevelIndex * 0.2f) - SpeedSlownessBuffModifier;
                 else
-                    return baseBaloonsSpeed;
+                    return baseBaloonsSpeed + (LevelSettings.GetCurrentLevel().LevelIndex * 0.2f);
             }
         }
 
-        public static int BalloonHealth = 10;
+        public static int BalloonHealth = 10 + (LevelSettings.GetCurrentLevel().LevelIndex * 2);
 
-        public static int PlayerClickDamage = 10;
+        public static int PlayerClickDamage = 18;
 
-        public static readonly float BallonsGenerationFrequensy = 20;
-        public static readonly float PlanesGenerationFrequensy = 2f;
+        public static readonly float BallonsGenerationFrequensy = 0.1f - (LevelSettings.GetCurrentLevel().LevelIndex * 0.05f);
+        public static readonly float PlanesGenerationFrequensy = 30f;
 
         public static bool IsMoneyIncreaseBuffOn = false;
         public static readonly int MoneyIncreaseBuffMultiplayer = 4;
-        public static readonly float MoneyIncreaseBuffProbability = 0.05f;
+        public static readonly float MoneyIncreaseBuffProbability = 0.01f;
 
         public static bool IsSpeedSlownessBuffOn = false;
         public static readonly float SpeedSlownessBuffModifier = 0.5f;
-        public static readonly float SpeedSlownessBuffProbability = 0.05f;
+        public static readonly float SpeedSlownessBuffProbability = 0.01f;
 
         // Settings Screen configurations
         public static bool isTutotrialOn = true;
-
     }
 }
