@@ -3679,7 +3679,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114840621323998266, guid: dff4154751e693c459dd1a8a2ac96fa1, type: 2}
+    - {fileID: 65115398792247830, guid: dff4154751e693c459dd1a8a2ac96fa1, type: 2}
+    - {fileID: 54586771492819666, guid: dff4154751e693c459dd1a8a2ac96fa1, type: 2}
+    - {fileID: 95127266899646266, guid: dff4154751e693c459dd1a8a2ac96fa1, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: dff4154751e693c459dd1a8a2ac96fa1, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1087517091
@@ -4368,7 +4372,16 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 54835880611285004, guid: d437ede4e8625794191bca70279ed70e,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 54835880611285004, guid: d437ede4e8625794191bca70279ed70e, type: 2}
+    - {fileID: 65337761306471224, guid: d437ede4e8625794191bca70279ed70e, type: 2}
+    - {fileID: 114959956717653476, guid: d437ede4e8625794191bca70279ed70e, type: 2}
+    - {fileID: 95127266899646266, guid: d437ede4e8625794191bca70279ed70e, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d437ede4e8625794191bca70279ed70e, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1217391877
@@ -4795,7 +4808,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114636002852519584, guid: 9058439c1e21ca04a851c206c145838c, type: 2}
+    - {fileID: 65572948732260248, guid: 9058439c1e21ca04a851c206c145838c, type: 2}
+    - {fileID: 54615302376576984, guid: 9058439c1e21ca04a851c206c145838c, type: 2}
+    - {fileID: 95127266899646266, guid: 9058439c1e21ca04a851c206c145838c, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9058439c1e21ca04a851c206c145838c, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1354709653

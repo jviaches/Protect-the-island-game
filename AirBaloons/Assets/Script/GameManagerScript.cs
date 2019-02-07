@@ -52,7 +52,7 @@ public class GameManagerScript : MonoBehaviour {
         levelFailedDialog = GameObject.Find("level_failed_Canvas");
         levelFailedDialog.SetActive(false);
 
-        if (GameSettings.isTutotrialOn)
+        if (GameSettings.IsTutotrialOn)
         {
             GameObject.Find("level-goal-notification").SetActive(true);
             //Time.timeScale = 0.00001f;

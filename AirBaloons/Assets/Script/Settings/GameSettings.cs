@@ -50,6 +50,6 @@ namespace Assets.Script.Settings
         public static readonly float SpeedSlownessBuffProbability = 0.01f;
 
         // Settings Screen configurations
-        public static bool isTutotrialOn = true;
+        public static bool IsTutotrialOn = true;
     }
 }
