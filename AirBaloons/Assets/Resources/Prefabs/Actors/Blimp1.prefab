@@ -23,7 +23,9 @@ GameObject:
   - component: {fileID: 23648997679985038}
   - component: {fileID: 95031625710614528}
   - component: {fileID: 114615531315932478}
-  - component: {fileID: 114376381637302438}
+  - component: {fileID: 114652839054008324}
+  - component: {fileID: 54397149139521240}
+  - component: {fileID: 65934230513470456}
   m_Layer: 0
   m_Name: Blimp1
   m_TagString: Untagged
@@ -157,7 +159,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1088182202441634}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
@@ -167,7 +169,7 @@ Transform:
   - {fileID: 4820748920956242}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23040613141315850
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -378,6 +380,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1381192984424138}
   m_Mesh: {fileID: 4300000, guid: 87e3a0e4c9130594d815367873d264d8, type: 3}
+--- !u!54 &54397149139521240
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1088182202441634}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65934230513470456
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1088182202441634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 59.727768, y: 195.32791, z: 64.64367}
+  m_Center: {x: 0, y: 0.1631813, z: 32.34139}
 --- !u!95 &95031625710614528
 Animator:
   serializedVersion: 3
@@ -396,19 +425,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114376381637302438
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1088182202441634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b98d0a2aba0a0c41a362c8a41c21856, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  isIslandEngaged: 0
 --- !u!114 &114615531315932478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -425,3 +441,16 @@ MonoBehaviour:
   prop1Blured: {fileID: 1367511990273532}
   prop2Blured: {fileID: 1832574646102208}
   engenOn: 1
+--- !u!114 &114652839054008324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1088182202441634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3b0762cd4d917418bd22a21554132f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 3
+  IsIslandEngaged: 0

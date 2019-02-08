@@ -10,7 +10,7 @@ namespace Assets.Script.Settings
 {
     public static class GameSettings
     {
-        public static readonly float BaloonsBornRadius = 40;    //point on the surface of a sphere with radius 40
+        //public static readonly float BaloonsBornRadius = 40;    //point on the surface of a sphere with radius 40
 
         public static readonly Vector3 PlanesBornPosition = new Vector3(-75f, 6.7f, -9.4f);
         public static readonly Vector3[] BalloonsBornPositions = new Vector3[]
@@ -23,6 +23,8 @@ namespace Assets.Script.Settings
         };
 
         public static int BaseIslandHealth = 100;
+
+        public static float ZeppelinSpeed = 1f;
 
         private static readonly float baseBaloonsSpeed = 3f;
         public static float BaloonsSpeed
@@ -37,6 +39,7 @@ namespace Assets.Script.Settings
         }
 
         public static int BalloonHealth = 10 + (LevelSettings.GetCurrentLevel().LevelIndex * 2);
+        public static int ZeppelinHealth = 80 + (LevelSettings.GetCurrentLevel().LevelIndex * 10);
 
         public static int PlayerClickDamage = 18;
 
