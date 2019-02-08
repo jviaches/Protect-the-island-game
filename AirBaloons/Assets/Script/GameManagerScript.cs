@@ -33,7 +33,7 @@ public class GameManagerScript : MonoBehaviour {
     void Start () {
 
         player = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Player")).GetComponent<PlayerScript>(); // TODO: load from file
-        currLevel = LevelSettings.GetCurrentLevel();
+        currLevel = LevelSettings.GetCurrentLevel();        
 
         islandScript = GameObject.Find("IslandShield").GetComponent<IslandScript>();
         GameObject.Find("bar_health_text").GetComponent<Text>().text = islandScript.Health.ToString();
@@ -52,10 +52,12 @@ public class GameManagerScript : MonoBehaviour {
         levelFailedDialog = GameObject.Find("level_failed_Canvas");
         levelFailedDialog.SetActive(false);
 
+        Time.timeScale = 1;
+
         if (GameSettings.IsTutotrialOn)
         {
             GameObject.Find("level-goal-notification").SetActive(true);
-            //Time.timeScale = 0.00001f;
+            Time.timeScale = 0.00001f;
             Invoke("hideLevelGoalNotification", 2f);
         }
         else
@@ -123,23 +125,33 @@ public class GameManagerScript : MonoBehaviour {
             GameObject.Find("square_button_fail_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
 
             stopLevel();
+            return;
         }
-       
+
         if (levelTimer <= 0.01f)
         {
             isLevelSuccessfullyCompleted = true;
             levelCompletedDialog.SetActive(true);
 
             GameObject.Find("square_button_menu").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
-            GameObject.Find("square_button_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
+            GameObject.Find("square_button_repeat").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                LevelSettings.RevealNextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
+                LevelSettings.SelectedLevelIndex = LevelSettings.GetCurrentLevel().LevelIndex;
+                SceneManager.LoadScene("GameScene");
+
+                print("[Success repeat] lvl " + LevelSettings.GetCurrentLevel().LevelIndex);
+            });
 
             GameObject.Find("square_button_play").GetComponent<Button>().onClick.AddListener(() =>
             {
-                LevelSettings.NextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
-                SceneManager.LoadScene("LevelsScene");
+                LevelSettings.RunNextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
+                SceneManager.LoadScene("GameScene");
+                print("[Success play] " + LevelSettings.GetCurrentLevel().LevelIndex);
             });
 
             stopLevel();
+            return;
         }      
 
         // ------ UI updates -------
@@ -175,6 +187,7 @@ public class GameManagerScript : MonoBehaviour {
             Destroy(planes[i].gameObject);
 
         Time.timeScale = 0;
+
     }
 
     private IEnumerator generateFloatableItems(FloatItem floatItem, float delayTime)

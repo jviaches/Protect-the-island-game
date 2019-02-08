@@ -13,6 +13,9 @@ public class SettingsSceneLoader : MonoBehaviour {
     private Toggle tutorial_switch;
 
     void Start () {
+
+        print(Application.persistentDataPath);
+
         exitButton = GameObject.Find("ExitButton").GetComponent<Button>();
         exitButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
 
@@ -26,10 +29,14 @@ public class SettingsSceneLoader : MonoBehaviour {
         languageDropDwn.interactable = false;
 
         tutorial_switch = GameObject.Find("tutorial_switch").GetComponent<Toggle>();
-        tutorial_switch.isOn = GameSettings.isTutotrialOn;
-        tutorial_switch.onValueChanged.AddListener((isOn) => GameSettings.isTutotrialOn = isOn);
+        tutorial_switch.isOn = GameSettings.IsTutotrialOn;
+        tutorial_switch.onValueChanged.AddListener((isOn) => GameSettings.IsTutotrialOn = isOn);
 
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
-        saveButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));  // TODO: wire to save setting in file
+        saveButton.onClick.AddListener(() =>
+        {
+            GameSettings.SaveData();
+            SceneManager.LoadScene("MainScene");
+        }); 
     }
 }

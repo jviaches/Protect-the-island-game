@@ -33,14 +33,31 @@ public static class LevelSettings
         Episode1Levels.Add(new Level1(), 0);
         Episode1Levels.Add(new Level2(), 0);
         Episode1Levels.Add(new Level3(), 0);
+        Episode1Levels.Add(new Level4(), 0);
+        Episode1Levels.Add(new Level5(), 0);
+        Episode1Levels.Add(new Level6(), 0);
+        Episode1Levels.Add(new Level7(), 0);
+        Episode1Levels.Add(new Level8(), 0);
+        Episode1Levels.Add(new Level9(), 0);
+        Episode1Levels.Add(new Level10(), 0);
     }
 
-    public static void NextLevel(int level)
+    public static void RevealNextLevel(int level)
     {
-        SelectedLevelIndex = level;
+        if (SelectedLevelIndex < Episode1Levels.Count)
+        {
+            SelectedLevelIndex = level;
+            LastCompletedLevelIndex = (LastCompletedLevelIndex >= SelectedLevelIndex) ? LastCompletedLevelIndex : SelectedLevelIndex;
+        }
+    }
 
-        if (SelectedLevelIndex <= Episode1Levels.Count)
-            LastCompletedLevelIndex = LastCompletedLevelIndex >= SelectedLevelIndex ? LastCompletedLevelIndex : SelectedLevelIndex;            
+    public static void RunNextLevel(int level)
+    {
+        if (SelectedLevelIndex < Episode1Levels.Count)
+        {
+            SelectedLevelIndex = level + 1;
+            LastCompletedLevelIndex = (LastCompletedLevelIndex >= SelectedLevelIndex) ? LastCompletedLevelIndex : SelectedLevelIndex;
+        }
     }
 
     public static ILevel GetCurrentLevel()
