@@ -512,7 +512,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4256390853455650}
-  - component: {fileID: 114137696173815090}
   m_Layer: 0
   m_Name: Islands3_Connected
   m_TagString: death_surface
@@ -2303,14 +2302,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1580852942703656}
   m_Mesh: {fileID: 4300156, guid: 3dff5c602fa2a3a45b81246f45003770, type: 3}
---- !u!114 &114137696173815090
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1823498409331248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88a07055956d8ba4dbbbae910bd675e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

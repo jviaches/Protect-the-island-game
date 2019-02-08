@@ -32,7 +32,7 @@ public class GameManagerScript : MonoBehaviour {
 
     void Start () {
 
-        player = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Player")).GetComponent<PlayerScript>(); // TODO: load from file
+        player = GameObject.Find("Player").GetComponent<PlayerScript>(); // TODO: load from file
         currLevel = LevelSettings.GetCurrentLevel();        
 
         islandScript = GameObject.Find("IslandShield").GetComponent<IslandScript>();
@@ -124,6 +124,9 @@ public class GameManagerScript : MonoBehaviour {
             GameObject.Find("square_button_fail_levels").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
             GameObject.Find("square_button_fail_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
 
+            updatePlayerStats();
+            GameObject.Find("fail_score_money").GetComponent<Text>().text = LevelSettings.Episode1Levels[currLevel].ToString();
+
             stopLevel();
             return;
         }
@@ -149,6 +152,9 @@ public class GameManagerScript : MonoBehaviour {
                 SceneManager.LoadScene("GameScene");
                 print("[Success play] " + LevelSettings.GetCurrentLevel().LevelIndex);
             });
+            
+            updatePlayerStats();
+            GameObject.Find("succ_score_money").GetComponent<Text>().text = LevelSettings.Episode1Levels[currLevel].ToString();
 
             stopLevel();
             return;
@@ -171,6 +177,14 @@ public class GameManagerScript : MonoBehaviour {
             speedBuffUI.SetActive(false);
     }
 
+    private void updatePlayerStats()
+    {
+        LevelSettings.Episode1Levels[currLevel] = player.Coins;
+
+        print("[Player Coins] = " + player.Coins + " [Level coins] =  " + LevelSettings.Episode1Levels[currLevel]);
+        //player.Coins = 0;
+    }
+
     private void stopLevel()
     {
         CancelInvoke("generateBaloons");
@@ -187,7 +201,6 @@ public class GameManagerScript : MonoBehaviour {
             Destroy(planes[i].gameObject);
 
         Time.timeScale = 0;
-
     }
 
     private IEnumerator generateFloatableItems(FloatItem floatItem, float delayTime)
