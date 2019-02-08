@@ -26,11 +26,10 @@ namespace Assets.Script.Levels
 
         public Level1()
         {
-            timeActivationDic = new Dictionary<float, FloatItem>();
-
-            // test
-            timeActivationDic.Add(LevelSettings.LevelTimer / 3.33f, new FloatItem("Prefabs/Actors/Blimp1", new Vector3(45f, 10f, 108f))); // after 1/3 level time
-            timeActivationDic.Add(LevelSettings.LevelTimer / 6.66f, new FloatItem("Prefabs/Actors/Blimp1", new Vector3(45f, 10f, 108f))); // after 2/3 level time
+            timeActivationDic = new Dictionary<float, FloatItem>
+            {
+                { LevelSettings.LevelTimer / 6.66f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_3]) } // after 2/3 level time
+            };
         }
     }
 }

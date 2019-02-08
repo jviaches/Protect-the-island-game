@@ -90,13 +90,13 @@ public class GameManagerScript : MonoBehaviour {
 
         for (int i = 0; i < 10; i++)    // 10 attemtps to make sure, no previos location was generated
         {
-            var random = UnityEngine.Random.Range(0, GameSettings.BalloonsBornPositions.Length - 1);
-            if (GameSettings.BalloonsBornPositions[random].x != lastBornBalloonPosition.x &&
-                GameSettings.BalloonsBornPositions[random].y != lastBornBalloonPosition.y &&
-                GameSettings.BalloonsBornPositions[random].z != lastBornBalloonPosition.z)
+            var random = UnityEngine.Random.Range(0, GameSettings.BornPoints.Count - 1);
+            if (GameSettings.BornPoints.ElementAt(random).Value.x != lastBornBalloonPosition.x &&
+                GameSettings.BornPoints.ElementAt(random).Value.y != lastBornBalloonPosition.y &&
+                GameSettings.BornPoints.ElementAt(random).Value.z != lastBornBalloonPosition.z)
             {
-                balloon.transform.position = GameSettings.BalloonsBornPositions[random];
-                lastBornBalloonPosition = GameSettings.BalloonsBornPositions[random];
+                balloon.transform.position = GameSettings.BornPoints.ElementAt(random).Value;
+                lastBornBalloonPosition = GameSettings.BornPoints.ElementAt(random).Value;
                 break;
             }
         }
