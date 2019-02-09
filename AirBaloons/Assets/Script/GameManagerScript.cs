@@ -14,7 +14,7 @@ public class GameManagerScript : MonoBehaviour {
     private PlayerScript player;
 
     private ILevel currLevel;
-    private float levelTimer = LevelSettings.LevelTimer;
+    private float levelTimer = 100; // LevelSettings.LevelTimer;
 
     private Text levelTimerText;
 

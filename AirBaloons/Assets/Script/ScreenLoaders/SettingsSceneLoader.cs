@@ -35,7 +35,7 @@ public class SettingsSceneLoader : MonoBehaviour {
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
         saveButton.onClick.AddListener(() =>
         {
-            GameSettings.SaveData();
+            // GameSettings.SaveData();
             SceneManager.LoadScene("MainScene");
         }); 
     }

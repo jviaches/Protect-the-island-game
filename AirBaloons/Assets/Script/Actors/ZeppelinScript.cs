@@ -1,7 +1,6 @@
 ﻿using Assets.Script.Actors;
 using Assets.Script.Settings;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ZeppelinScript : MonoBehaviour, IEnemy
@@ -27,13 +26,14 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
         Health = GameSettings.ZeppelinHealth;
 
         originalScale = gameObject.transform.localScale;
+        transform.rotation = Quaternion.Euler(Vector3.zero);        
     }
     void Update()
     {
         if (!IsIslandEngaged)
         {
             transform.position = Vector3.MoveTowards(transform.position, island.transform.position, step);
-            transform.rotation = Quaternion.LookRotation(transform.position.normalized, Vector3.down);  
+            transform.forward = (island.transform.position - transform.position).normalized;
         }
 
         if (isClicked != null)
@@ -50,9 +50,9 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
         Vector3 destinationScale;
 
         if (upscale)
-            destinationScale = new Vector3(0.16f, 0.16f, 0.16f);
+            destinationScale = new Vector3(0.9f, 0.9f, 0.9f);
         else
-            destinationScale = new Vector3(0.1f, 0.1f, 0.1f);
+            destinationScale = new Vector3(1, 1, 1f);
 
         float currentTime = 0.0f;
 

@@ -8,16 +8,10 @@ public class IslandScript : MonoBehaviour {
 
     public float Health { get; set; }
 
-    // Use this for initialization
     void Start () {
         Health = GameSettings.BaseIslandHealth;
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void HealthUpdate(int healthAmount)
     {
         Health += healthAmount;

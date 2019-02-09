@@ -14,11 +14,11 @@ namespace Assets.Script.Settings
 
         public static readonly Dictionary<BornPoint, Vector3> BornPoints = new Dictionary<BornPoint, Vector3>
         {
-            { BornPoint.Clock_3, new Vector3(-75f, 6.7f, -9.4f) },
+            { BornPoint.Clock_3, new Vector3(-75f, 5f, -9.4f) },
             { BornPoint.Clock_5, new Vector3(-24.2f, 11.3f, 28f) },
-            { BornPoint.Clock_6, new Vector3(-19.4f, 31f, -9.4f) },
-            { BornPoint.Clock_7, new Vector3(-5.7f, 11.3f, 26.8f) },
-            { BornPoint.Clock_9, new Vector3(20.6f, 5f, -9.4f) }
+            { BornPoint.Clock_6, new Vector3(-18.5f, 0f, 30f) },
+            { BornPoint.Clock_7, new Vector3(0f, 0f, 30f) },
+            { BornPoint.Clock_9, new Vector3(30f, 5f, -9.4f) }
         };
 
         public static readonly Vector3 PlanesBornPosition = BornPoints[BornPoint.Clock_3];
@@ -64,8 +64,6 @@ namespace Assets.Script.Settings
 
         static GameSettings()
         {
-
-
             //loadData();
         }
 

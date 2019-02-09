@@ -6,9 +6,23 @@ using System.Collections.Generic;
 public static class LevelSettings
 {
     public static int LevelsInEpisode = 10;
-    public static int LevelTimer = 100; // Time take to level to complete (in sec)
+    public static float LevelTimer = 100; // Time take to level to complete (in sec)
 
-    public static Dictionary<ILevel, int> Episode1Levels = new Dictionary<ILevel, int>();   // 1rs param level, 2nd param amount of stars
+    public static Dictionary<ILevel, int> Episode1Levels = new Dictionary<ILevel, int>()   // 1rs param level, 2nd param amount of stars
+    {
+        { new Level1(), 0 },
+        { new Level2(), 0},
+        { new Level3(), 0},
+        { new Level4(), 0},
+        { new Level5(), 0},
+        { new Level6(), 0},
+        { new Level7(), 0},
+        { new Level8(), 0},
+        { new Level9(), 0},
+        { new Level10(), 0}
+
+    };
+
     public static int SelectedLevelIndex = 1;                   // Level chosen by user
 
     // Persistance 
@@ -23,22 +37,6 @@ public static class LevelSettings
     {
         if (Episode1Levels.Count > 0)
             return;
-
-        InitEpisode1();
-    }
-
-    private static void InitEpisode1()
-    {
-        Episode1Levels.Add(new Level1(), 0);
-        Episode1Levels.Add(new Level2(), 0);
-        Episode1Levels.Add(new Level3(), 0);
-        Episode1Levels.Add(new Level4(), 0);
-        Episode1Levels.Add(new Level5(), 0);
-        Episode1Levels.Add(new Level6(), 0);
-        Episode1Levels.Add(new Level7(), 0);
-        Episode1Levels.Add(new Level8(), 0);
-        Episode1Levels.Add(new Level9(), 0);
-        Episode1Levels.Add(new Level10(), 0);
     }
 
     public static void RevealNextLevel(int level)
