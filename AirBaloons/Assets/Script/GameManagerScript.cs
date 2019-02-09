@@ -136,7 +136,13 @@ public class GameManagerScript : MonoBehaviour {
             isLevelSuccessfullyCompleted = true;
             levelCompletedDialog.SetActive(true);
 
-            GameObject.Find("square_button_menu").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
+            GameObject.Find("square_button_menu").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                LevelSettings.RevealNextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
+                LevelSettings.SelectedLevelIndex = LevelSettings.GetCurrentLevel().LevelIndex;
+                SceneManager.LoadScene("LevelsScene");
+            });
+
             GameObject.Find("square_button_repeat").GetComponent<Button>().onClick.AddListener(() =>
             {
                 LevelSettings.RevealNextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
