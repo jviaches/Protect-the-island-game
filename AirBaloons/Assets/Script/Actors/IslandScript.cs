@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class IslandScript : MonoBehaviour {
 
+    private GameSettings gameSettings;
+
     public float Health { get; set; }
 
     void Start () {
-        Health = GameSettings.BaseIslandHealth;
+        gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+
+        Health = gameSettings.BaseIslandHealth;
     }
 	
     public void HealthUpdate(int healthAmount)
     {
         Health += healthAmount;
         GameObject.Find("bar_health_text").GetComponent<Text>().text = Health.ToString();
-        GameObject.Find("health_fill").GetComponent<Image>().fillAmount = Health / GameSettings.BaseIslandHealth;
+        GameObject.Find("health_fill").GetComponent<Image>().fillAmount = Health / gameSettings.BaseIslandHealth;
     }
 }

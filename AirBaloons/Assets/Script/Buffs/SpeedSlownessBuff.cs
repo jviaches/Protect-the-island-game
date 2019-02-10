@@ -6,10 +6,16 @@ using UnityEngine;
 public class SpeedSlownessBuff : MonoBehaviour {
 
     private float activationTimer = 20; // stay active for 10 sec
+    private GameSettings gameSettings;
+
+    void Awake()
+    {
+        gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+    }
 
     void OnMouseDown()
     {
-        GameSettings.IsSpeedSlownessBuffOn = true;
+        gameSettings.IsSpeedSlownessBuffOn = true;
         gameObject.transform.position = GameObject.Find("ItemsCollectionObject").transform.position;
 
         updateBaloonSpeed();
@@ -19,12 +25,12 @@ public class SpeedSlownessBuff : MonoBehaviour {
     {
         updateBaloonSpeed();
 
-        if (GameSettings.IsSpeedSlownessBuffOn)
+        if (gameSettings.IsSpeedSlownessBuffOn)
         {
             activationTimer -= Time.deltaTime;
             if (activationTimer <= 0.01f)
             {
-                GameSettings.IsSpeedSlownessBuffOn = false;                
+                gameSettings.IsSpeedSlownessBuffOn = false;                
                 Destroy(gameObject);
             }
         }
@@ -33,10 +39,10 @@ public class SpeedSlownessBuff : MonoBehaviour {
     private void updateBaloonSpeed()
     {
         // update spped of all existing planes
-        BaloonScript[] baloons = GameObject.FindObjectsOfType<BaloonScript>();
+        BaloonScript[] baloons = FindObjectsOfType<BaloonScript>();
         for (int i = 0; i < baloons.Length; i++)
         {
-            baloons[i].Speed = GameSettings.BaloonsSpeed;
+            baloons[i].Speed = gameSettings.BaloonsSpeed;
         }
     }
 }

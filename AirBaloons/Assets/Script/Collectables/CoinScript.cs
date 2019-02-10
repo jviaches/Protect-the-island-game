@@ -11,14 +11,19 @@ public class CoinScript : MonoBehaviour
     private bool isCointAlreadyCounted;
     private ILevel currLevel;
 
+    private GameSettings gameSettings;
+
     public int Value = 1;   // by default value is 1 coin. Can be changed by buff or level money modifier.
 
     private GameObject itemsCollectedObject;
 
     void Start()
     {
+        gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+
         itemsCollectedObject = GameObject.Find("ItemsCollectionObject");
-        currLevel = LevelSettings.GetCurrentLevel();
+        currLevel = gameSettings.LevelSettings.SelectedLevel;
+
     }
 
     void Update()
@@ -44,7 +49,7 @@ public class CoinScript : MonoBehaviour
     {
         if (!isCointAlreadyCounted)
         {
-            if (GameSettings.IsMoneyIncreaseBuffOn)
+            if (gameSettings.IsMoneyIncreaseBuffOn)
                 coinCounted(Value * 4);
             else
                 coinCounted(Value);
@@ -71,8 +76,8 @@ public class CoinScript : MonoBehaviour
     {
         if (!isCointAlreadyCounted)
         {
-            if (GameSettings.IsMoneyIncreaseBuffOn)
-                coinCounted(Value * GameSettings.MoneyIncreaseBuffMultiplayer);
+            if (gameSettings.IsMoneyIncreaseBuffOn)
+                coinCounted(Value * gameSettings.MoneyIncreaseBuffMultiplayer);
             else
                 coinCounted(Value);
         }

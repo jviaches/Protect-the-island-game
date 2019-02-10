@@ -7,20 +7,27 @@ public class MoneyIncreaseBuff : MonoBehaviour {
 
     private float activationTimer = 20; // stay active for 10 sec
 
+    private GameSettings gameSettings;
+
+    void Awake()
+    {
+        gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+    }
+
     void OnMouseDown()
     {
-        GameSettings.IsMoneyIncreaseBuffOn = true;
+        gameSettings.IsMoneyIncreaseBuffOn = true;
         gameObject.transform.position = GameObject.Find("ItemsCollectionObject").transform.position;
     }
 
     void Update()
     {
-        if (GameSettings.IsMoneyIncreaseBuffOn)
+        if (gameSettings.IsMoneyIncreaseBuffOn)
         {
             activationTimer -= Time.deltaTime;
             if (activationTimer <= 0.01f)
             {
-                GameSettings.IsMoneyIncreaseBuffOn = false;
+                gameSettings.IsMoneyIncreaseBuffOn = false;
                 Destroy(gameObject);
             }
         }

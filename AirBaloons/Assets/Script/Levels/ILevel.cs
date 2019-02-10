@@ -13,6 +13,6 @@ namespace Assets.Script.Levels
         float PlaneGenerationFrequencyModifier { get; }
         int MoneyGenerationModifier { get; }
 
-        Dictionary<float,FloatItem> TimeActivationDic { get; }
+        List<KeyValuePair<float,FloatItem>> TimeActivationDic { get; }
     }
 }

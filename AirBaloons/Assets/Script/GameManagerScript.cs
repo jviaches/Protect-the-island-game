@@ -30,10 +30,16 @@ public class GameManagerScript : MonoBehaviour {
     private bool isLevelSuccessfullyCompleted = false;
     private bool isLevelFailed = false;
 
+    private GameSettings gameSettings;
+
     void Start () {
 
+        gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+
         player = GameObject.Find("Player").GetComponent<PlayerScript>(); // TODO: load from file
-        currLevel = LevelSettings.GetCurrentLevel();        
+        currLevel = gameSettings.LevelSettings.SelectedLevel;
+
+        print("gameSettings.LevelSettings= " + currLevel);
 
         islandScript = GameObject.Find("IslandShield").GetComponent<IslandScript>();
         GameObject.Find("bar_health_text").GetComponent<Text>().text = islandScript.Health.ToString();
@@ -54,7 +60,7 @@ public class GameManagerScript : MonoBehaviour {
 
         Time.timeScale = 1;
 
-        if (GameSettings.IsTutotrialOn)
+        if (gameSettings.IsTutotrialOn)
         {
             GameObject.Find("level-goal-notification").SetActive(true);
             Time.timeScale = 0.00001f;
@@ -71,13 +77,19 @@ public class GameManagerScript : MonoBehaviour {
         GameObject.Find("level-goal-notification").SetActive(false);
         Time.timeScale = 1f;
 
-        InvokeRepeating("generateBaloons", 0f, GameSettings.BallonsGenerationFrequensy + currLevel.BaloonGenerationFrequencyModifier);
-        InvokeRepeating("generateBonusPlanes", GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier, 
-                                               GameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
+        InvokeRepeating("generateBaloons", 0f, gameSettings.BallonsGenerationFrequensy + currLevel.BaloonGenerationFrequencyModifier);
+        InvokeRepeating("generateBonusPlanes", gameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier,
+                                               gameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
+
+
+       
 
         // create enemy after at certain amount of time
-        for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
-            StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(i).Value, currLevel.TimeActivationDic.ElementAt(i).Key));
+        //for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
+        //{
+            //print("TimeActivationDic " + i);
+            StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(0).Value, currLevel.TimeActivationDic.ElementAt(0).Key));
+        //}
     }
 
     private void generateBaloons()
@@ -90,13 +102,13 @@ public class GameManagerScript : MonoBehaviour {
 
         for (int i = 0; i < 10; i++)    // 10 attemtps to make sure, no previos location was generated
         {
-            var random = UnityEngine.Random.Range(0, GameSettings.BornPoints.Count - 1);
-            if (GameSettings.BornPoints.ElementAt(random).Value.x != lastBornBalloonPosition.x &&
-                GameSettings.BornPoints.ElementAt(random).Value.y != lastBornBalloonPosition.y &&
-                GameSettings.BornPoints.ElementAt(random).Value.z != lastBornBalloonPosition.z)
+            var random = UnityEngine.Random.Range(0, gameSettings.BornPoints.Count - 1);
+            if (gameSettings.BornPoints.ElementAt(random).Value.x != lastBornBalloonPosition.x &&
+                gameSettings.BornPoints.ElementAt(random).Value.y != lastBornBalloonPosition.y &&
+                gameSettings.BornPoints.ElementAt(random).Value.z != lastBornBalloonPosition.z)
             {
-                balloon.transform.position = GameSettings.BornPoints.ElementAt(random).Value;
-                lastBornBalloonPosition = GameSettings.BornPoints.ElementAt(random).Value;
+                balloon.transform.position = gameSettings.BornPoints.ElementAt(random).Value;
+                lastBornBalloonPosition = gameSettings.BornPoints.ElementAt(random).Value;
                 break;
             }
         }
@@ -105,7 +117,7 @@ public class GameManagerScript : MonoBehaviour {
     private void generateBonusPlanes()
     {
         GameObject plane = Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Plane8_1"));
-        plane.transform.position = GameSettings.PlanesBornPosition;
+        plane.transform.position = gameSettings.PlanesBornPosition;
     }
 
     void Update()
@@ -125,7 +137,7 @@ public class GameManagerScript : MonoBehaviour {
             GameObject.Find("square_button_fail_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
 
             updatePlayerStats();
-            GameObject.Find("fail_score_money").GetComponent<Text>().text = LevelSettings.Episode1Levels[currLevel].ToString();
+            //GameObject.Find("fail_score_money").GetComponent<Text>().text = gameSettings.LevelSettings.Episode1Levels[currLevel].ToString();
 
             stopLevel();
             return;
@@ -138,29 +150,29 @@ public class GameManagerScript : MonoBehaviour {
 
             GameObject.Find("square_button_menu").GetComponent<Button>().onClick.AddListener(() =>
             {
-                LevelSettings.RevealNextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
-                LevelSettings.SelectedLevelIndex = LevelSettings.GetCurrentLevel().LevelIndex;
+                gameSettings.LevelSettings.RevealNextLevel(gameSettings.LevelSettings.SelectedLevel.LevelIndex);
+                gameSettings.LevelSettings.SelectedLevelIndex = gameSettings.LevelSettings.SelectedLevel.LevelIndex;
                 SceneManager.LoadScene("LevelsScene");
             });
 
             GameObject.Find("square_button_repeat").GetComponent<Button>().onClick.AddListener(() =>
             {
-                LevelSettings.RevealNextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
-                LevelSettings.SelectedLevelIndex = LevelSettings.GetCurrentLevel().LevelIndex;
+                gameSettings.LevelSettings.RevealNextLevel(gameSettings.LevelSettings.SelectedLevel.LevelIndex);
+                gameSettings.LevelSettings.SelectedLevelIndex = gameSettings.LevelSettings.SelectedLevel.LevelIndex;
                 SceneManager.LoadScene("GameScene");
 
-                print("[Success repeat] lvl " + LevelSettings.GetCurrentLevel().LevelIndex);
+                print("[Success repeat] lvl " + gameSettings.LevelSettings.SelectedLevel.LevelIndex);
             });
 
             GameObject.Find("square_button_play").GetComponent<Button>().onClick.AddListener(() =>
             {
-                LevelSettings.RunNextLevel(LevelSettings.GetCurrentLevel().LevelIndex);
+                gameSettings.LevelSettings.RunNextLevel(gameSettings.LevelSettings.SelectedLevel.LevelIndex);
                 SceneManager.LoadScene("GameScene");
-                print("[Success play] " + LevelSettings.GetCurrentLevel().LevelIndex);
+                print("[Success play] " + gameSettings.LevelSettings.SelectedLevel.LevelIndex);
             });
             
             updatePlayerStats();
-            GameObject.Find("succ_score_money").GetComponent<Text>().text = LevelSettings.Episode1Levels[currLevel].ToString();
+            //GameObject.Find("succ_score_money").GetComponent<Text>().text = gameSettings.LevelSettings.Episode1Levels[currLevel].ToString();
 
             stopLevel();
             return;
@@ -171,23 +183,23 @@ public class GameManagerScript : MonoBehaviour {
         levelTimerText.text = (int)levelTimer + " sec";
 
         // handle money multiplyer buff
-        if (GameSettings.IsMoneyIncreaseBuffOn)
+        if (gameSettings.IsMoneyIncreaseBuffOn)
             moneyBuffUI.SetActive(true);
-        else if(false == GameSettings.IsMoneyIncreaseBuffOn)
+        else if(false == gameSettings.IsMoneyIncreaseBuffOn)
             moneyBuffUI.SetActive(false);
 
         // handle speed decrease buff
-        if (GameSettings.IsSpeedSlownessBuffOn)
+        if (gameSettings.IsSpeedSlownessBuffOn)
             speedBuffUI.SetActive(true);
-        else if (false == GameSettings.IsSpeedSlownessBuffOn)
+        else if (false == gameSettings.IsSpeedSlownessBuffOn)
             speedBuffUI.SetActive(false);
     }
 
     private void updatePlayerStats()
     {
-        LevelSettings.Episode1Levels[currLevel] = player.Coins;
+        //gameSettings.LevelSettings.Episode1Levels[currLevel] = player.Coins;
 
-        print("[Player Coins] = " + player.Coins + " [Level coins] =  " + LevelSettings.Episode1Levels[currLevel]);
+        //print("[Player Coins] = " + player.Coins + " [Level coins] =  " + gameSettings.LevelSettings.Episode1Levels[currLevel]);
         //player.Coins = 0;
     }
 

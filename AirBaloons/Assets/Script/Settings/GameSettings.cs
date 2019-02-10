@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Script.Levels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,11 +9,29 @@ using UnityEngine;
 
 namespace Assets.Script.Settings
 {
-    public static class GameSettings
+    public class GameSettings: MonoBehaviour
     {
-        //public static readonly float BaloonsBornRadius = 40;    //point on the surface of a sphere with radius 40
+        public LevelSettings LevelSettings;
+        private ILevel currentLevel;
 
-        public static readonly Dictionary<BornPoint, Vector3> BornPoints = new Dictionary<BornPoint, Vector3>
+        void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
+        void Start()
+        {
+            LevelSettings = gameObject.GetComponent<LevelSettings>();
+            currentLevel = LevelSettings.SelectedLevel;
+            //print("LevelSettings " + LevelSettings);
+
+            BalloonHealth = 10 + (LevelSettings.SelectedLevel.LevelIndex * 2);
+            ZeppelinHealth = 80 + (LevelSettings.SelectedLevel.LevelIndex * 10);
+            BallonsGenerationFrequensy = 0.1f - (LevelSettings.SelectedLevel.LevelIndex * 0.05f);
+            PlanesBornPosition = BornPoints[BornPoint.Clock_3];
+        }
+
+        public Dictionary<BornPoint, Vector3> BornPoints = new Dictionary<BornPoint, Vector3>
         {
             { BornPoint.Clock_3, new Vector3(-75f, 5f, -9.4f) },
             { BornPoint.Clock_5, new Vector3(-24.2f, 11.3f, 28f) },
@@ -21,55 +40,50 @@ namespace Assets.Script.Settings
             { BornPoint.Clock_9, new Vector3(30f, 5f, -9.4f) }
         };
 
-        public static readonly Vector3 PlanesBornPosition = BornPoints[BornPoint.Clock_3];
+        public Vector3 PlanesBornPosition;
 
-        public static int BaseIslandHealth = 100;
+        public int BaseIslandHealth = 100;
 
-        public static float ZeppelinSpeed = 1f;
+        public float ZeppelinSpeed = 1f;
 
-        private static readonly float baseBaloonsSpeed = 3f;
-        public static float BaloonsSpeed
+        private readonly float baseBaloonsSpeed = 3f;
+        public float BaloonsSpeed
         {
             get
             {
                 if (IsSpeedSlownessBuffOn)
-                    return baseBaloonsSpeed + (LevelSettings.GetCurrentLevel().LevelIndex * 0.2f) - SpeedSlownessBuffModifier;
+                    return baseBaloonsSpeed + (LevelSettings.SelectedLevel.LevelIndex * 0.2f) - SpeedSlownessBuffModifier;
                 else
-                    return baseBaloonsSpeed + (LevelSettings.GetCurrentLevel().LevelIndex * 0.2f);
+                    return baseBaloonsSpeed + (LevelSettings.SelectedLevel.LevelIndex * 0.2f);
             }
         }
 
-        public static int BalloonHealth = 10 + (LevelSettings.GetCurrentLevel().LevelIndex * 2);
-        public static int ZeppelinHealth = 80 + (LevelSettings.GetCurrentLevel().LevelIndex * 10);
+        public int BalloonHealth;
+        public int ZeppelinHealth;
 
-        public static int PlayerClickDamage = 10;
+        public int PlayerClickDamage = 10;
 
-        public static readonly float BallonsGenerationFrequensy = 0.1f - (LevelSettings.GetCurrentLevel().LevelIndex * 0.05f);
-        public static readonly float PlanesGenerationFrequensy = 30f;
+        public float BallonsGenerationFrequensy;
+        public float PlanesGenerationFrequensy = 30f;
 
-        public static bool IsMoneyIncreaseBuffOn = false;
-        public static readonly int MoneyIncreaseBuffMultiplayer = 4;
-        public static readonly float MoneyIncreaseBuffProbability = 0.01f;
+        public bool IsMoneyIncreaseBuffOn = false;
+        public int MoneyIncreaseBuffMultiplayer = 4;
+        public float MoneyIncreaseBuffProbability = 0.01f;
 
-        public static bool IsSpeedSlownessBuffOn = false;
-        public static readonly float SpeedSlownessBuffModifier = 0.5f;
-        public static readonly float SpeedSlownessBuffProbability = 0.01f;
+        public bool IsSpeedSlownessBuffOn = false;
+        public float SpeedSlownessBuffModifier = 0.5f;
+        public float SpeedSlownessBuffProbability = 0.01f;
 
         // Settings Screen configurations
-        public static bool IsTutotrialOn = false;
-        public static bool IsMusicMuted = false;
+        public bool IsTutotrialOn = false;
+        public bool IsMusicMuted = false;
 
-        public static float MusicLevel = 0;
-        public static float FXsoundLevel = 0;
-
-        static GameSettings()
-        {
-            //loadData();
-        }
+        public float MusicLevel = 0;
+        public float FXsoundLevel = 0;
 
         #region Persistance
 
-        private static void loadData()
+        private void loadData()
         {
             if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
             {
@@ -101,7 +115,7 @@ namespace Assets.Script.Settings
             }
         }
 
-        public static void SaveData()
+        public void SaveData()
         {
             string fileName = Application.persistentDataPath + "/playerInfo.dat";
 
@@ -120,7 +134,7 @@ namespace Assets.Script.Settings
             var dataSettings = new DataSettings()
             {
                 //Lives = PlayerSettings.PlayerLivesAmount,
-                LastCompletedLevelIndex = LevelSettings.GetCurrentLevel().LevelIndex,
+                LastCompletedLevelIndex = LevelSettings.SelectedLevel.LevelIndex,
                 //LevelRecords = lvlRecords,
 
                 systemDataSettings = new DataSettings.SystemDataSettings()

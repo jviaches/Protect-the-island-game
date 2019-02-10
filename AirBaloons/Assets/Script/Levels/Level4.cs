@@ -18,18 +18,18 @@ namespace Assets.Script.Levels
 
         public int MoneyGenerationModifier { get { return 1; } }
 
-        private readonly Dictionary<float, FloatItem> timeActivationDic;
-        public Dictionary<float, FloatItem> TimeActivationDic
+        private List<KeyValuePair<float, FloatItem>> timeActivationDic;
+        public List<KeyValuePair<float, FloatItem>> TimeActivationDic
         {
             get { return timeActivationDic; }
         }
 
-        public Level4()
+        public Level4(GameSettings gameSettings)
         {
-            timeActivationDic = new Dictionary<float, FloatItem>
+            timeActivationDic = new List<KeyValuePair<float, FloatItem>>
             {
-                { LevelSettings.LevelTimer / 3.33f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_5]) },   // after 1/3 level time
-                { LevelSettings.LevelTimer / 2f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_9]) }      // after 1/2 level time
+                //{ gameSettings.LevelSettings.LevelTimer / 3.33f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_5]) },   // after 1/3 level time
+                //{ gameSettings.LevelSettings.LevelTimer / 2f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_9]) }      // after 1/2 level time
             };
 
         }

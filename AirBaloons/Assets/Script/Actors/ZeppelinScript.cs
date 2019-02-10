@@ -11,7 +11,9 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
     private float step;
     private bool? isClicked = null;
 
-    public float Speed = GameSettings.ZeppelinSpeed;
+    private GameSettings gameSettings;
+
+    public float Speed;
 
     public int DPS { get { return 20; } }
 
@@ -21,9 +23,12 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
 
     void Start ()
     {
+        gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+
         island = GameObject.Find("IslandShield");
         step = Speed * Time.deltaTime;
-        Health = GameSettings.ZeppelinHealth;
+        Health = gameSettings.ZeppelinHealth;
+        Speed = gameSettings.ZeppelinSpeed;
 
         originalScale = gameObject.transform.localScale;
         transform.rotation = Quaternion.Euler(Vector3.zero);        
@@ -96,7 +101,7 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
 
     void OnMouseDown()
     {
-        Health -= GameSettings.PlayerClickDamage;
+        Health -= gameSettings.PlayerClickDamage;
         if (Health <= 0)
             dropItems();
         else
@@ -108,23 +113,23 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
         // generate 2 coins as reward
         Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.left, Quaternion.identity);
 
-        if (!GameSettings.IsMoneyIncreaseBuffOn)
+        if (!gameSettings.IsMoneyIncreaseBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
             //print("Money Increase buffProbability=" + buffProbability);
 
-            if (buffProbability <= GameSettings.MoneyIncreaseBuffProbability)
+            if (buffProbability <= gameSettings.MoneyIncreaseBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/MoneyIncreaseBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
             else
                 Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);
         }
 
-        if (!GameSettings.IsSpeedSlownessBuffOn)
+        if (!gameSettings.IsSpeedSlownessBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
             //print("Slowness buffProbability=" + buffProbability);
 
-            if (buffProbability <= GameSettings.SpeedSlownessBuffProbability)
+            if (buffProbability <= gameSettings.SpeedSlownessBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/SpeeedSlownessBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
             else
                 Instantiate((GameObject)Resources.Load("Prefabs/Collectables/Coin"), gameObject.transform.position + Vector3.right, Quaternion.identity);

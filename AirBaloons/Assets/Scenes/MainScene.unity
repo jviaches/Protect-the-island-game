@@ -5966,6 +5966,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 12.504001, y: 180.00002, z: 0}
+--- !u!1 &1709073501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1709073503}
+  - component: {fileID: 1709073504}
+  - component: {fileID: 1709073502}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1709073502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1709073501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30fb0c5f961b7e4c8fc4b272db649ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 0}
+  PlanesBornPosition: {x: 0, y: 0, z: 0}
+  BaseIslandHealth: 100
+  ZeppelinSpeed: 1
+  BalloonHealth: 0
+  ZeppelinHealth: 0
+  PlayerClickDamage: 10
+  BallonsGenerationFrequensy: 0
+  PlanesGenerationFrequensy: 30
+  IsMoneyIncreaseBuffOn: 0
+  MoneyIncreaseBuffMultiplayer: 4
+  MoneyIncreaseBuffProbability: 0.01
+  IsSpeedSlownessBuffOn: 0
+  SpeedSlownessBuffModifier: 0.5
+  SpeedSlownessBuffProbability: 0.01
+  IsTutotrialOn: 0
+  IsMusicMuted: 0
+  MusicLevel: 0
+  FXsoundLevel: 0
+--- !u!4 &1709073503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1709073501}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.3136487, y: 1.0401001, z: -807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1709073504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1709073501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c223c2364962f449fc868e8abaf91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelsInEpisode: 10
+  LevelTimer: 100
+  SelectedLevelIndex: 1
 --- !u!1 &1758794695
 GameObject:
   m_ObjectHideFlags: 0

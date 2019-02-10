@@ -18,24 +18,26 @@ namespace Assets.Script.Levels
 
         public int MoneyGenerationModifier { get { return 1; } }
 
-        private readonly Dictionary<float, FloatItem> timeActivationDic;
-        public Dictionary<float, FloatItem> TimeActivationDic
+        private GameSettings gameSettings;        
+    
+        private List<KeyValuePair<float, FloatItem>> timeActivationDic;
+        public List<KeyValuePair<float, FloatItem>> TimeActivationDic
         {
             get { return timeActivationDic; }
         }
 
-        public Level10()
+        public Level10(GameSettings gameSettings)
         {
-            timeActivationDic = new Dictionary<float, FloatItem>
+            timeActivationDic = new List<KeyValuePair<float, FloatItem>>()
             {
-                { 3f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_3]) },      // after 1/3 level time
-                { 3.1f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_5]) },      // after 1/3 level time
-                { 3.2f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_7]) },      // after 1/3 level time
+                //{ 3f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_3]) },      // after 1/3 level time
+                //{ 3.1f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_5]) },      // after 1/3 level time
+                //{ 3.2f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_7]) },      // after 1/3 level time
 
-                { LevelSettings.LevelTimer / 3.33f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_3]) },      // after 1/3 level time
-                { LevelSettings.LevelTimer / 3.35f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_9]) },      // after 1/3 level time
-                { LevelSettings.LevelTimer / 6.66f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_5]) },      // after 2/3 level time
-                { LevelSettings.LevelTimer / 6.67f, new FloatItem("Prefabs/Actors/Blimp1", GameSettings.BornPoints[BornPoint.Clock_7]) }      // after 2/3 level time            
+                //{ gameSettings.LevelSettings.LevelTimer / 3.33f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_3]) },      // after 1/3 level time
+                //{ gameSettings.LevelSettings.LevelTimer / 3.35f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_9]) },      // after 1/3 level time
+                //{ gameSettings.LevelSettings.LevelTimer / 6.66f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_5]) },      // after 2/3 level time
+                //{ gameSettings.LevelSettings.LevelTimer / 6.67f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_7]) }      // after 2/3 level time            
             };
         }
     }

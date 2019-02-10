@@ -12,7 +12,11 @@ public class SettingsSceneLoader : MonoBehaviour {
     private Dropdown languageDropDwn;
     private Toggle tutorial_switch;
 
+    private GameSettings gameSettings;
+
     void Start () {
+
+        gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
         print(Application.persistentDataPath);
 
@@ -29,8 +33,8 @@ public class SettingsSceneLoader : MonoBehaviour {
         languageDropDwn.interactable = false;
 
         tutorial_switch = GameObject.Find("tutorial_switch").GetComponent<Toggle>();
-        tutorial_switch.isOn = GameSettings.IsTutotrialOn;
-        tutorial_switch.onValueChanged.AddListener((isOn) => GameSettings.IsTutotrialOn = isOn);
+        tutorial_switch.isOn = gameSettings.IsTutotrialOn;
+        tutorial_switch.onValueChanged.AddListener((isOn) => gameSettings.IsTutotrialOn = isOn);
 
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
         saveButton.onClick.AddListener(() =>

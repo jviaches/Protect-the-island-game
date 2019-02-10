@@ -2,44 +2,52 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine;
+using Assets.Script.Settings;
 
-public static class LevelSettings
+public class LevelSettings: MonoBehaviour
 {
-    public static int LevelsInEpisode = 10;
-    public static float LevelTimer = 100; // Time take to level to complete (in sec)
+    public int LevelsInEpisode = 10;
+    public float LevelTimer = 100;
+    public int SelectedLevelIndex = 1;                   // Level chosen by user
+    public List<ILevel> Episode1Levels;
 
-    public static Dictionary<ILevel, int> Episode1Levels = new Dictionary<ILevel, int>()   // 1rs param level, 2nd param amount of stars
+    void Awake()
     {
-        { new Level1(), 0 },
-        { new Level2(), 0},
-        { new Level3(), 0},
-        { new Level4(), 0},
-        { new Level5(), 0},
-        { new Level6(), 0},
-        { new Level7(), 0},
-        { new Level8(), 0},
-        { new Level9(), 0},
-        { new Level10(), 0}
+        var gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-    };
+        Episode1Levels = new List<ILevel>
+        {
+            new Level1(gameSettings),
+            new Level2(gameSettings),
+            new Level3(gameSettings),
+            new Level4(gameSettings),
+            new Level5(gameSettings),
+            new Level6(gameSettings),
+            new Level7(gameSettings),
+            new Level8(gameSettings),
+            new Level9(gameSettings),
+            new Level10(gameSettings),
+        };
 
-    public static int SelectedLevelIndex = 1;                   // Level chosen by user
+        SelectedLevel = Episode1Levels[0];
+    }
 
     // Persistance 
-    private static int lastCompletedLevelIndex = 0;
-    public static int LastCompletedLevelIndex
+    private int lastCompletedLevelIndex = 0;
+    public int LastCompletedLevelIndex
     {
         get { return lastCompletedLevelIndex; }
         set { lastCompletedLevelIndex = value; }
     }
 
-    static LevelSettings()
+    public ILevel SelectedLevel
     {
-        if (Episode1Levels.Count > 0)
-            return;
+        get;
+        set;
     }
 
-    public static void RevealNextLevel(int level)
+    public void RevealNextLevel(int level)
     {
         if (SelectedLevelIndex < Episode1Levels.Count)
         {
@@ -48,18 +56,12 @@ public static class LevelSettings
         }
     }
 
-    public static void RunNextLevel(int level)
+    public void RunNextLevel(int level)
     {
         if (SelectedLevelIndex < Episode1Levels.Count)
         {
             SelectedLevelIndex = level + 1;
             LastCompletedLevelIndex = (LastCompletedLevelIndex >= SelectedLevelIndex) ? LastCompletedLevelIndex : SelectedLevelIndex;
         }
-    }
-
-    public static ILevel GetCurrentLevel()
-    {
-        int lvlIndex = SelectedLevelIndex == 0 ? 1 : SelectedLevelIndex;  
-        return Episode1Levels.Keys.First(lvl => lvl.LevelIndex == lvlIndex);
     }
 }
