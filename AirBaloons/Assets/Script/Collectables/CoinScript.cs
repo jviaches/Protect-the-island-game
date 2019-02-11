@@ -23,7 +23,6 @@ public class CoinScript : MonoBehaviour
 
         itemsCollectedObject = GameObject.Find("ItemsCollectionObject");
         currLevel = gameSettings.LevelSettings.SelectedLevel;
-
     }
 
     void Update()
@@ -67,6 +66,7 @@ public class CoinScript : MonoBehaviour
         //print("Coins collected: "+ coinsCalculated);
 
         GameObject.Find("Player").GetComponent<PlayerScript>().CoinsUpdate(coinsCalculated);
+        currLevel.CollectedCoins += coinsCalculated;
 
         isCointAlreadyCounted = true;
         allowedToBeCollected = true;

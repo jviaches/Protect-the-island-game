@@ -29,6 +29,8 @@ namespace Assets.Script.Settings
             ZeppelinHealth = 80 + (LevelSettings.SelectedLevel.LevelIndex * 10);
             BallonsGenerationFrequensy = 0.1f - (LevelSettings.SelectedLevel.LevelIndex * 0.05f);
             PlanesBornPosition = BornPoints[BornPoint.Clock_3];
+
+            LoadData();
         }
 
         public Dictionary<BornPoint, Vector3> BornPoints = new Dictionary<BornPoint, Vector3>
@@ -83,7 +85,7 @@ namespace Assets.Script.Settings
 
         #region Persistance
 
-        private void loadData()
+        public void LoadData()
         {
             if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
             {
@@ -94,12 +96,13 @@ namespace Assets.Script.Settings
                 file.Close();
 
                 // level settings
-                //LevelSettings.LastCompletedLevelIndex = dataSettings.LastCompletedLevelIndex;
-                //foreach (var lvlRecord in dataSettings.LevelRecords)
-                //{
-                //    var levelData = LevelSettings.Episode1Levels.First(rec => rec.Key.LevelIndex == lvlRecord.LevelIndex);
-                //    LevelSettings.Episode1Levels[levelData.Key] = new KeyValuePair<int, int>(lvlRecord.Coins, lvlRecord.Score);
-                //}
+                LevelSettings.LastCompletedLevelIndex = dataSettings.LastCompletedLevelIndex;                
+
+                for (int lvlRecord = 0; lvlRecord < dataSettings.LevelRecords.Count; lvlRecord++)
+                    LevelSettings.Episode1Levels[lvlRecord].CollectedCoins = dataSettings.LevelRecords[lvlRecord].Coins;
+
+                int lvlIndex = LevelSettings.LastCompletedLevelIndex == 0 ? 0 : LevelSettings.LastCompletedLevelIndex - 1;
+                LevelSettings.SelectedLevel = LevelSettings.Episode1Levels[lvlIndex];
 
                 // player settings
                 //PlayerSettings.PlayerLivesAmount = dataSettings.Lives;
@@ -126,16 +129,16 @@ namespace Assets.Script.Settings
             FileStream file = File.Open(fileName, FileMode.CreateNew);
 
             // Save Level related settings
-            //var lvlRecords = new List<DataSettings.LevelData>();
+            var lvlRecords = new List<DataSettings.LevelData>();
 
-            //foreach (var lvlData in LevelSettings.Episode1Levels)
-            //    lvlRecords.Add(new DataSettings.LevelData() { LevelIndex = lvlData.Key.LevelIndex, Coins = lvlData.Value.Key, Score = lvlData.Value.Value });
+            foreach (var lvlData in LevelSettings.Episode1Levels)
+                lvlRecords.Add(new DataSettings.LevelData() { LevelIndex = lvlData.LevelIndex, Coins = lvlData.CollectedCoins, });
 
             var dataSettings = new DataSettings()
             {
                 //Lives = PlayerSettings.PlayerLivesAmount,
-                LastCompletedLevelIndex = LevelSettings.SelectedLevel.LevelIndex,
-                //LevelRecords = lvlRecords,
+                LastCompletedLevelIndex = LevelSettings.LastCompletedLevelIndex,
+                LevelRecords = lvlRecords,                
 
                 systemDataSettings = new DataSettings.SystemDataSettings()
                 {
@@ -158,16 +161,16 @@ namespace Assets.Script.Settings
         {
             public int LastCompletedLevelIndex;
             //public int Lives;
-            //public List<LevelData> LevelRecords;
+            public List<LevelData> LevelRecords;
             public SystemDataSettings systemDataSettings;
 
-            //[Serializable]
-            //public class LevelData
-            //{
-            //    public int LevelIndex;
-            //    public int Coins;
+            [Serializable]
+            public class LevelData
+            {
+                public int LevelIndex;
+                public int Coins;
             //    public int Score;
-            //}
+            }
 
             [Serializable]
             public class SystemDataSettings

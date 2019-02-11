@@ -12,6 +12,8 @@ namespace Assets.Script.Levels
     {
         public int LevelIndex { get { return 4; } }
 
+        public int CollectedCoins { get; set; }
+
         public float BaloonGenerationFrequencyModifier { get { return 1.2f; } }
 
         public float PlaneGenerationFrequencyModifier { get { return 20; } }

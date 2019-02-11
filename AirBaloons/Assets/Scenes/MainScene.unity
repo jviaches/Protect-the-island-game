@@ -6038,7 +6038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelsInEpisode: 10
-  LevelTimer: 100
+  LevelTimer: 2
   SelectedLevelIndex: 1
 --- !u!1 &1758794695
 GameObject:

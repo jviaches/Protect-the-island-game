@@ -20,12 +20,13 @@ public class LevelsScene : MonoBehaviour
         //print("Awake begin => selLvl=" + LevelSettings.SelectedLevelIndex + " LastComplLvl=" + LevelSettings.LastCompletedLevelIndex);
 
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+        gameSettings.LoadData();
 
         closebutton = GameObject.Find("ExitButton").GetComponent<Button>();
         closebutton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
 
         settingsbutton = GameObject.Find("square_button_settings").GetComponent<Button>();
-        settingsbutton.onClick.AddListener(() => SceneManager.LoadScene("SettingsScene"));
+        settingsbutton.onClick.AddListener(() => SceneManager.LoadScene("SettingsScene"));        
 
         for (int levelIndex = 1; levelIndex <= gameSettings.LevelSettings.LevelsInEpisode; levelIndex++)
         {
@@ -101,15 +102,11 @@ public class LevelsScene : MonoBehaviour
                 }
             }
         }
-
-        //print("Awake end => selLvl=" + LevelSettings.SelectedLevelIndex + " LastComplLvl=" + LevelSettings.LastCompletedLevelIndex);
     }
 
     private void loadLevel(int level)
     {
-        gameSettings.LevelSettings.SelectedLevelIndex = level;
-        //print("After loadLevel() => selLvl=" + LevelSettings.SelectedLevelIndex + " LastComplLvl="+ LevelSettings.LastCompletedLevelIndex);
-
-        SceneManager.LoadScene("GameScene");  // load level
+        gameSettings.LevelSettings.PrepareNextLevel(level);
+        SceneManager.LoadScene("GameScene");  
     }
 }

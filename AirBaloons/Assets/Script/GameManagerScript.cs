@@ -14,7 +14,7 @@ public class GameManagerScript : MonoBehaviour {
     private PlayerScript player;
 
     private ILevel currLevel;
-    private float levelTimer = 100; // LevelSettings.LevelTimer;
+    private float levelTimer;
 
     private Text levelTimerText;
 
@@ -35,11 +35,11 @@ public class GameManagerScript : MonoBehaviour {
     void Start () {
 
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+        levelTimer = gameSettings.LevelSettings.LevelTimer;
 
         player = GameObject.Find("Player").GetComponent<PlayerScript>(); // TODO: load from file
         currLevel = gameSettings.LevelSettings.SelectedLevel;
-
-        print("gameSettings.LevelSettings= " + currLevel);
+        currLevel.CollectedCoins = 0;
 
         islandScript = GameObject.Find("IslandShield").GetComponent<IslandScript>();
         GameObject.Find("bar_health_text").GetComponent<Text>().text = islandScript.Health.ToString();
@@ -81,22 +81,17 @@ public class GameManagerScript : MonoBehaviour {
         InvokeRepeating("generateBonusPlanes", gameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier,
                                                gameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
 
-
-       
-
         // create enemy after at certain amount of time
-        //for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
-        //{
-            //print("TimeActivationDic " + i);
+        for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
+        {
             StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(0).Value, currLevel.TimeActivationDic.ElementAt(0).Key));
-        //}
+        }
     }
 
     private void generateBaloons()
     {
         //var random = UnityEngine.Random.onUnitSphere * GameSettings.BaloonsBornRadius; //Returns a random point on the surface of a sphere with radius 40
         //GameObject balloon = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1,3)), random, Quaternion.identity);
-        //balloon.transform.Rotate(-90, 0, 0);
 
         GameObject balloon = Instantiate((GameObject)Resources.Load("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3)));
 
@@ -137,7 +132,7 @@ public class GameManagerScript : MonoBehaviour {
             GameObject.Find("square_button_fail_repeat").GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
 
             updatePlayerStats();
-            //GameObject.Find("fail_score_money").GetComponent<Text>().text = gameSettings.LevelSettings.Episode1Levels[currLevel].ToString();
+            GameObject.Find("fail_score_money").GetComponent<Text>().text = currLevel.CollectedCoins.ToString();
 
             stopLevel();
             return;
@@ -148,38 +143,32 @@ public class GameManagerScript : MonoBehaviour {
             isLevelSuccessfullyCompleted = true;
             levelCompletedDialog.SetActive(true);
 
+            gameSettings.SaveData();
+
             GameObject.Find("square_button_menu").GetComponent<Button>().onClick.AddListener(() =>
             {
-                gameSettings.LevelSettings.RevealNextLevel(gameSettings.LevelSettings.SelectedLevel.LevelIndex);
-                gameSettings.LevelSettings.SelectedLevelIndex = gameSettings.LevelSettings.SelectedLevel.LevelIndex;
                 SceneManager.LoadScene("LevelsScene");
             });
 
             GameObject.Find("square_button_repeat").GetComponent<Button>().onClick.AddListener(() =>
             {
-                gameSettings.LevelSettings.RevealNextLevel(gameSettings.LevelSettings.SelectedLevel.LevelIndex);
-                gameSettings.LevelSettings.SelectedLevelIndex = gameSettings.LevelSettings.SelectedLevel.LevelIndex;
                 SceneManager.LoadScene("GameScene");
-
-                print("[Success repeat] lvl " + gameSettings.LevelSettings.SelectedLevel.LevelIndex);
             });
 
             GameObject.Find("square_button_play").GetComponent<Button>().onClick.AddListener(() =>
             {
-                gameSettings.LevelSettings.RunNextLevel(gameSettings.LevelSettings.SelectedLevel.LevelIndex);
+                gameSettings.LevelSettings.PrepareNextLevel(currLevel.LevelIndex + 1);
                 SceneManager.LoadScene("GameScene");
-                print("[Success play] " + gameSettings.LevelSettings.SelectedLevel.LevelIndex);
             });
             
             updatePlayerStats();
-            //GameObject.Find("succ_score_money").GetComponent<Text>().text = gameSettings.LevelSettings.Episode1Levels[currLevel].ToString();
+            GameObject.Find("succ_score_money").GetComponent<Text>().text = currLevel.CollectedCoins.ToString();
 
             stopLevel();
             return;
         }      
 
         // ------ UI updates -------
-
         levelTimerText.text = (int)levelTimer + " sec";
 
         // handle money multiplyer buff

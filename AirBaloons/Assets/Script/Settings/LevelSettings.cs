@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Script.Settings;
 
-public class LevelSettings: MonoBehaviour
+public class LevelSettings : MonoBehaviour
 {
     public int LevelsInEpisode = 10;
-    public float LevelTimer = 100;
-    public int SelectedLevelIndex = 1;                   // Level chosen by user
+    public float LevelTimer = 5;
+    //public int SelectedLevelIndex = 1;                   // Level chosen by user
     public List<ILevel> Episode1Levels;
 
     void Awake()
@@ -47,21 +47,13 @@ public class LevelSettings: MonoBehaviour
         set;
     }
 
-    public void RevealNextLevel(int level)
+    public void PrepareNextLevel(int level)
     {
-        if (SelectedLevelIndex < Episode1Levels.Count)
+        if (level < Episode1Levels.Count)
         {
-            SelectedLevelIndex = level;
-            LastCompletedLevelIndex = (LastCompletedLevelIndex >= SelectedLevelIndex) ? LastCompletedLevelIndex : SelectedLevelIndex;
-        }
-    }
+            SelectedLevel = Episode1Levels[level - 1];
 
-    public void RunNextLevel(int level)
-    {
-        if (SelectedLevelIndex < Episode1Levels.Count)
-        {
-            SelectedLevelIndex = level + 1;
-            LastCompletedLevelIndex = (LastCompletedLevelIndex >= SelectedLevelIndex) ? LastCompletedLevelIndex : SelectedLevelIndex;
+            LastCompletedLevelIndex = (LastCompletedLevelIndex >= SelectedLevel.LevelIndex) ? LastCompletedLevelIndex : SelectedLevel.LevelIndex;
         }
     }
 }

@@ -14,32 +14,46 @@ public class SettingsSceneLoader : MonoBehaviour {
 
     private GameSettings gameSettings;
 
-    void Start () {
+    void Start() {
 
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-        print(Application.persistentDataPath);
+        //print(Application.persistentDataPath);
 
         exitButton = GameObject.Find("ExitButton").GetComponent<Button>();
         exitButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
 
         systemSound = GameObject.Find("switch").GetComponent<Toggle>();
-        systemSound.onValueChanged.AddListener((isOn) => AudioListener.pause = !isOn);
+        systemSound.isOn = !gameSettings.IsMusicMuted;
+
+        systemSound.onValueChanged.AddListener((isOn) =>
+        {
+            AudioListener.pause = !isOn;
+            gameSettings.IsMusicMuted = !isOn;
+        });
 
         volumeSlider = GameObject.Find("volume_slider").GetComponent<Slider>();
-        volumeSlider.onValueChanged.AddListener((isOn) => AudioListener.volume = volumeSlider.value);
+        volumeSlider.value = gameSettings.MusicLevel;
+        volumeSlider.onValueChanged.AddListener((isOn) =>
+        {
+            AudioListener.volume = volumeSlider.value;
+            gameSettings.MusicLevel = volumeSlider.value;
+        });
 
         languageDropDwn = GameObject.Find("lang-dropdown").GetComponent<Dropdown>();
         languageDropDwn.interactable = false;
 
         tutorial_switch = GameObject.Find("tutorial_switch").GetComponent<Toggle>();
         tutorial_switch.isOn = gameSettings.IsTutotrialOn;
-        tutorial_switch.onValueChanged.AddListener((isOn) => gameSettings.IsTutotrialOn = isOn);
+        tutorial_switch.onValueChanged.AddListener((isOn) =>
+        {
+            gameSettings.IsTutotrialOn = isOn;
+        });
 
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
         saveButton.onClick.AddListener(() =>
         {
-            // GameSettings.SaveData();
+            gameSettings.SaveData();
             SceneManager.LoadScene("MainScene");
         }); 
     }

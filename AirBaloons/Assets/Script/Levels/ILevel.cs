@@ -9,6 +9,9 @@ namespace Assets.Script.Levels
     public interface ILevel
     {
         int LevelIndex { get; }
+
+        int CollectedCoins { get; set; }
+
         float BaloonGenerationFrequencyModifier { get; }
         float PlaneGenerationFrequencyModifier { get; }
         int MoneyGenerationModifier { get; }
