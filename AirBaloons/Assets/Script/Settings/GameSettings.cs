@@ -77,7 +77,7 @@ namespace Assets.Script.Settings
         public float SpeedSlownessBuffProbability = 0.01f;
 
         // Settings Screen configurations
-        public bool IsTutotrialOn = false;
+        public bool IsLevelGuidenceOn = false;
         public bool IsMusicMuted = false;
 
         public float MusicLevel = 0;

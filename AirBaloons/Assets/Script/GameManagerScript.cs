@@ -60,7 +60,7 @@ public class GameManagerScript : MonoBehaviour {
 
         Time.timeScale = 1;
 
-        if (gameSettings.IsTutotrialOn)
+        if (gameSettings.IsLevelGuidenceOn)
         {
             GameObject.Find("level-goal-notification").SetActive(true);
             Time.timeScale = 0.00001f;

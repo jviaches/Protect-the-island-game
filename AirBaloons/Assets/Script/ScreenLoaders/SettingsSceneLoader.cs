@@ -18,19 +18,8 @@ public class SettingsSceneLoader : MonoBehaviour {
 
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-        //print(Application.persistentDataPath);
-
         exitButton = GameObject.Find("ExitButton").GetComponent<Button>();
         exitButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
-
-        systemSound = GameObject.Find("switch").GetComponent<Toggle>();
-        systemSound.isOn = !gameSettings.IsMusicMuted;
-
-        systemSound.onValueChanged.AddListener((isOn) =>
-        {
-            AudioListener.pause = !isOn;
-            gameSettings.IsMusicMuted = !isOn;
-        });
 
         volumeSlider = GameObject.Find("volume_slider").GetComponent<Slider>();
         volumeSlider.value = gameSettings.MusicLevel;
@@ -40,14 +29,28 @@ public class SettingsSceneLoader : MonoBehaviour {
             gameSettings.MusicLevel = volumeSlider.value;
         });
 
+        systemSound = GameObject.Find("switch").GetComponent<Toggle>();
+        systemSound.isOn = !gameSettings.IsMusicMuted;
+
+        systemSound.onValueChanged.AddListener((isOn) =>
+        {
+            AudioListener.pause = !isOn;
+            gameSettings.IsMusicMuted = !isOn;
+
+            if (isOn)
+                volumeSlider.enabled = true;
+            else
+                volumeSlider.enabled = false;
+        });
+
         languageDropDwn = GameObject.Find("lang-dropdown").GetComponent<Dropdown>();
         languageDropDwn.interactable = false;
 
-        tutorial_switch = GameObject.Find("tutorial_switch").GetComponent<Toggle>();
-        tutorial_switch.isOn = gameSettings.IsTutotrialOn;
-        tutorial_switch.onValueChanged.AddListener((isOn) =>
+        levelGuidence = GameObject.Find("level-guidence").GetComponent<Toggle>();
+        levelGuidence.isOn = gameSettings.IsLevelGuidenceOn;
+        levelGuidence.onValueChanged.AddListener((isOn) =>
         {
-            gameSettings.IsTutotrialOn = isOn;
+            gameSettings.IsLevelGuidenceOn = isOn;
         });
 
         saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
