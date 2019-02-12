@@ -6009,7 +6009,7 @@ MonoBehaviour:
   IsSpeedSlownessBuffOn: 0
   SpeedSlownessBuffModifier: 0.5
   SpeedSlownessBuffProbability: 0.01
-  IsTutotrialOn: 0
+  IsLevelGuidenceOn: 0
   IsMusicMuted: 0
   MusicLevel: 0
   FXsoundLevel: 0
@@ -6038,8 +6038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelsInEpisode: 10
-  LevelTimer: 2
-  SelectedLevelIndex: 1
+  LevelTimer: 100
 --- !u!1 &1758794695
 GameObject:
   m_ObjectHideFlags: 0

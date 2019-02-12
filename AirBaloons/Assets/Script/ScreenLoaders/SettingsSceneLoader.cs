@@ -10,7 +10,7 @@ public class SettingsSceneLoader : MonoBehaviour {
     private Toggle systemSound;
     private Slider volumeSlider;
     private Dropdown languageDropDwn;
-    private Toggle tutorial_switch;
+    private Toggle levelGuidence;
 
     private GameSettings gameSettings;
 
