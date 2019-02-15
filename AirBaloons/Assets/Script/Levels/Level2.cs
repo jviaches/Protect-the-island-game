@@ -30,8 +30,8 @@ namespace Assets.Script.Levels
         {
             timeActivationDic = new List<KeyValuePair<float, FloatItem>>()
             {
-                //{ gameSettings.LevelSettings.LevelTimer / 3.33f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_3]) }, // after 1/3 level time
-                //{ gameSettings.LevelSettings.LevelTimer / 6.66f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_6]) } // after 2/3 level time
+                { new KeyValuePair<float, FloatItem>( 30f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_3])) },
+                { new KeyValuePair<float, FloatItem>( 60f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_6])) } 
             };
         }
     }

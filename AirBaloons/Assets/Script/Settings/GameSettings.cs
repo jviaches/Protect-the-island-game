@@ -35,7 +35,7 @@ namespace Assets.Script.Settings
 
         public Dictionary<BornPoint, Vector3> BornPoints = new Dictionary<BornPoint, Vector3>
         {
-            { BornPoint.Clock_3, new Vector3(-75f, 5f, -9.4f) },
+            { BornPoint.Clock_3, new Vector3(-80f, 5f, -9.4f) },
             { BornPoint.Clock_5, new Vector3(-24.2f, 11.3f, 28f) },
             { BornPoint.Clock_6, new Vector3(-18.5f, 0f, 30f) },
             { BornPoint.Clock_7, new Vector3(0f, 0f, 30f) },
