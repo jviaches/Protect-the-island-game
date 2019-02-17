@@ -42,8 +42,6 @@ public class HeroZhouyu : MonoBehaviour
             isLockedOnEnemy = true;
             enemyTarget = colliders[0].gameObject;
             animator.SetBool("setAttack", true);
-
-            //print("Collider");
         }
         else
         {

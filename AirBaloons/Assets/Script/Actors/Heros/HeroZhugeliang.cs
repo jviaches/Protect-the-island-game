@@ -1,0 +1,151 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class HeroZhugeliang : MonoBehaviour
+{
+    public GameObject attackBullet;
+    public GameObject magicBullet;
+    public GameObject magic2Bullet;
+    public GameObject ultimateBullet;
+    public GameObject damageEffect1;
+    public GameObject damageEffect2;
+    public GameObject damageEffect3;
+
+    private Animator animator;
+
+    private float enemyRadiusDetection = 45f;   // TODO: pull from GameSettings
+    public GameObject enemyTarget;
+    private bool isLockedOnEnemy = false;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (!isLockedOnEnemy || enemyTarget == null)
+            detectCloseEnemy();
+    }
+
+    void ActionStart() { }  //TODO: remove call from animation and deleted this function
+    void ActionDone() { }   //TODO: remove call from animation and deleted this function
+
+
+    private void detectCloseEnemy()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemyRadiusDetection);
+        if (colliders.Length > 0 && colliders[0].tag == "enemy")
+        {
+            isLockedOnEnemy = true;
+            enemyTarget = colliders[0].gameObject;
+            animator.SetBool("setAttack", true);
+        }
+        else
+        {
+            isLockedOnEnemy = false;
+            enemyTarget = null;
+            animator.SetBool("setAttack", false);
+        }
+    }
+
+    void preAction(string actionName)
+    {
+        if (enemyTarget == null || isLockedOnEnemy == false)
+            return;
+
+        AttackedController c = enemyTarget.GetComponent<AttackedController>();
+        string[] arr = actionName.Split('|');
+        string name = arr[0];
+        switch (name)
+        {
+            case AnimationName.Attack:
+                if (attackBullet != null)
+                {
+                    GameObject obj = Instantiate(attackBullet);
+                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    bullet.player = transform;
+                    bullet.target = enemyTarget.transform;
+                    bullet.effectObj = damageEffect1;
+                    bullet.bulleting();
+                }
+                break;
+
+            case AnimationName.Magic:
+                if (magicBullet != null)
+                {
+                    GameObject obj = Instantiate(magicBullet);
+                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    bullet.player = transform;
+                    bullet.target = enemyTarget.transform;
+                    bullet.effectObj = damageEffect2;
+                    bullet.bulleting();
+                }
+
+                StartCoroutine(delayBullet());
+                StartCoroutine(delayBullet1());
+
+                break;
+            case AnimationName.Magic2:
+                if (magic2Bullet != null)
+                {
+                    GameObject obj = Instantiate(magic2Bullet);
+                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
+                    bullet.player = transform;
+                    bullet.target = enemyTarget.transform;
+                    bullet.effectObj = damageEffect2;
+                    bullet.bulleting();
+                }
+                break;
+            case AnimationName.Ultimate:
+                if (damageEffect3 != null)
+                {
+                    GameObject obj1 = Instantiate(damageEffect3);
+                    ParticlesEffect effect = obj1.AddComponent<ParticlesEffect>();
+                    Transform target = enemyTarget.transform;
+                    effect.transform.position = MathUtil.findChild(target, "attackedPivot").position;
+                    effect.play();
+                }
+                c.attacked();
+                break;
+        }
+    }
+
+    IEnumerator delayBullet()
+    {
+        AttackedController c = enemyTarget.GetComponent<AttackedController>();
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = Instantiate(ultimateBullet);
+            xuanzhuanBullet bullet = obj.GetComponent<xuanzhuanBullet>();
+            bullet.player = transform;
+            bullet.effectObj = damageEffect1;
+            bullet.target = c.transform;
+            bullet.bulleting();
+
+            yield return new WaitForSeconds(0.1f);
+            if (i % 9 == 0)
+                c.attacked();
+        }
+    }
+
+    IEnumerator delayBullet1()
+    {
+        AttackedController c = enemyTarget.GetComponent<AttackedController>();
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = Instantiate(ultimateBullet);
+            xuanzhuanBullet bullet = obj.GetComponent<xuanzhuanBullet>();
+            bullet.player = transform;
+            bullet.effectObj = damageEffect1;
+            bullet.target = c.transform;
+            bullet.flag = -1f;
+            bullet.bulleting();
+
+            yield return new WaitForSeconds(0.1f);
+            if (i % 9 == 0)
+                c.attacked();
+        }
+    }
+}
