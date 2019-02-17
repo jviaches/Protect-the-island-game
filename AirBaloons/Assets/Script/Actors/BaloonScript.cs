@@ -26,7 +26,7 @@ public class BaloonScript : MonoBehaviour, IEnemy
     {
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-        island = GameObject.Find("IslandShield");
+        island = GameObject.Find("Island");
         Speed = gameSettings.BaloonsSpeed;
         step = Speed * Time.deltaTime;
         Health = gameSettings.BalloonHealth;

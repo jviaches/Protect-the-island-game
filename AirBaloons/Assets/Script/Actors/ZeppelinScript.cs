@@ -25,7 +25,7 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
     {
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-        island = GameObject.Find("IslandShield");
+        island = GameObject.Find("Island");
         step = Speed * Time.deltaTime;
         Health = gameSettings.ZeppelinHealth;
         Speed = gameSettings.ZeppelinSpeed;

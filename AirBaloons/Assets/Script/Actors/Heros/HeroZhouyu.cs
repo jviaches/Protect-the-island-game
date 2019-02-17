@@ -37,7 +37,6 @@ public class HeroZhouyu : MonoBehaviour
 
     private void detectCloseEnemy()
     {
-        // if enemy in radius -> isLockedOnEnemy = true
         Collider[] colliders  = Physics.OverlapSphere(this.transform.position, enemyRadiusDetection);
         if (colliders.Length > 0 && colliders[0].tag == "enemy")
         {
@@ -45,15 +44,13 @@ public class HeroZhouyu : MonoBehaviour
             enemyTarget = colliders[0].gameObject;
             animator.SetBool("setAttack", true);
 
-            print("Collider");
+            //print("Collider");
         }
         else
         {
             isLockedOnEnemy = false;
             enemyTarget = null;
             animator.SetBool("setAttack", false);
-
-            print("no Collider");
         }
     }
 
