@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroZhouyu : MonoBehaviour
+public class HeroDaochan : MonoBehaviour
 {
     public GameObject attackBullet;
     public GameObject magicBullet;
@@ -30,20 +29,14 @@ public class HeroZhouyu : MonoBehaviour
             detectCloseEnemy();
     }
 
-    void ActionStart() { }  //TODO: remove call from animation and deleted this function
-    void ActionDone() { }   //TODO: remove call from animation and deleted this function
-
-
     private void detectCloseEnemy()
     {
-        Collider[] colliders  = Physics.OverlapSphere(transform.position, enemyRadiusDetection);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, enemyRadiusDetection);
         if (colliders.Length > 0 && colliders[0].tag == "enemy")
         {
             isLockedOnEnemy = true;
             enemyTarget = colliders[0].gameObject;
             animator.SetBool("setAttack", true);
-
-            //print("Collider");
         }
         else
         {
@@ -58,6 +51,7 @@ public class HeroZhouyu : MonoBehaviour
         if (enemyTarget == null || isLockedOnEnemy == false)
             return;
 
+        AttackedController c = enemyTarget.GetComponent<AttackedController>();
         string[] arr = actionName.Split('|');
         string name = arr[0];
 
@@ -74,17 +68,9 @@ public class HeroZhouyu : MonoBehaviour
                     bullet.bulleting();
                 }
                 break;
-
             case AnimationName.Magic:
                 if (magicBullet != null)
-                {
-                    GameObject obj = Instantiate(magicBullet);
-                    NormalBullet bullet = obj.GetComponent<NormalBullet>();
-                    bullet.player = transform;
-                    bullet.target = enemyTarget.transform;
-                    bullet.effectObj = damageEffect1;
-                    bullet.bulleting();
-                }
+                    StartCoroutine(delayBullet());
                 break;
             case AnimationName.Magic2:
                 if (magic2Bullet != null)
@@ -100,7 +86,7 @@ public class HeroZhouyu : MonoBehaviour
             case AnimationName.Ultimate:
                 if (ultimateBullet != null)
                 {
-                    GameObject obj = Instantiate(ultimateBullet);
+                    GameObject obj = GameObject.Instantiate(ultimateBullet);
                     LightBullet bullet = obj.GetComponent<LightBullet>();
                     bullet.player = transform;
                     bullet.target = enemyTarget.transform;
@@ -109,23 +95,52 @@ public class HeroZhouyu : MonoBehaviour
                 }
                 if (damageEffect3 != null)
                 {
-                    GameObject obj = Instantiate(damageEffect3);
-                    ParticlesEffect effect = obj.AddComponent<ParticlesEffect>();
-                    effect.transform.position = enemyTarget.transform.position;
+                    GameObject obj1 = Instantiate(damageEffect3);
+                    ParticlesEffect effect = obj1.AddComponent<ParticlesEffect>();
+                    Transform target = enemyTarget.transform;
+                    effect.transform.position = MathUtil.findChild(target, "attackedPivot").position;
                     effect.play();
-                    StartCoroutine(delayAttacked());
                 }
                 break;
         }
     }
 
-    IEnumerator delayAttacked()
+    IEnumerator delayBullet()
     {
-        yield return new WaitForSeconds(1.5f);
         if (enemyTarget != null)
         {
-            AttackedController c = enemyTarget.transform.GetComponent<AttackedController>();
-            c.attacked();
+            int count = 20;
+            float angle = -count / 2f * 5f;
+            for (int i = 0; i < count; i++)
+            {
+                GameObject obj = Instantiate(magicBullet);
+
+                PosBullet bullet = obj.GetComponent<PosBullet>();
+                bullet.player = transform;
+                bullet.tarPos = MathUtil.calcTargetPosByRotation(transform, angle + i * 5f, 10f);
+                bullet.effectObj = damageEffect1;
+                bullet.bulleting();
+
+                yield return new WaitForSeconds(0.01f);
+
+                if (i % 9 == 0)
+                {
+                    AttackedController c = enemyTarget.GetComponent<AttackedController>();
+                    c.attacked();
+                    if (damageEffect2 != null)
+                    {
+                        GameObject obj1 = GameObject.Instantiate(damageEffect2);
+                        ParticlesEffect effect = obj1.AddComponent<ParticlesEffect>();
+                        Transform target = enemyTarget.transform;
+                        effect.transform.position = MathUtil.findChild(target, "attackedPivot").position;
+                        effect.play();
+                    }
+                }
+            }
         }
     }
+
+    void ActionStart() { }  //TODO: remove call from animation and deleted this function
+    void ActionDone() { }   //TODO: remove call from animation and deleted this function
+
 }
