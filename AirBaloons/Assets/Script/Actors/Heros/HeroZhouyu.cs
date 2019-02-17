@@ -15,13 +15,12 @@ public class HeroZhouyu : MonoBehaviour
 
     private Animator animator;
 
-    private float enemyRadiusDetection = 20f;
+    private float enemyRadiusDetection = 45f;
     public GameObject enemyTarget;
     private bool isLockedOnEnemy = false;
 
     void Start()
     {
-        //enemyTarget = GameObject.Find("pine_C_04 (1)");
         animator = GetComponent<Animator>();
     }
 
@@ -37,7 +36,7 @@ public class HeroZhouyu : MonoBehaviour
 
     private void detectCloseEnemy()
     {
-        Collider[] colliders  = Physics.OverlapSphere(this.transform.position, enemyRadiusDetection);
+        Collider[] colliders  = Physics.OverlapSphere(transform.position, enemyRadiusDetection);
         if (colliders.Length > 0 && colliders[0].tag == "enemy")
         {
             isLockedOnEnemy = true;

@@ -16,9 +16,20 @@ public class BaloonScript : MonoBehaviour, IEnemy
 
     public float Speed;
 
-    public int DPS { get  { return 5;  }  }
+    public float DPS { get  { return 5;  }  }
 
-    public int Health { get; set; }
+    private float health;
+    public float Health
+    {
+        get { return health; }
+        set
+        {
+            health = value;
+
+            if (Health <= 0)
+                dropItems();
+        }
+    }
 
     public bool IsIslandEngaged = false;
 

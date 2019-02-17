@@ -15,9 +15,9 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
 
     public float Speed;
 
-    public int DPS { get { return 20; } }
+    public float DPS { get { return 20; } }
 
-    public int Health { get; set; }
+    public float Health { get; set; }
 
     public bool IsIslandEngaged = false;
 
