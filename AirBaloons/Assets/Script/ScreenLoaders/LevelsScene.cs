@@ -10,23 +10,25 @@ using Assets.Script.Settings;
 
 public class LevelsScene : MonoBehaviour
 {
-    private Button closebutton;
-    private Button settingsbutton;
+    private Button closeButton;
+    private Button settingsButton;
+    private Button upgradeButton;
 
     private GameSettings gameSettings;
 
     void Awake()
     {
-        //print("Awake begin => selLvl=" + LevelSettings.SelectedLevelIndex + " LastComplLvl=" + LevelSettings.LastCompletedLevelIndex);
-
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
         gameSettings.LoadData();
 
-        closebutton = GameObject.Find("ExitButton").GetComponent<Button>();
-        closebutton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
+        closeButton = GameObject.Find("ExitButton").GetComponent<Button>();
+        closeButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
 
-        settingsbutton = GameObject.Find("square_button_settings").GetComponent<Button>();
-        settingsbutton.onClick.AddListener(() => SceneManager.LoadScene("SettingsScene"));        
+        upgradeButton = GameObject.Find("square_button_upgrade").GetComponent<Button>();
+        upgradeButton.onClick.AddListener(() => SceneManager.LoadScene("UpgradeScene"));
+
+        settingsButton = GameObject.Find("square_button_settings").GetComponent<Button>();
+        settingsButton.onClick.AddListener(() => SceneManager.LoadScene("SettingsScene"));        
 
         for (int levelIndex = 1; levelIndex <= gameSettings.LevelSettings.LevelsInEpisode; levelIndex++)
         {

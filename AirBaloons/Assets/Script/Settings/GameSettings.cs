@@ -12,6 +12,8 @@ namespace Assets.Script.Settings
     public class GameSettings: MonoBehaviour
     {
         public LevelSettings LevelSettings;
+        public UpgradeSettings UpgradeSettings;
+
         private ILevel currentLevel;
 
         void Awake()
