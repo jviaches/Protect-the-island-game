@@ -14,6 +14,19 @@ namespace Assets.Script.Settings
         public LevelSettings LevelSettings;
         public UpgradeSettings UpgradeSettings;
 
+        public event EventHandler EnemySelected;
+
+        private GameObject selectedEnemy;
+        public GameObject SelectedEnemy
+        {
+            get { return selectedEnemy; }
+            set
+            {
+                selectedEnemy = value;
+                EnemySelected.Invoke(this, new EventArgs());
+            }
+        }
+
         private ILevel currentLevel;
 
         void Awake()
@@ -29,7 +42,7 @@ namespace Assets.Script.Settings
 
             BalloonHealth = 10 + (LevelSettings.SelectedLevel.LevelIndex * 2);
             ZeppelinHealth = 80 + (LevelSettings.SelectedLevel.LevelIndex * 10);
-            BallonsGenerationFrequensy = 0.1f - (LevelSettings.SelectedLevel.LevelIndex * 0.05f);
+            BallonsGenerationFrequensy = 5f;//0.1f - (LevelSettings.SelectedLevel.LevelIndex * 0.05f);
             PlanesBornPosition = BornPoints[BornPoint.Clock_3];
 
             LoadData();

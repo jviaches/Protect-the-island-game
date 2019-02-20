@@ -20,6 +20,12 @@ public class GameManagerScript : MonoBehaviour {
 
     private GameObject moneyBuffUI;
     private GameObject speedBuffUI;
+
+    private GameObject hero1UI;
+    private GameObject hero2UI;
+    private GameObject hero3UI;
+    private GameObject hero4UI;
+
     private GameObject levelCompletedDialog;
     private GameObject levelFailedDialog;
 
@@ -32,8 +38,8 @@ public class GameManagerScript : MonoBehaviour {
 
     private GameSettings gameSettings;
 
-    void Start () {
-
+    void Start()
+    {
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
         levelTimer = gameSettings.LevelSettings.LevelTimer;
 
@@ -58,6 +64,37 @@ public class GameManagerScript : MonoBehaviour {
         levelFailedDialog = GameObject.Find("level_failed_Canvas");
         levelFailedDialog.SetActive(false);
 
+        hero1UI = GameObject.Find("hero1-barItem");
+        hero1UI.GetComponent<Button>().onClick.AddListener(() =>
+       {
+           // hero 1. set target with gamesettings.Selected Enemy
+           GameObject.Find("hero_zhouyu").GetComponent<HeroZhouyu>().enemyTarget = gameSettings.SelectedEnemy;
+           print("Selected [hero_zhouyu], Enemy ["+ gameSettings.SelectedEnemy + "]");
+       });
+
+        hero2UI = GameObject.Find("hero2-barItem");
+        hero2UI.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            // hero 1. set target with gamesettings.Selected Enemy
+            GameObject.Find("hero_daochan").GetComponent<HeroDaochan>().enemyTarget = gameSettings.SelectedEnemy;
+            print("Selected [hero_daochan], Enemy [" + gameSettings.SelectedEnemy + "]");
+        });
+
+        hero3UI = GameObject.Find("hero3-barItem");
+        hero3UI.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            // hero 1. set target with gamesettings.Selected Enemy
+            GameObject.Find("hero_zhugeliang").GetComponent<HeroZhugeliang>().enemyTarget = gameSettings.SelectedEnemy;
+            print("Selected [hero_zhugeliang], Enemy [" + gameSettings.SelectedEnemy + "]");
+        });
+
+        hero4UI = GameObject.Find("hero4-barItem");
+        hero4UI.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            // hero 1. set target with gamesettings.Selected Enemy
+            GameObject.Find("hero_zhangjiao").GetComponent<HeroZhangjiao>().enemyTarget = gameSettings.SelectedEnemy;
+            print("Selected [hero_zhangjiao], Enemy [" + gameSettings.SelectedEnemy + "]");
+        });
         Time.timeScale = 1;
 
         if (gameSettings.IsLevelGuidenceOn)
@@ -194,6 +231,8 @@ public class GameManagerScript : MonoBehaviour {
 
     private void stopLevel()
     {
+        gameSettings.SelectedEnemy = null;
+
         CancelInvoke("generateBaloons");
         CancelInvoke("generateBonusPlanes");
 

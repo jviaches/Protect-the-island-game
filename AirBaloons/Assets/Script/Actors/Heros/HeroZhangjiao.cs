@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Assets.Script.Settings;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,46 +15,41 @@ public class HeroZhangjiao : MonoBehaviour
     public GameObject damageEffect2;
     public GameObject damageEffect3;
 
+    public GameObject enemyTarget;
     private Animator animator;
-
-    private float enemyRadiusDetection = 45f;   // TODO: pull from GameSettings
-    private GameObject enemyTarget;
-    private bool isLockedOnEnemy = false;
+    private GameSettings gameSettings;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+        gameSettings.EnemySelected += GameSettings_EnemySelected;
+    }
+
+    private void GameSettings_EnemySelected(object sender, EventArgs e)
+    {
+        enemyTarget = gameSettings.SelectedEnemy;
     }
 
     void Update()
     {
-        if (!isLockedOnEnemy || enemyTarget == null)
-            detectCloseEnemy();
-    }
-
-    void ActionStart() { }  //TODO: remove call from animation and deleted this function
-    void ActionDone() { }   //TODO: remove call from animation and deleted this function
-
-    private void detectCloseEnemy()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, enemyRadiusDetection);
-        if (colliders.Length > 0 && colliders[0].tag == "enemy")
+        if (enemyTarget != null && enemyTarget.tag == "enemy")
         {
-            isLockedOnEnemy = true;
-            enemyTarget = colliders[0].gameObject;
             animator.SetBool("setAttack", true);
         }
         else
         {
-            isLockedOnEnemy = false;
             enemyTarget = null;
             animator.SetBool("setAttack", false);
         }
     }
 
+    void ActionStart() { }  //TODO: remove call from animation and deleted this function
+    void ActionDone() { }   //TODO: remove call from animation and deleted this function
+
     void preAction(string actionName)
     {
-        if (enemyTarget == null || isLockedOnEnemy == false)
+        if (enemyTarget == null)
             return;
         {
 

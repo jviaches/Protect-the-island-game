@@ -91,9 +91,7 @@ public class BaloonScript : MonoBehaviour, IEnemy
 
         if (other.tag == "islandShield")
         {
-            //print("Ballon detected in area");
             IsIslandEngaged = true;
-
             InvokeRepeating("startDamage", 0, 1);
         }
     }
@@ -101,7 +99,6 @@ public class BaloonScript : MonoBehaviour, IEnemy
     private void startDamage()
     {
         island.GetComponent<IslandScript>().HealthUpdate(-DPS);
-        //print("Ballon doing damage: " + DPS + " Time: " + Time.timeSinceLevelLoad);
 
         Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
         int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
@@ -111,11 +108,8 @@ public class BaloonScript : MonoBehaviour, IEnemy
 
     void OnMouseDown()
     {
-        Health -= gameSettings.PlayerClickDamage;
-        if (Health <= 0)
-            dropItems();
-        else
-            isClicked = true;
+        isClicked = true;
+        gameSettings.SelectedEnemy = gameObject;
     }
 
     private void dropItems()
@@ -126,7 +120,6 @@ public class BaloonScript : MonoBehaviour, IEnemy
         if (!gameSettings.IsMoneyIncreaseBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
-            //print("Money Increase buffProbability=" + buffProbability);
 
             if (buffProbability <= gameSettings.MoneyIncreaseBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/MoneyIncreaseBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
@@ -137,7 +130,6 @@ public class BaloonScript : MonoBehaviour, IEnemy
         if (!gameSettings.IsSpeedSlownessBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
-            //print("Slowness buffProbability=" + buffProbability);
 
             if (buffProbability <= gameSettings.SpeedSlownessBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/SpeeedSlownessBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
