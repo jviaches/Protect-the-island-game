@@ -27,6 +27,8 @@ namespace Assets.Script.Settings
             }
         }
 
+        public GameObject SelectedHero { get; set; }
+
         private ILevel currentLevel;
 
         void Awake()

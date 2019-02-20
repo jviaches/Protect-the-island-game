@@ -41,6 +41,7 @@ public class GameManagerScript : MonoBehaviour {
     void Start()
     {
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+
         levelTimer = gameSettings.LevelSettings.LevelTimer;
 
         player = GameObject.Find("Player").GetComponent<PlayerScript>(); // TODO: load from file
@@ -67,33 +68,25 @@ public class GameManagerScript : MonoBehaviour {
         hero1UI = GameObject.Find("hero1-barItem");
         hero1UI.GetComponent<Button>().onClick.AddListener(() =>
        {
-           // hero 1. set target with gamesettings.Selected Enemy
-           GameObject.Find("hero_zhouyu").GetComponent<HeroZhouyu>().enemyTarget = gameSettings.SelectedEnemy;
-           print("Selected [hero_zhouyu], Enemy ["+ gameSettings.SelectedEnemy + "]");
+           gameSettings.SelectedHero = GameObject.Find("hero_zhouyu");
        });
 
         hero2UI = GameObject.Find("hero2-barItem");
         hero2UI.GetComponent<Button>().onClick.AddListener(() =>
         {
-            // hero 1. set target with gamesettings.Selected Enemy
-            GameObject.Find("hero_daochan").GetComponent<HeroDaochan>().enemyTarget = gameSettings.SelectedEnemy;
-            print("Selected [hero_daochan], Enemy [" + gameSettings.SelectedEnemy + "]");
+            gameSettings.SelectedHero = GameObject.Find("hero_daochan");
         });
 
         hero3UI = GameObject.Find("hero3-barItem");
         hero3UI.GetComponent<Button>().onClick.AddListener(() =>
         {
-            // hero 1. set target with gamesettings.Selected Enemy
-            GameObject.Find("hero_zhugeliang").GetComponent<HeroZhugeliang>().enemyTarget = gameSettings.SelectedEnemy;
-            print("Selected [hero_zhugeliang], Enemy [" + gameSettings.SelectedEnemy + "]");
+            gameSettings.SelectedHero = GameObject.Find("hero_zhugeliang");
         });
 
         hero4UI = GameObject.Find("hero4-barItem");
         hero4UI.GetComponent<Button>().onClick.AddListener(() =>
         {
-            // hero 1. set target with gamesettings.Selected Enemy
-            GameObject.Find("hero_zhangjiao").GetComponent<HeroZhangjiao>().enemyTarget = gameSettings.SelectedEnemy;
-            print("Selected [hero_zhangjiao], Enemy [" + gameSettings.SelectedEnemy + "]");
+            gameSettings.SelectedHero = GameObject.Find("hero_zhangjiao");
         });
         Time.timeScale = 1;
 

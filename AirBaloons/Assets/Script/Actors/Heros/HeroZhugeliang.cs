@@ -27,7 +27,8 @@ public class HeroZhugeliang : MonoBehaviour
 
     private void GameSettings_EnemySelected(object sender, EventArgs e)
     {
-        enemyTarget = gameSettings.SelectedEnemy;
+        if (gameSettings.SelectedHero == gameObject)
+            enemyTarget = gameSettings.SelectedEnemy;
     }
 
     void Update()
