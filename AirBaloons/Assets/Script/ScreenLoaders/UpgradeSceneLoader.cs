@@ -35,6 +35,7 @@ public class UpgradeSceneLoader : MonoBehaviour
         {
             gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhouyu);
             setupHeroDetails();
+            gameSettings.SaveData();
         });
 
         upgradeDaoHeroButton = GameObject.Find("medium_button_dao").GetComponent<Button>();
@@ -42,6 +43,7 @@ public class UpgradeSceneLoader : MonoBehaviour
         {
             gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Daochan);
             setupHeroDetails();
+            gameSettings.SaveData();
         });
 
         upgradeZhuHeroButton = GameObject.Find("medium_button_zhu").GetComponent<Button>();
@@ -49,6 +51,7 @@ public class UpgradeSceneLoader : MonoBehaviour
         {
             gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhugeliang);
             setupHeroDetails();
+            gameSettings.SaveData();
         });
 
         upgradeZhaHeroButton = GameObject.Find("medium_button_zha").GetComponent<Button>();
@@ -56,8 +59,10 @@ public class UpgradeSceneLoader : MonoBehaviour
         {
             gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhangjiao);
             setupHeroDetails();
+            gameSettings.SaveData();
         });
 
+        gameSettings.LoadData();
         setupHeroDetails();
     }
 

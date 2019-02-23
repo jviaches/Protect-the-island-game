@@ -111,7 +111,8 @@ namespace Assets.Script.Settings
                 file.Close();
 
                 // level settings
-                LevelSettings.LastCompletedLevelIndex = dataSettings.LastCompletedLevelIndex;                
+                LevelSettings.LastCompletedLevelIndex = dataSettings.LastCompletedLevelIndex;
+                UpgradeSettings.PlayerHerosList = dataSettings.HeroRecords;
 
                 for (int lvlRecord = 0; lvlRecord < dataSettings.LevelRecords.Count; lvlRecord++)
                     LevelSettings.Episode1Levels[lvlRecord].CollectedCoins = dataSettings.LevelRecords[lvlRecord].Coins;
@@ -153,7 +154,8 @@ namespace Assets.Script.Settings
             {
                 //Lives = PlayerSettings.PlayerLivesAmount,
                 LastCompletedLevelIndex = LevelSettings.LastCompletedLevelIndex,
-                LevelRecords = lvlRecords,                
+                LevelRecords = lvlRecords,
+                HeroRecords = UpgradeSettings.PlayerHerosList,
 
                 systemDataSettings = new DataSettings.SystemDataSettings()
                 {
@@ -177,6 +179,7 @@ namespace Assets.Script.Settings
             public int LastCompletedLevelIndex;
             //public int Lives;
             public List<LevelData> LevelRecords;
+            public List<HeroDetails> HeroRecords;
             public SystemDataSettings systemDataSettings;
 
             [Serializable]
@@ -186,6 +189,7 @@ namespace Assets.Script.Settings
                 public int Coins;
             //    public int Score;
             }
+
 
             [Serializable]
             public class SystemDataSettings
