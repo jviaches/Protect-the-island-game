@@ -46,30 +46,51 @@ public class UpgradeSceneLoader : MonoBehaviour
     {
         var daoHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Daochan);
         if (daoHero != null)
-            GameObject.Find("info_Hero Daochan").GetComponent<Text>().text = "<b>Level</b> " + daoHero.Level +"          <b>Damage:</b> " + daoHero.Damage;
+        {
+            GameObject.Find("info_Hero Daochan").GetComponent<Text>().text = "<b>Level</b> " + daoHero.Level + "          <b>Damage:</b> " + daoHero.Damage;
+            GameObject.Find("descr_HeroDaochan").GetComponent<Text>().text = daoHero.Description;
+        }
         else
-            GameObject.Find("info_Hero Daochan").GetComponent<Text>().text = "<b>Level</b> 0          <b>Damage:</b> ---";
-
+        {
+            GameObject.Find("info_Hero Daochan").GetComponent<Text>().text = "<b>Level</b> 1          <b>Damage:</b> " + gameSettings.UpgradeSettings.HerosList.First(hero => hero.Hero == Hero.Daochan).Damage;
+            GameObject.Find("descr_HeroDaochan").GetComponent<Text>().text = "Unlock to use";
+        }
 
         var zhoHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Zhouyu);
         if (zhoHero != null)
+        {
             GameObject.Find("info_HeroZhouyu").GetComponent<Text>().text = "<b>Level</b> " + zhoHero.Level + "          <b>Damage:</b> " + zhoHero.Damage;
+            GameObject.Find("descr_HeroZhouyu").GetComponent<Text>().text = daoHero.Description;
+        }
         else
-            GameObject.Find("info_HeroZhouyu").GetComponent<Text>().text = "<b>Level</b> 0          <b>Damage:</b> ---";
-
+        {
+            GameObject.Find("info_HeroZhouyu").GetComponent<Text>().text = "<b>Level</b> 1          <b>Damage:</b> " + gameSettings.UpgradeSettings.HerosList.First(hero => hero.Hero == Hero.Zhouyu).Damage; 
+            GameObject.Find("descr_HeroZhouyu").GetComponent<Text>().text = "Unlock to use";
+        }
 
         var zhaHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Zhangjiao);
         if (zhaHero != null)
+        {
             GameObject.Find("info_Hero Zhangjiao").GetComponent<Text>().text = "<b>Level</b> " + zhaHero.Level + "          <b>Damage:</b> " + zhaHero.Damage;
+            GameObject.Find("descr_HeroZhangjiao").GetComponent<Text>().text = daoHero.Description;
+        }
         else
-            GameObject.Find("info_Hero Zhangjiao").GetComponent<Text>().text = "<b>Level</b> 0          <b>Damage:</b> ---";
-
+        {
+            GameObject.Find("info_Hero Zhangjiao").GetComponent<Text>().text = "<b>Level</b> 1          <b>Damage:</b> " + gameSettings.UpgradeSettings.HerosList.First(hero => hero.Hero == Hero.Zhangjiao).Damage;
+            GameObject.Find("descr_HeroZhangjiao").GetComponent<Text>().text = "Unlock to use";
+        }
 
         var zhuHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Zhugeliang);
         if (zhuHero != null)
+        {
             GameObject.Find("info_Hero Zhugeliang").GetComponent<Text>().text = "<b>Level</b> " + zhuHero.Level + "          <b>Damage:</b> " + zhuHero.Damage;
+            GameObject.Find("descr_HeroZhugeliang").GetComponent<Text>().text = daoHero.Description;
+        }
         else
-            GameObject.Find("info_Hero Zhugeliang").GetComponent<Text>().text = "<b>Level</b> 0          <b>Damage:</b> ---";
+        {
+            GameObject.Find("info_Hero Zhugeliang").GetComponent<Text>().text = "<b>Level</b> 1          <b>Damage:</b> " + gameSettings.UpgradeSettings.HerosList.First(hero => hero.Hero == Hero.Zhugeliang).Damage;
+            GameObject.Find("descr_HeroZhugeliang").GetComponent<Text>().text = "Unlock to use";
+        }
     }
 }
 
