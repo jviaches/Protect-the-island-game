@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 152521039}
   - component: {fileID: 152521038}
   m_Layer: 0
-  m_Name: hero3-barItem
+  m_Name: hero_zha_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1247,7 +1247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.86997986, y: -0.00005984848}
+  m_AnchoredPosition: {x: 0.86997986, y: -0.000062337}
   m_SizeDelta: {x: -0.9, y: 429.8}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &197753744
@@ -1552,7 +1552,7 @@ GameObject:
   - component: {fileID: 232552830}
   - component: {fileID: 232552829}
   m_Layer: 0
-  m_Name: hero2-barItem
+  m_Name: hero_dao_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3723,7 +3723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.86997986, y: -0.000060048584}
+  m_AnchoredPosition: {x: 0.86997986, y: -0.0000625371}
   m_SizeDelta: {x: -0.9, y: 429.8}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &597093557
@@ -3749,36 +3749,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
---- !u!1 &598936759
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 598936760}
-  m_Layer: 0
-  m_Name: HeroStands
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &598936760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598936759}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1774686943}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &605643223
 GameObject:
   m_ObjectHideFlags: 0
@@ -4326,7 +4296,7 @@ GameObject:
   - component: {fileID: 693914785}
   - component: {fileID: 693914784}
   m_Layer: 0
-  m_Name: hero4-barItem
+  m_Name: hero_zhu_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5595,7 +5565,7 @@ Transform:
   - {fileID: 1805454235}
   - {fileID: 1990962137}
   m_Father: {fileID: 1774686943}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &812252628
 GameObject:
@@ -13510,7 +13480,7 @@ GameObject:
   - component: {fileID: 2092628164}
   - component: {fileID: 2092628162}
   m_Layer: 0
-  m_Name: hero1-barItem
+  m_Name: hero_zho_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

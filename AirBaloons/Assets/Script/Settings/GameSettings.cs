@@ -39,12 +39,12 @@ namespace Assets.Script.Settings
         void Start()
         {
             LevelSettings = gameObject.GetComponent<LevelSettings>();
+            UpgradeSettings = gameObject.GetComponent<UpgradeSettings>();
             currentLevel = LevelSettings.SelectedLevel;
-            //print("LevelSettings " + LevelSettings);
 
             BalloonHealth = 10 + (LevelSettings.SelectedLevel.LevelIndex * 2);
             ZeppelinHealth = 80 + (LevelSettings.SelectedLevel.LevelIndex * 10);
-            BallonsGenerationFrequensy = 5f;//0.1f - (LevelSettings.SelectedLevel.LevelIndex * 0.05f);
+            BallonsGenerationFrequency = 8f;//0.1f - (LevelSettings.SelectedLevel.LevelIndex * 0.05f);
             PlanesBornPosition = BornPoints[BornPoint.Clock_3];
 
             LoadData();
@@ -80,10 +80,8 @@ namespace Assets.Script.Settings
         public int BalloonHealth;
         public int ZeppelinHealth;
 
-        public int PlayerClickDamage = 10;
-
-        public float BallonsGenerationFrequensy;
-        public float PlanesGenerationFrequensy = 30f;
+        public float BallonsGenerationFrequency;
+        public float PlanesGenerationFrequency = 30f;
 
         public bool IsMoneyIncreaseBuffOn = false;
         public int MoneyIncreaseBuffMultiplayer = 4;

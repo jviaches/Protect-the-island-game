@@ -18,11 +18,19 @@ public class HeroDaochan : MonoBehaviour
     private Animator animator;
     private GameSettings gameSettings;
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+    }
 
+    void OnDisable()
+    {
+        gameSettings.EnemySelected -= GameSettings_EnemySelected;
+    }
+
+    void OnEnable()
+    {
         gameSettings.EnemySelected += GameSettings_EnemySelected;
     }
 

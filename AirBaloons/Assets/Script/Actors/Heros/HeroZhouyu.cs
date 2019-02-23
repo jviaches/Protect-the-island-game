@@ -18,11 +18,10 @@ public class HeroZhouyu : MonoBehaviour
     private Animator animator;
     private GameSettings gameSettings;
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
-        gameSettings.EnemySelected += GameSettings_EnemySelected;
     }
 
     private void GameSettings_EnemySelected(object sender, EventArgs e)
@@ -42,6 +41,16 @@ public class HeroZhouyu : MonoBehaviour
             enemyTarget = null;
             animator.SetBool("setAttack", false);
         }
+    }
+
+    void OnDisable()
+    {
+        gameSettings.EnemySelected -= GameSettings_EnemySelected;
+    }
+
+    void OnEnable()
+    {
+        gameSettings.EnemySelected += GameSettings_EnemySelected;
     }
 
     void ActionStart() { }  //TODO: remove call from animation and deleted this function
