@@ -125,7 +125,7 @@ public class GameManagerScript : MonoBehaviour {
                     hero_zhangjiao.SetActive(true);
                     hero_zha_UI.SetActive(true);
 
-                    hero_dao_UI.GetComponent<Button>().onClick.AddListener(() =>
+                    hero_zha_UI.GetComponent<Button>().onClick.AddListener(() =>
                     {
                         gameSettings.SelectedHero = GameObject.Find("hero_zhangjiao");
                     });
@@ -136,7 +136,7 @@ public class GameManagerScript : MonoBehaviour {
                     hero_zhouyu.SetActive(true);
                     hero_zho_UI.SetActive(true);
 
-                    hero_zhu_UI.GetComponent<Button>().onClick.AddListener(() =>
+                    hero_zho_UI.GetComponent<Button>().onClick.AddListener(() =>
                     {
                         gameSettings.SelectedHero = GameObject.Find("hero_zhouyu");
                     });
