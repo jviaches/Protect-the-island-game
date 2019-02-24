@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,8 +26,10 @@ public class HeroZhouyu : MonoBehaviour
         animator = GetComponent<Animator>();
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-        heroUIElement = GameObject.Find("hero_zho_UI");
+        var zhoHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Zhouyu);
+        GameObject.Find("hero-zho-image-lvl").GetComponent<Text>().text = zhoHero.Level.ToString();
 
+        heroUIElement = GameObject.Find("hero_zho_UI");
         heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
         {
             gameSettings.SelectedHero = GameObject.Find("hero_zhouyu");

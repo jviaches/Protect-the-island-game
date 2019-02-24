@@ -884,7 +884,7 @@ RectTransform:
   m_GameObject: {fileID: 152521036}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -15}
-  m_LocalScale: {x: 0.50000155, y: 0.59999794, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1391097348}
   - {fileID: 509405365}
@@ -1247,7 +1247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.86997986, y: -0.00005639433}
+  m_AnchoredPosition: {x: 0.86997986, y: -0.000059194503}
   m_SizeDelta: {x: -0.9, y: 429.8}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &197753744
@@ -1567,7 +1567,7 @@ RectTransform:
   m_GameObject: {fileID: 232552827}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -15}
-  m_LocalScale: {x: 0.50000155, y: 0.59999794, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1295388499}
   - {fileID: 1425434818}
@@ -3723,7 +3723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.86997986, y: -0.000056594432}
+  m_AnchoredPosition: {x: 0.86997986, y: -0.000059394606}
   m_SizeDelta: {x: -0.9, y: 429.8}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &597093557
@@ -4310,7 +4310,7 @@ RectTransform:
   m_GameObject: {fileID: 693914782}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -15}
-  m_LocalScale: {x: 0.50000155, y: 0.59999794, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1136123814}
   - {fileID: 1750803994}
@@ -5274,7 +5274,7 @@ GameObject:
   - component: {fileID: 789717504}
   - component: {fileID: 789717503}
   m_Layer: 0
-  m_Name: Text
+  m_Name: hero-dao-image-lvl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5865,7 +5865,7 @@ GameObject:
   - component: {fileID: 860943134}
   - component: {fileID: 860943133}
   m_Layer: 0
-  m_Name: Text
+  m_Name: hero-zho-image-lvl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7342,14 +7342,14 @@ RectTransform:
   m_GameObject: {fileID: 1136123813}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 693914783}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00003415346, y: -0.000030517578}
+  m_AnchoredPosition: {x: 1.7, y: -0.000030517578}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1136123815
@@ -8048,14 +8048,14 @@ RectTransform:
   m_GameObject: {fileID: 1295388498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 232552828}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00003415346, y: -0.000030517578}
+  m_AnchoredPosition: {x: 3.1, y: -0.000030517578}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1295388500
@@ -8687,14 +8687,14 @@ RectTransform:
   m_GameObject: {fileID: 1391097347}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 152521037}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.8, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1391097349
@@ -9452,14 +9452,14 @@ RectTransform:
   m_GameObject: {fileID: 1501393955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 2092628161}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00003415346, y: -0.000030517578}
+  m_AnchoredPosition: {x: 1, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1501393958
@@ -10218,7 +10218,7 @@ GameObject:
   - component: {fileID: 1636034842}
   - component: {fileID: 1636034841}
   m_Layer: 0
-  m_Name: Text
+  m_Name: hero-zhu-image-lvl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13104,7 +13104,7 @@ GameObject:
   - component: {fileID: 2069118501}
   - component: {fileID: 2069118500}
   m_Layer: 0
-  m_Name: Text
+  m_Name: hero-zha-image-lvl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13494,7 +13494,7 @@ RectTransform:
   m_GameObject: {fileID: 2092628160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -15}
-  m_LocalScale: {x: 0.5, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1501393956}
   - {fileID: 1174003473}
@@ -13526,7 +13526,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4d8fefd7b37151b46b918af5ffacc28e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d5e039302ae4ea4ba542e6cd79f3ac9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

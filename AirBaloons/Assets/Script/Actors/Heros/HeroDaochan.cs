@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,8 +26,10 @@ public class HeroDaochan : MonoBehaviour
         animator = GetComponent<Animator>();
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-        heroUIElement = GameObject.Find("hero_dao_UI");
+        var daoHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Daochan);
+        GameObject.Find("hero-dao-image-lvl").GetComponent<Text>().text = daoHero.Level.ToString();
 
+        heroUIElement = GameObject.Find("hero_dao_UI");
         heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
         {
             gameSettings.SelectedHero = GameObject.Find("hero_daochan");
