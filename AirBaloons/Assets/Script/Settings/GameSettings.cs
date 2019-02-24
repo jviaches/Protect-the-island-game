@@ -15,6 +15,7 @@ namespace Assets.Script.Settings
         public UpgradeSettings UpgradeSettings;
 
         public event EventHandler EnemySelected;
+        public event EventHandler HeroSelected;
 
         private GameObject selectedEnemy;
         public GameObject SelectedEnemy
@@ -27,7 +28,16 @@ namespace Assets.Script.Settings
             }
         }
 
-        public GameObject SelectedHero { get; set; }
+        private GameObject selectedHero;
+        public GameObject SelectedHero
+    {
+            get { return selectedHero; }
+            set
+            {
+                selectedHero = value;
+                HeroSelected.Invoke(this, new EventArgs());
+            }
+        }
 
         private ILevel currentLevel;
 

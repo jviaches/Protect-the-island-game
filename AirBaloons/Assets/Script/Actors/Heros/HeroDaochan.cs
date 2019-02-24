@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroDaochan : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class HeroDaochan : MonoBehaviour
     public GameObject damageEffect2;
     public GameObject damageEffect3;
 
-    public GameObject enemyTarget;
+    private GameObject enemyTarget;
+    private GameObject heroUIElement;
     private Animator animator;
     private GameSettings gameSettings;
 
@@ -22,16 +24,33 @@ public class HeroDaochan : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+
+        heroUIElement = GameObject.Find("hero_dao_UI");
+
+        heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            gameSettings.SelectedHero = GameObject.Find("hero_daochan");
+        });
     }
 
     void OnDisable()
     {
         gameSettings.EnemySelected -= GameSettings_EnemySelected;
+        gameSettings.HeroSelected -= GameSettings_HeroSelected;
     }
 
     void OnEnable()
     {
         gameSettings.EnemySelected += GameSettings_EnemySelected;
+        gameSettings.HeroSelected += GameSettings_HeroSelected;
+    }
+
+    private void GameSettings_HeroSelected(object sender, EventArgs e)
+    {
+        if (gameSettings.SelectedHero == gameObject)
+            heroUIElement.GetComponent<Image>().enabled = true;            
+        else
+            heroUIElement.GetComponent<Image>().enabled = false;
     }
 
     private void GameSettings_EnemySelected(object sender, EventArgs e)

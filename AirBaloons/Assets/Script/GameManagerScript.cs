@@ -111,46 +111,24 @@ public class GameManagerScript : MonoBehaviour {
                 {
                     hero_daochan.SetActive(true);
                     hero_dao_UI.SetActive(true);
-
-                    hero_dao_UI.GetComponent<Button>().onClick.AddListener(() =>
-                    {
-                        gameSettings.SelectedHero = GameObject.Find("hero_daochan");
-                    });
-
                 }
 
                 if (hero.Hero == Hero.Zhangjiao)
                 {
-
                     hero_zhangjiao.SetActive(true);
                     hero_zha_UI.SetActive(true);
-
-                    hero_zha_UI.GetComponent<Button>().onClick.AddListener(() =>
-                    {
-                        gameSettings.SelectedHero = GameObject.Find("hero_zhangjiao");
-                    });
                 }
 
                 if (hero.Hero == Hero.Zhouyu)
                 {
                     hero_zhouyu.SetActive(true);
                     hero_zho_UI.SetActive(true);
-
-                    hero_zho_UI.GetComponent<Button>().onClick.AddListener(() =>
-                    {
-                        gameSettings.SelectedHero = GameObject.Find("hero_zhouyu");
-                    });
                 }
 
                 if (hero.Hero == Hero.Zhugeliang)
                 {
                     hero_zhugeliang.SetActive(true);
                     hero_zhu_UI.SetActive(true);
-
-                    hero_zhu_UI.GetComponent<Button>().onClick.AddListener(() =>
-                    {
-                        gameSettings.SelectedHero = GameObject.Find("hero_zhugeliang");
-                    });
                 }
             }
         }
