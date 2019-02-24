@@ -3989,7 +3989,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3573252510998648821, guid: 2a5d36c78cc663149aed67f7becc5d8e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a5d36c78cc663149aed67f7becc5d8e, type: 3}
 --- !u!4 &429590591 stripped
 Transform:
@@ -5705,7 +5706,8 @@ PrefabInstance:
       propertyPath: enemyTarget
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3158376407699533554, guid: 7b00d3a6406a842448677ccf3408a07c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7b00d3a6406a842448677ccf3408a07c, type: 3}
 --- !u!4 &564545978 stripped
 Transform:
@@ -11309,7 +11311,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1923143512206705636, guid: d32f3ef465c1591478d5477f51dde982, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d32f3ef465c1591478d5477f51dde982, type: 3}
 --- !u!4 &1093429970 stripped
 Transform:
@@ -14804,36 +14807,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1462186630}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1462186632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1626096741619992, guid: a28bd658995c40c40981bf3f055415f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1462186630}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1462186633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462186632}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c2f0afcea2489149afc4165e2a80ff4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackBullet: {fileID: 100000, guid: bc1aca9ecaf4dca43a5313ab56efe7c1, type: 3}
-  magicBullet: {fileID: 1300488013814774, guid: 1927e47c0216ba1489211cec3b640168,
-    type: 3}
-  magic2Bullet: {fileID: 1300488013814774, guid: 1927e47c0216ba1489211cec3b640168,
-    type: 3}
-  ultimateBullet: {fileID: 7107358963304132551, guid: 2603e5b7abd169944ac9cf18f6e45937,
-    type: 3}
-  damageEffect1: {fileID: 100000, guid: 4997464d6344f7f4593f079601c0f8e6, type: 3}
-  damageEffect2: {fileID: 4266943084905399334, guid: cc6da737f86b4f044bad20892ef1b34b,
-    type: 3}
-  damageEffect3: {fileID: 100000, guid: 7a6c566ae59a5ca4090aa90ec1223ad5, type: 3}
-  enemyTarget: {fileID: 0}
 --- !u!1 &1464930910
 GameObject:
   m_ObjectHideFlags: 0
