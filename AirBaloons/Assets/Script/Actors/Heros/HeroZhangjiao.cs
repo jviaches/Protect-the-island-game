@@ -26,15 +26,6 @@ public class HeroZhangjiao : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
-
-        var zhaHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Zhangjiao);
-        GameObject.Find("hero-zha-image-lvl").GetComponent<Text>().text = zhaHero.Level.ToString();
-
-        heroUIElement = GameObject.Find("hero_zha_UI");
-        heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            gameSettings.SelectedHero = GameObject.Find("hero_zhangjiao");
-        });
     }
 
     void OnDisable()
@@ -47,6 +38,18 @@ public class HeroZhangjiao : MonoBehaviour
     {
         gameSettings.EnemySelected += GameSettings_EnemySelected;
         gameSettings.HeroSelected += GameSettings_HeroSelected;
+
+        var zhaHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Zhangjiao);
+        if (zhaHero != null)
+        {
+            GameObject.Find("hero-zha-image-lvl").GetComponent<Text>().text = zhaHero.Level.ToString();
+
+            heroUIElement = GameObject.Find("hero_zha_UI");
+            heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                gameSettings.SelectedHero = GameObject.Find("hero_zhangjiao");
+            });
+        }
     }
 
     private void GameSettings_HeroSelected(object sender, EventArgs e)

@@ -25,15 +25,6 @@ public class HeroDaochan : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
-
-        var daoHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Daochan);
-        GameObject.Find("hero-dao-image-lvl").GetComponent<Text>().text = daoHero.Level.ToString();
-
-        heroUIElement = GameObject.Find("hero_dao_UI");
-        heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            gameSettings.SelectedHero = GameObject.Find("hero_daochan");
-        });
     }
 
     void OnDisable()
@@ -46,6 +37,18 @@ public class HeroDaochan : MonoBehaviour
     {
         gameSettings.EnemySelected += GameSettings_EnemySelected;
         gameSettings.HeroSelected += GameSettings_HeroSelected;
+
+        var daoHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Daochan);
+        if (daoHero != null)
+        {
+            GameObject.Find("hero-dao-image-lvl").GetComponent<Text>().text = daoHero.Level.ToString();
+
+            heroUIElement = GameObject.Find("hero_dao_UI");
+            heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                gameSettings.SelectedHero = GameObject.Find("hero_daochan");
+            });
+        }
     }
 
     private void GameSettings_HeroSelected(object sender, EventArgs e)

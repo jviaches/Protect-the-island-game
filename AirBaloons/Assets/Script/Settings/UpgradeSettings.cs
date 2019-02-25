@@ -15,10 +15,10 @@ namespace Assets.Script.Settings
         {
             HerosList = new List<HeroDetails>
             {
-                new HeroDetails(Hero.Daochan, 1, 2, 100, "Master of .."),
-                new HeroDetails(Hero.Zhangjiao, 1, 4, 100, "Master of .."),
-                new HeroDetails(Hero.Zhouyu, 1, 6, 100, "Master of .."),
-                new HeroDetails(Hero.Zhugeliang, 1, 8, 100, "Master of ..")
+                new HeroDetails(Hero.Zhouyu, 1, 6, 100, "Master of Energy"),
+                new HeroDetails(Hero.Daochan, 1, 2, 100, "Master of Weather"),
+                new HeroDetails(Hero.Zhangjiao, 1, 4, 100, "Master of Underground"),
+                new HeroDetails(Hero.Zhugeliang, 1, 8, 100, "Master of Chi")
             };
 
             PlayerHerosList = new List<HeroDetails>()  { HerosList[0] };

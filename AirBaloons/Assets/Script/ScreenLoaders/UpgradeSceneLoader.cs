@@ -86,7 +86,7 @@ public class UpgradeSceneLoader : MonoBehaviour
         if (zhoHero != null)
         {
             GameObject.Find("info_HeroZhouyu").GetComponent<Text>().text = "<b>Level</b> " + zhoHero.Level + "          <b>Damage:</b> " + zhoHero.Damage;
-            GameObject.Find("descr_HeroZhouyu").GetComponent<Text>().text = daoHero.Description;
+            GameObject.Find("descr_HeroZhouyu").GetComponent<Text>().text = zhoHero.Description;
             GameObject.Find("item_HeroZhouyu").GetComponent<Image>().sprite = Resources.Load<Sprite>(ActiveHeroItem);
         }
         else
@@ -101,7 +101,7 @@ public class UpgradeSceneLoader : MonoBehaviour
         if (zhaHero != null)
         {
             GameObject.Find("info_Hero Zhangjiao").GetComponent<Text>().text = "<b>Level</b> " + zhaHero.Level + "          <b>Damage:</b> " + zhaHero.Damage;
-            GameObject.Find("descr_HeroZhangjiao").GetComponent<Text>().text = daoHero.Description;
+            GameObject.Find("descr_HeroZhangjiao").GetComponent<Text>().text = zhaHero.Description;
             GameObject.Find("item_Hero Zhangjiao").GetComponent<Image>().sprite = Resources.Load<Sprite>(ActiveHeroItem);
         }
         else
@@ -115,7 +115,7 @@ public class UpgradeSceneLoader : MonoBehaviour
         if (zhuHero != null)
         {
             GameObject.Find("info_Hero Zhugeliang").GetComponent<Text>().text = "<b>Level</b> " + zhuHero.Level + "          <b>Damage:</b> " + zhuHero.Damage;
-            GameObject.Find("descr_HeroZhugeliang").GetComponent<Text>().text = daoHero.Description;
+            GameObject.Find("descr_HeroZhugeliang").GetComponent<Text>().text = zhuHero.Description;
             GameObject.Find("item_Hero Zhugeliang").GetComponent<Image>().sprite = Resources.Load<Sprite>(ActiveHeroItem);
         }
         else

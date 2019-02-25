@@ -25,15 +25,6 @@ public class HeroZhugeliang : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
-
-        var zhuHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Zhugeliang);
-        GameObject.Find("hero-zhu-image-lvl").GetComponent<Text>().text = zhuHero.Level.ToString();
-
-        heroUIElement = GameObject.Find("hero_zhu_UI");
-        heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            gameSettings.SelectedHero = GameObject.Find("hero_zhugeliang");
-        });
     }
 
     void OnDisable()
@@ -46,6 +37,18 @@ public class HeroZhugeliang : MonoBehaviour
     {
         gameSettings.EnemySelected += GameSettings_EnemySelected;
         gameSettings.HeroSelected += GameSettings_HeroSelected;
+
+        var zhuHero = gameSettings.UpgradeSettings.PlayerHerosList.FirstOrDefault(hero => hero.Hero == Hero.Zhugeliang);
+        if (zhuHero != null)
+        {
+            GameObject.Find("hero-zhu-image-lvl").GetComponent<Text>().text = zhuHero.Level.ToString();
+
+            heroUIElement = GameObject.Find("hero_zhu_UI");
+            heroUIElement.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                gameSettings.SelectedHero = GameObject.Find("hero_zhugeliang");
+            });
+        }
     }
 
     private void GameSettings_HeroSelected(object sender, EventArgs e)
