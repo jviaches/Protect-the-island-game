@@ -3,11 +3,12 @@ using Assets.Script.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaloonScript : MonoBehaviour, IEnemy
 {
     private GameObject island;
-    private GameObject explosion;
+    private GameObject explosion;    
     private Vector3 originalScale;
     private float step;
     private bool? isClicked = null;
@@ -25,6 +26,9 @@ public class BaloonScript : MonoBehaviour, IEnemy
         set
         {
             health = value;
+
+            transform.Find("HealthBar/LifeFillImage").gameObject.GetComponent<Image>().fillAmount = Health / gameSettings.BalloonHealth;
+            //transform.Find("/HealthBar/LifeTextValue").gameObject.GetComponent<Text>().text = health.ToString();
 
             if (Health <= 0)
                 dropItems();
@@ -57,6 +61,12 @@ public class BaloonScript : MonoBehaviour, IEnemy
             else
                 StartCoroutine(ScaleOverTime(0.1f, false));
         }
+    }
+
+    void OnGUI()
+    {
+        //var targetPos = Camera.main.WorldToScreenPoint(transform.position);
+        //GUI.Box(new Rect(targetPos.x, targetPos.y, 100, 20), Health + "/" + gameSettings.BalloonHealth);
     }
 
     private IEnumerator ScaleOverTime(float time, bool upscale)
@@ -144,3 +154,4 @@ public class BaloonScript : MonoBehaviour, IEnemy
         Destroy(gameObject);
     }
 }
+

@@ -2,6 +2,7 @@
 using Assets.Script.Settings;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ZeppelinScript : MonoBehaviour, IEnemy
 {
@@ -24,6 +25,8 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
         set
         {
             health = value;
+
+            transform.Find("HealthBar/LifeFillImage").gameObject.GetComponent<Image>().fillAmount = Health / gameSettings.ZeppelinHealth;
 
             if (Health <= 0)
                 dropItems();
