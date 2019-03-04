@@ -12,6 +12,33 @@ namespace Assets.Script.Settings
     public class GameSettings: MonoBehaviour
     {
         public LevelSettings LevelSettings;
+        public UpgradeSettings UpgradeSettings;
+
+        public event EventHandler EnemySelected;
+        public event EventHandler HeroSelected;
+
+        private GameObject selectedEnemy;
+        public GameObject SelectedEnemy
+        {
+            get { return selectedEnemy; }
+            set
+            {
+                selectedEnemy = value;
+                EnemySelected.Invoke(this, new EventArgs());
+            }
+        }
+
+        private GameObject selectedHero;
+        public GameObject SelectedHero
+    {
+            get { return selectedHero; }
+            set
+            {
+                selectedHero = value;
+                HeroSelected.Invoke(this, new EventArgs());
+            }
+        }
+
         private ILevel currentLevel;
 
         void Awake()
@@ -22,12 +49,12 @@ namespace Assets.Script.Settings
         void Start()
         {
             LevelSettings = gameObject.GetComponent<LevelSettings>();
+            UpgradeSettings = gameObject.GetComponent<UpgradeSettings>();
             currentLevel = LevelSettings.SelectedLevel;
-            //print("LevelSettings " + LevelSettings);
 
             BalloonHealth = 10 + (LevelSettings.SelectedLevel.LevelIndex * 2);
             ZeppelinHealth = 80 + (LevelSettings.SelectedLevel.LevelIndex * 10);
-            BallonsGenerationFrequensy = 0.1f - (LevelSettings.SelectedLevel.LevelIndex * 0.05f);
+            BallonsGenerationFrequency = 8f;//0.1f - (LevelSettings.SelectedLevel.LevelIndex * 0.05f);
             PlanesBornPosition = BornPoints[BornPoint.Clock_3];
 
             LoadData();
@@ -63,10 +90,8 @@ namespace Assets.Script.Settings
         public int BalloonHealth;
         public int ZeppelinHealth;
 
-        public int PlayerClickDamage = 10;
-
-        public float BallonsGenerationFrequensy;
-        public float PlanesGenerationFrequensy = 30f;
+        public float BallonsGenerationFrequency;
+        public float PlanesGenerationFrequency = 30f;
 
         public bool IsMoneyIncreaseBuffOn = false;
         public int MoneyIncreaseBuffMultiplayer = 4;
@@ -96,7 +121,8 @@ namespace Assets.Script.Settings
                 file.Close();
 
                 // level settings
-                LevelSettings.LastCompletedLevelIndex = dataSettings.LastCompletedLevelIndex;                
+                LevelSettings.LastCompletedLevelIndex = dataSettings.LastCompletedLevelIndex;
+                UpgradeSettings.PlayerHerosList = dataSettings.HeroRecords;
 
                 for (int lvlRecord = 0; lvlRecord < dataSettings.LevelRecords.Count; lvlRecord++)
                     LevelSettings.Episode1Levels[lvlRecord].CollectedCoins = dataSettings.LevelRecords[lvlRecord].Coins;
@@ -138,7 +164,8 @@ namespace Assets.Script.Settings
             {
                 //Lives = PlayerSettings.PlayerLivesAmount,
                 LastCompletedLevelIndex = LevelSettings.LastCompletedLevelIndex,
-                LevelRecords = lvlRecords,                
+                LevelRecords = lvlRecords,
+                HeroRecords = UpgradeSettings.PlayerHerosList,
 
                 systemDataSettings = new DataSettings.SystemDataSettings()
                 {
@@ -162,6 +189,7 @@ namespace Assets.Script.Settings
             public int LastCompletedLevelIndex;
             //public int Lives;
             public List<LevelData> LevelRecords;
+            public List<HeroDetails> HeroRecords;
             public SystemDataSettings systemDataSettings;
 
             [Serializable]
@@ -171,6 +199,7 @@ namespace Assets.Script.Settings
                 public int Coins;
             //    public int Score;
             }
+
 
             [Serializable]
             public class SystemDataSettings

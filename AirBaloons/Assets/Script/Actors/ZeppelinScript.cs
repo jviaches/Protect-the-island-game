@@ -2,6 +2,7 @@
 using Assets.Script.Settings;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ZeppelinScript : MonoBehaviour, IEnemy
 {
@@ -15,9 +16,22 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
 
     public float Speed;
 
-    public int DPS { get { return 20; } }
+    public float DPS { get { return 20; } }
 
-    public int Health { get; set; }
+    private float health;
+    public float Health
+    {
+        get { return health; }
+        set
+        {
+            health = value;
+
+            transform.Find("HealthBar/LifeFillImage").gameObject.GetComponent<Image>().fillAmount = Health / gameSettings.ZeppelinHealth;
+
+            if (Health <= 0)
+                dropItems();
+        }
+    }
 
     public bool IsIslandEngaged = false;
 
@@ -25,7 +39,7 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
     {
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-        island = GameObject.Find("IslandShield");
+        island = GameObject.Find("Island");
         step = Speed * Time.deltaTime;
         Health = gameSettings.ZeppelinHealth;
         Speed = gameSettings.ZeppelinSpeed;
@@ -91,7 +105,6 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
     private void startDamage()
     {
         island.GetComponent<IslandScript>().HealthUpdate(-DPS);
-        //print("Zeppelin doing damage: " + DPS + " Time: " + Time.timeSinceLevelLoad);
 
         Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
         int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
@@ -101,11 +114,8 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
 
     void OnMouseDown()
     {
-        Health -= gameSettings.PlayerClickDamage;
-        if (Health <= 0)
-            dropItems();
-        else
-            isClicked = true;
+        isClicked = true;
+        gameSettings.SelectedEnemy = gameObject;
     }
 
     private void dropItems()
@@ -116,7 +126,6 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
         if (!gameSettings.IsMoneyIncreaseBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
-            //print("Money Increase buffProbability=" + buffProbability);
 
             if (buffProbability <= gameSettings.MoneyIncreaseBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/MoneyIncreaseBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
@@ -127,7 +136,6 @@ public class ZeppelinScript : MonoBehaviour, IEnemy
         if (!gameSettings.IsSpeedSlownessBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
-            //print("Slowness buffProbability=" + buffProbability);
 
             if (buffProbability <= gameSettings.SpeedSlownessBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/SpeeedSlownessBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);

@@ -3,11 +3,12 @@ using Assets.Script.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaloonScript : MonoBehaviour, IEnemy
 {
     private GameObject island;
-    private GameObject explosion;
+    private GameObject explosion;    
     private Vector3 originalScale;
     private float step;
     private bool? isClicked = null;
@@ -16,9 +17,23 @@ public class BaloonScript : MonoBehaviour, IEnemy
 
     public float Speed;
 
-    public int DPS { get  { return 5;  }  }
+    public float DPS { get  { return 5;  }  }
 
-    public int Health { get; set; }
+    private float health;
+    public float Health
+    {
+        get { return health; }
+        set
+        {
+            health = value;
+
+            transform.Find("HealthBar/LifeFillImage").gameObject.GetComponent<Image>().fillAmount = Health / gameSettings.BalloonHealth;
+            //transform.Find("/HealthBar/LifeTextValue").gameObject.GetComponent<Text>().text = health.ToString();
+
+            if (Health <= 0)
+                dropItems();
+        }
+    }
 
     public bool IsIslandEngaged = false;
 
@@ -26,7 +41,7 @@ public class BaloonScript : MonoBehaviour, IEnemy
     {
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
 
-        island = GameObject.Find("IslandShield");
+        island = GameObject.Find("Island");
         Speed = gameSettings.BaloonsSpeed;
         step = Speed * Time.deltaTime;
         Health = gameSettings.BalloonHealth;
@@ -46,6 +61,12 @@ public class BaloonScript : MonoBehaviour, IEnemy
             else
                 StartCoroutine(ScaleOverTime(0.1f, false));
         }
+    }
+
+    void OnGUI()
+    {
+        //var targetPos = Camera.main.WorldToScreenPoint(transform.position);
+        //GUI.Box(new Rect(targetPos.x, targetPos.y, 100, 20), Health + "/" + gameSettings.BalloonHealth);
     }
 
     private IEnumerator ScaleOverTime(float time, bool upscale)
@@ -80,9 +101,7 @@ public class BaloonScript : MonoBehaviour, IEnemy
 
         if (other.tag == "islandShield")
         {
-            //print("Ballon detected in area");
             IsIslandEngaged = true;
-
             InvokeRepeating("startDamage", 0, 1);
         }
     }
@@ -90,7 +109,6 @@ public class BaloonScript : MonoBehaviour, IEnemy
     private void startDamage()
     {
         island.GetComponent<IslandScript>().HealthUpdate(-DPS);
-        //print("Ballon doing damage: " + DPS + " Time: " + Time.timeSinceLevelLoad);
 
         Object[] explosionsObjects = Resources.LoadAll("Prefabs/Explosions");
         int randomExplosionIndex = Random.Range(0, explosionsObjects.Length - 1);
@@ -100,11 +118,8 @@ public class BaloonScript : MonoBehaviour, IEnemy
 
     void OnMouseDown()
     {
-        Health -= gameSettings.PlayerClickDamage;
-        if (Health <= 0)
-            dropItems();
-        else
-            isClicked = true;
+        isClicked = true;
+        gameSettings.SelectedEnemy = gameObject;
     }
 
     private void dropItems()
@@ -115,7 +130,6 @@ public class BaloonScript : MonoBehaviour, IEnemy
         if (!gameSettings.IsMoneyIncreaseBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
-            //print("Money Increase buffProbability=" + buffProbability);
 
             if (buffProbability <= gameSettings.MoneyIncreaseBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/MoneyIncreaseBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
@@ -126,7 +140,6 @@ public class BaloonScript : MonoBehaviour, IEnemy
         if (!gameSettings.IsSpeedSlownessBuffOn)
         {
             float buffProbability = Random.Range(0f, 1f);
-            //print("Slowness buffProbability=" + buffProbability);
 
             if (buffProbability <= gameSettings.SpeedSlownessBuffProbability)
                 Instantiate((GameObject)Resources.Load("Prefabs/Buffs/SpeeedSlownessBuff"), gameObject.transform.position + Vector3.right, Quaternion.identity);
@@ -141,3 +154,4 @@ public class BaloonScript : MonoBehaviour, IEnemy
         Destroy(gameObject);
     }
 }
+

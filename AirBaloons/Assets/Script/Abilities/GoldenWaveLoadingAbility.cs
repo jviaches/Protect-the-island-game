@@ -22,7 +22,7 @@ public class GoldenWaveLoadingAbility : MonoBehaviour {
         {
             if (isReadyForActivation)
             {
-                GameObject island = GameObject.Find("IslandShield");
+                GameObject island = GameObject.Find("Island");
                 Instantiate((GameObject)Resources.Load("Prefabs/Abilities/GoldenWave"), island.transform.position, Quaternion.identity);
                 isReadyForActivation = false;
             }

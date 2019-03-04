@@ -20,6 +20,17 @@ public class GameManagerScript : MonoBehaviour {
 
     private GameObject moneyBuffUI;
     private GameObject speedBuffUI;
+
+    private GameObject hero_zho_UI;
+    private GameObject hero_dao_UI;
+    private GameObject hero_zha_UI;
+    private GameObject hero_zhu_UI;
+
+    private GameObject hero_zhouyu;
+    private GameObject hero_daochan;
+    private GameObject hero_zhugeliang;
+    private GameObject hero_zhangjiao;
+
     private GameObject levelCompletedDialog;
     private GameObject levelFailedDialog;
 
@@ -32,16 +43,97 @@ public class GameManagerScript : MonoBehaviour {
 
     private GameSettings gameSettings;
 
-    void Start () {
-
+    void Start()
+    {
         gameSettings = GameObject.Find("Settings").GetComponent<GameSettings>();
+
         levelTimer = gameSettings.LevelSettings.LevelTimer;
 
         player = GameObject.Find("Player").GetComponent<PlayerScript>(); // TODO: load from file
         currLevel = gameSettings.LevelSettings.SelectedLevel;
         currLevel.CollectedCoins = 0;
 
-        islandScript = GameObject.Find("IslandShield").GetComponent<IslandScript>();
+        if (hero_zhouyu == null)
+        {
+            hero_zhouyu = GameObject.Find("hero_zhouyu");
+            hero_zho_UI = GameObject.Find("hero_zho_UI");
+        }
+
+        if (hero_daochan == null)
+        {
+            hero_daochan = GameObject.Find("hero_daochan");
+            hero_dao_UI = GameObject.Find("hero_dao_UI");
+        }
+
+        if (hero_zhugeliang == null)
+        {
+            hero_zhugeliang = GameObject.Find("hero_zhugeliang");
+            hero_zhu_UI = GameObject.Find("hero_zhu_UI");
+        }
+
+        if (hero_zhangjiao == null)
+        {
+            hero_zhangjiao = GameObject.Find("hero_zhangjiao");
+            hero_zha_UI = GameObject.Find("hero_zha_UI");
+        }
+
+        foreach (var hero in gameSettings.UpgradeSettings.HerosList)
+        {
+            if (!gameSettings.UpgradeSettings.PlayerHerosList.Exists(hr => hr.Hero == hero.Hero))
+            {
+                if (hero.Hero == Hero.Daochan)
+                {
+                    hero_daochan.SetActive(false);
+                    hero_dao_UI.SetActive(false);
+                }
+
+                if (hero.Hero == Hero.Zhangjiao)
+                {
+                    hero_zhangjiao.SetActive(false);
+                    hero_zha_UI.SetActive(false);
+                }
+
+                if (hero.Hero == Hero.Zhouyu)
+                {
+                    hero_zhouyu.SetActive(false);
+                    hero_zho_UI.SetActive(false);
+                }
+
+                if (hero.Hero == Hero.Zhugeliang)
+                {
+                    hero_zhugeliang.SetActive(false);
+                    hero_zhu_UI.SetActive(false);
+                }
+            }
+            else
+            {
+                if (hero.Hero == Hero.Daochan)
+                {
+                    hero_daochan.SetActive(true);
+                    hero_dao_UI.SetActive(true);
+                }
+
+                if (hero.Hero == Hero.Zhangjiao)
+                {
+                    hero_zhangjiao.SetActive(true);
+                    hero_zha_UI.SetActive(true);
+                }
+
+                if (hero.Hero == Hero.Zhouyu)
+                {
+                    hero_zhouyu.SetActive(true);
+                    hero_zho_UI.SetActive(true);
+                }
+
+                if (hero.Hero == Hero.Zhugeliang)
+                {
+                    hero_zhugeliang.SetActive(true);
+                    hero_zhu_UI.SetActive(true);
+                }
+            }
+        }
+
+        islandScript = GameObject.Find("Island").GetComponent<IslandScript>();
         GameObject.Find("bar_health_text").GetComponent<Text>().text = islandScript.Health.ToString();
 
         levelTimerText = GameObject.Find("bar_timer_text").GetComponent<Text>();
@@ -77,9 +169,9 @@ public class GameManagerScript : MonoBehaviour {
         GameObject.Find("level-goal-notification").SetActive(false);
         Time.timeScale = 1f;
 
-        InvokeRepeating("generateBaloons", 0f, gameSettings.BallonsGenerationFrequensy + currLevel.BaloonGenerationFrequencyModifier);
-        InvokeRepeating("generateBonusPlanes", gameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier,
-                                               gameSettings.PlanesGenerationFrequensy + currLevel.PlaneGenerationFrequencyModifier);
+        InvokeRepeating("generateBaloons", 0f, gameSettings.BallonsGenerationFrequency + currLevel.BaloonGenerationFrequencyModifier);
+        InvokeRepeating("generateBonusPlanes", gameSettings.PlanesGenerationFrequency + currLevel.PlaneGenerationFrequencyModifier,
+                                               gameSettings.PlanesGenerationFrequency + currLevel.PlaneGenerationFrequencyModifier);
 
         // create enemy after at certain amount of time
         for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
@@ -117,7 +209,6 @@ public class GameManagerScript : MonoBehaviour {
 
     void Update()
     {
-
         if (isLevelSuccessfullyCompleted || isLevelFailed)
             return;
         
@@ -194,6 +285,8 @@ public class GameManagerScript : MonoBehaviour {
 
     private void stopLevel()
     {
+        gameSettings.SelectedEnemy = null;
+
         CancelInvoke("generateBaloons");
         CancelInvoke("generateBonusPlanes");
 
@@ -206,6 +299,12 @@ public class GameManagerScript : MonoBehaviour {
 
         for (int i = 0; i < planes.Length; i++)
             Destroy(planes[i].gameObject);
+
+
+        hero_zhouyu.SetActive(true);
+        hero_daochan.SetActive(true);
+        hero_zhugeliang.SetActive(true);
+        hero_zhangjiao.SetActive(true);
 
         Time.timeScale = 0;
     }
