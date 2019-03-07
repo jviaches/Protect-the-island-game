@@ -100,6 +100,8 @@ public class HeroZhouyu : MonoBehaviour
                     bullet.target = enemyTarget.transform;
                     bullet.effectObj = damageEffect1;
                     bullet.bulleting();
+                    var damage = gameSettings.UpgradeSettings.PlayerHerosList.First(hr => hr.Hero == Hero.Zhouyu).Damage;
+                    bullet.DPS = gameSettings.UpgradeSettings.PlayerHerosList.First(hr => hr.Hero == Hero.Zhouyu).Damage;                    
                 }
                 break;
 
@@ -111,7 +113,7 @@ public class HeroZhouyu : MonoBehaviour
                     bullet.player = transform;
                     bullet.target = enemyTarget.transform;
                     bullet.effectObj = damageEffect1;
-                    bullet.bulleting();
+                    bullet.bulleting();                    
                 }
                 break;
             case AnimationName.Magic2:

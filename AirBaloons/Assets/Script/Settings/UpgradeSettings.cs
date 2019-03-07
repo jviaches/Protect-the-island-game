@@ -11,6 +11,8 @@ namespace Assets.Script.Settings
         public List<HeroDetails> HerosList;        // All avialable heros with levels and costs
         public List<HeroDetails> PlayerHerosList;        // All avialable heros with levels and costs
 
+        private Dictionary<int, float> zhoHeroUpgradeTable = new Dictionary<int, float>();
+
         void Start()
         {
             HerosList = new List<HeroDetails>
@@ -22,6 +24,17 @@ namespace Assets.Script.Settings
             };
 
             PlayerHerosList = new List<HeroDetails>()  { HerosList[0] };
+
+            setupHeroUpgradesTable();
+        }
+
+        private void setupHeroUpgradesTable()
+        {
+            zhoHeroUpgradeTable.Add(1, 10);
+            zhoHeroUpgradeTable.Add(2, 12);
+            zhoHeroUpgradeTable.Add(3, 14);
+            zhoHeroUpgradeTable.Add(4, 16);
+            zhoHeroUpgradeTable.Add(5, 18);
         }
 
         public void UpgradeHeroNextLevel(Hero hero)
@@ -35,7 +48,10 @@ namespace Assets.Script.Settings
             // check if player has hero for upgrade and upgrade it
             var foundPlayerHero = PlayerHerosList.FirstOrDefault(heroDetails => heroDetails.Hero == hero);
             if (foundPlayerHero != null)
+            {
                 foundPlayerHero.Level += 1;
+                foundHero.Damage = zhoHeroUpgradeTable[foundPlayerHero.Level];
+            }
             else
                 PlayerHerosList.Add(foundHero);
 
@@ -59,7 +75,7 @@ namespace Assets.Script.Settings
     {
         public Hero Hero { get; set; }
         public int Level { get; set; }        
-        public int Damage { get; set; }
+        public float Damage { get; set; }
         public int Cost { get; set; }
         public string Description { get; set; }
 
