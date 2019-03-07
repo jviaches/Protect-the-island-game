@@ -48,6 +48,8 @@ namespace Assets.Script.Settings
 
         void Start()
         {
+            print(Application.persistentDataPath + "/playerInfo.dat");
+
             LevelSettings = gameObject.GetComponent<LevelSettings>();
             UpgradeSettings = gameObject.GetComponent<UpgradeSettings>();
             currentLevel = LevelSettings.SelectedLevel;
@@ -114,6 +116,8 @@ namespace Assets.Script.Settings
         {
             if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
             {
+                print("Loaded from: " + Application.persistentDataPath + "/playerInfo.dat");
+
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
 
@@ -147,6 +151,7 @@ namespace Assets.Script.Settings
         public void SaveData()
         {
             string fileName = Application.persistentDataPath + "/playerInfo.dat";
+            print("Saved to: " + fileName);
 
             if (File.Exists(fileName))
                 File.Delete(fileName);

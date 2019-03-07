@@ -133,6 +133,8 @@ public class GameManagerScript : MonoBehaviour {
             }
         }
 
+        gameSettings.SelectedHero = GameObject.Find("hero_zhouyu");
+
         islandScript = GameObject.Find("Island").GetComponent<IslandScript>();
         GameObject.Find("bar_health_text").GetComponent<Text>().text = islandScript.Health.ToString();
 

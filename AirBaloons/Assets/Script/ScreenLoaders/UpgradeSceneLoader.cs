@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class UpgradeSceneLoader : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class UpgradeSceneLoader : MonoBehaviour
     private string ActiveHeroItem = "Graphics/universal_slot";
     private string InActiveHeroItem = "Graphics/button_simple_inactive";
 
+    private string activeButton = "Graphics/button_medium_o";
+    private string inActiveButton = "Graphics/button_medium_inactive";
+
     private GameSettings gameSettings;
     private UpgradeSettings upgradeSettings;
 
@@ -31,36 +35,93 @@ public class UpgradeSceneLoader : MonoBehaviour
         exitButton.onClick.AddListener(() => SceneManager.LoadScene("LevelsScene"));
 
         upgradeZhoHeroButton = GameObject.Find("medium_button_zho").GetComponent<Button>();
-        upgradeZhoHeroButton.onClick.AddListener(() =>
+
+        // disable upgrade in current version
+        if (gameSettings.UpgradeSettings.PlayerHerosList.Find(hero => hero.Hero == Hero.Zhouyu) == null)
         {
-            gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhouyu);
-            setupHeroDetails();
-            gameSettings.SaveData();
-        });
+            upgradeZhoHeroButton.onClick.AddListener(() =>
+            {
+                gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhouyu);
+                setupHeroDetails();
+                gameSettings.SaveData();
+            });
+        }
+        else
+        {
+            upgradeZhoHeroButton.enabled = false;
+            upgradeZhoHeroButton.interactable = false;
+            GameObject.Find("medium_button_zho").GetComponent<Image>().sprite = Resources.Load<Sprite>(inActiveButton);  
+        }
 
         upgradeDaoHeroButton = GameObject.Find("medium_button_dao").GetComponent<Button>();
-        upgradeDaoHeroButton.onClick.AddListener(() =>
+
+        if (gameSettings.UpgradeSettings.PlayerHerosList.Find(hero => hero.Hero == Hero.Daochan) == null)
         {
-            gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Daochan);
-            setupHeroDetails();
-            gameSettings.SaveData();
-        });
+            upgradeDaoHeroButton.onClick.AddListener(() =>
+            {
+                gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Daochan);
+                setupHeroDetails();
+                gameSettings.SaveData();
+
+                GameObject.Find("medium_button_dao").GetComponent<Image>().sprite = Resources.Load<Sprite>(inActiveButton);
+                upgradeDaoHeroButton.enabled = false;
+                upgradeDaoHeroButton.interactable = false;                
+            });
+
+            upgradeDaoHeroButton.enabled = true;
+            upgradeDaoHeroButton.interactable = true;
+            GameObject.Find("medium_button_dao").GetComponent<Image>().sprite = Resources.Load<Sprite>(activeButton);
+        }
+        else
+        {
+            upgradeDaoHeroButton.enabled = false;
+            upgradeDaoHeroButton.interactable = false;
+            GameObject.Find("medium_button_dao").GetComponent<Image>().sprite = Resources.Load<Sprite>(inActiveButton);
+        }
 
         upgradeZhuHeroButton = GameObject.Find("medium_button_zhu").GetComponent<Button>();
-        upgradeZhuHeroButton.onClick.AddListener(() =>
+
+        if (gameSettings.UpgradeSettings.PlayerHerosList.Find(hero => hero.Hero == Hero.Zhugeliang) == null)
         {
-            gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhugeliang);
-            setupHeroDetails();
-            gameSettings.SaveData();
-        });
+            upgradeZhuHeroButton.onClick.AddListener(() =>
+            {
+                gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhugeliang);
+                setupHeroDetails();
+                gameSettings.SaveData();
+            });
+
+            upgradeZhuHeroButton.enabled = true;
+            upgradeZhuHeroButton.interactable = true;
+            GameObject.Find("medium_button_zhu").GetComponent<Image>().sprite = Resources.Load<Sprite>(activeButton);
+        }
+        else
+        {
+            upgradeZhuHeroButton.enabled = false;
+            upgradeZhuHeroButton.interactable = false;
+            GameObject.Find("medium_button_zhu").GetComponent<Image>().sprite = Resources.Load<Sprite>(inActiveButton);
+        }
 
         upgradeZhaHeroButton = GameObject.Find("medium_button_zha").GetComponent<Button>();
-        upgradeZhaHeroButton.onClick.AddListener(() =>
+
+        if (gameSettings.UpgradeSettings.PlayerHerosList.Find(hero => hero.Hero == Hero.Zhangjiao) == null)
         {
-            gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhangjiao);
-            setupHeroDetails();
-            gameSettings.SaveData();
-        });
+            upgradeZhaHeroButton.onClick.AddListener(() =>
+            {
+                gameSettings.UpgradeSettings.UpgradeHeroNextLevel(Hero.Zhangjiao);
+                setupHeroDetails();
+                gameSettings.SaveData();
+            });
+
+            upgradeZhaHeroButton.enabled = true;
+            upgradeZhaHeroButton.interactable = true;
+            GameObject.Find("medium_button_zha").GetComponent<Image>().sprite = Resources.Load<Sprite>(activeButton);
+        }
+        else
+        {
+            upgradeZhaHeroButton.enabled = false;
+            upgradeZhaHeroButton.interactable = false;
+            GameObject.Find("medium_button_zha").GetComponent<Image>().sprite = Resources.Load<Sprite>(inActiveButton);
+        }
 
         gameSettings.LoadData();
         setupHeroDetails();
