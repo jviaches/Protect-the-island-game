@@ -20,18 +20,35 @@ namespace Assets.Script.Levels
 
         public int MoneyGenerationModifier { get { return 1; } }
 
-        private List<KeyValuePair<float, FloatItem>>  timeActivationDic;
-        public List<KeyValuePair<float, FloatItem>> TimeActivationDic
-        {
-            get { return timeActivationDic; }
-        }
+        public List<KeyValuePair<float, FloatItem>> TimeActivationDic { get; private set; }
 
         public Level2(GameSettings gameSettings)
         {
-            timeActivationDic = new List<KeyValuePair<float, FloatItem>>()
+            TimeActivationDic = new List<KeyValuePair<float, FloatItem>>()
             {
-                { new KeyValuePair<float, FloatItem>( 30f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_3])) },
-                { new KeyValuePair<float, FloatItem>( 60f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_6])) } 
+                { new KeyValuePair<float, FloatItem>( 5f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_6])) },
+                { new KeyValuePair<float, FloatItem>( 7f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_9])) },
+                //{ new KeyValuePair<float, FloatItem>( 9f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_7])) },
+                { new KeyValuePair<float, FloatItem>( 11f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_6])) },
+                //{ new KeyValuePair<float, FloatItem>( 28f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_9])) },
+                { new KeyValuePair<float, FloatItem>( 15f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_3])) },
+                { new KeyValuePair<float, FloatItem>( 19f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_6])) },
+                { new KeyValuePair<float, FloatItem>( 23f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_9])) },
+                { new KeyValuePair<float, FloatItem>( 27f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_7])) },
+                { new KeyValuePair<float, FloatItem>( 31f, new FloatItem("Prefabs/Actors/Blimp1", gameSettings.BornPoints[BornPoint.Clock_3])) },
+                { new KeyValuePair<float, FloatItem>( 39f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_9])) },
+                { new KeyValuePair<float, FloatItem>( 43f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_6])) },
+                { new KeyValuePair<float, FloatItem>( 47f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_7])) },
+                { new KeyValuePair<float, FloatItem>( 55f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_3])) },
+                { new KeyValuePair<float, FloatItem>( 60f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_9])) },
+                { new KeyValuePair<float, FloatItem>( 64f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_9])) },
+                { new KeyValuePair<float, FloatItem>( 70f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_6])) },
+                { new KeyValuePair<float, FloatItem>( 74f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_7])) },
+                { new KeyValuePair<float, FloatItem>( 78f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_5])) },
+                { new KeyValuePair<float, FloatItem>( 82f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_3])) },
+                { new KeyValuePair<float, FloatItem>( 86f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_9])) },
+                { new KeyValuePair<float, FloatItem>( 90f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_7])) },
+                { new KeyValuePair<float, FloatItem>( 94f, new FloatItem("Prefabs/Actors/Balloon" + UnityEngine.Random.Range(1, 3), gameSettings.BornPoints[BornPoint.Clock_5])) },
             };
         }
     }
