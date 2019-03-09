@@ -171,15 +171,13 @@ public class GameManagerScript : MonoBehaviour {
         GameObject.Find("level-goal-notification").SetActive(false);
         Time.timeScale = 1f;
 
-        InvokeRepeating("generateBaloons", 0f, gameSettings.BallonsGenerationFrequency + currLevel.BaloonGenerationFrequencyModifier);
-        InvokeRepeating("generateBonusPlanes", gameSettings.PlanesGenerationFrequency + currLevel.PlaneGenerationFrequencyModifier,
-                                               gameSettings.PlanesGenerationFrequency + currLevel.PlaneGenerationFrequencyModifier);
+        //InvokeRepeating("generateBaloons", 0f, gameSettings.BallonsGenerationFrequency + currLevel.BaloonGenerationFrequencyModifier);
+        //InvokeRepeating("generateBonusPlanes", gameSettings.PlanesGenerationFrequency + currLevel.PlaneGenerationFrequencyModifier,
+        //                                       gameSettings.PlanesGenerationFrequency + currLevel.PlaneGenerationFrequencyModifier);
 
         // create enemy after at certain amount of time
         for (int i = 0; i < currLevel.TimeActivationDic.Count; i++)
-        {
-            StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(0).Value, currLevel.TimeActivationDic.ElementAt(0).Key));
-        }
+            StartCoroutine(generateFloatableItems(currLevel.TimeActivationDic.ElementAt(i).Value, currLevel.TimeActivationDic.ElementAt(i).Key));
     }
 
     private void generateBaloons()
